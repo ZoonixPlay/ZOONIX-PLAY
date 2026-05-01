@@ -1,16 +1,5 @@
 const JOGOS = [
     {
-        time1: "Flamengo",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/9/93/Flamengo-RJ_%28BRA%29.png", 
-        time2: "Vasco Da Gama",
-        escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
-        campeonato: "Brasileirão Série A",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
-        data: "2026-05-03", 
-        horario: "16:00",    
-        link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
-    },
-    {
         time1: "Palmeiras",
         escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Palmeiras_logo.svg/330px-Palmeiras_logo.svg.png", 
         time2: "Santos",
@@ -19,6 +8,17 @@ const JOGOS = [
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-02", 
         horario: "18:30",    
+        link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
+    },
+    {
+        time1: "Flamengo",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/9/93/Flamengo-RJ_%28BRA%29.png", 
+        time2: "Vasco Da Gama",
+        escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
+        campeonato: "Brasileirão Série A",
+        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
+        data: "2026-05-03", 
+        horario: "16:00",    
         link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
     }
 ];
