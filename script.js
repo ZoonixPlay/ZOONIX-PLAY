@@ -7,7 +7,7 @@ const JOGOS = [
         campeonato: "Brasileirão Série A",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-02", 
-        horario: "18;30",    
+        horario: "18:30",    
         link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
     },
     {
@@ -18,7 +18,7 @@ const JOGOS = [
         campeonato: "Brasileirão Série A",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-03", 
-        horario: "16;00",    
+        horario: "16:00",    
         link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
     }
 ];
