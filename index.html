@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZONIX PLAY | OFFICIAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="icone-zonix" href="img/logo-zoonix.png">
+</head>
+<!-- Modal do Player -->
+<div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; align-items:center; justify-content:center;">
+    <div style="position:relative; width:90%; max-width:900px; background:#000; border:2px solid #00d2ff;">
+        <button onclick="closePlayer()" style="position:absolute; top:-30px; right:0; background:none; border:none; color:#fff; font-family:'Orbitron'; cursor:pointer;">[ FECHAR X ]</button>
+        <div style="position:relative; padding-bottom:56.25%; height:0;">
+            <iframe id="videoIframe" src="" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen="yes" allow="encrypted-media; picture-in-picture;"></iframe>
+        </div>
+    </div>
+</div>
+<body>
+    <div class="particles-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <header class="navbar">
+        <div class="navbar-content container">
+            <div class="logo-area">
+                <img src="img/logo-zoonix.png" alt="Logo ZONIX PLAY" class="main-logo">
+                <span class="site-name-animated">ZONIX PLAY</span>
+            </div>
+            <nav class="menu">
+                <a href="index.html">INÍCIO</a>
+                <a href="pix.html" class="btn-top-doe">DOAR</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="welcome-section">
+            <h2>Seja bem-vindo ao <span>ZONIX PLAY</span></h2>
+            <p>Assista seus jogos, lutas e muito mais — tudo totalmente de graça!
+Aqui você aproveita o melhor do esporte sem pagar nada.
+
+Se você curtir o site e quiser apoiar, você pode fazer uma doação para ajudar a melhorar o domínio e manter tudo funcionando bem 💙
+
+Mas fique tranquilo: não é obrigatório doar!
+O importante é você aproveitar o conteúdo.
+
+Obrigado por estar aqui e… bom jogo!</p>
+            <div class="pix-center-container">
+                <a href="pix.html" class="btn-pix-animated">DOE UM PIX</a>
+            </div>
+        </section>
+
+        <h3 class="matches-title">PARTIDAS DISPONÍVEIS</h3>
+
+        <div id="lista-jogos" class="jogos-grid"></div>
+    </main>
+
+    <footer class="footer-final">
+        <div class="footer-content">
+            <div class="footer-brand-area">
+                <img src="img/logo-zoonix.png" alt="ZONIX PLAY">
+                <span>ZONIX PLAY</span>
+            </div>
+            <div class="footer-copyright-area">
+                <p>&copy; 2026 ZONIX PLAY</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
