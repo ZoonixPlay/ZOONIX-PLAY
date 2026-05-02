@@ -7,8 +7,8 @@ const JOGOS = [
         campeonato: "Brasileirão Série A",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-02", 
-        horario: "10:30",    
-        link: "https://jack01bp.mp7786j2ncsusov57general.ru/br/football/bundesliga-4199889/fc-bayern-munich-vs-1-fc-heidenheim-1846.html?icg=QlI"
+        horario: "18:30",    
+        link: "#"
     },    
     {
         time1: "Flamengo",
@@ -19,7 +19,7 @@ const JOGOS = [
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-03", 
         horario: "16:00",    
-        link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
+        link: "#" 
     },
 
 ];
