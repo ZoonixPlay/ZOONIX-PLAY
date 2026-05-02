@@ -586,3 +586,15 @@ main {
     z-index: 40; /* Fica acima de tudo */
     pointer-events: auto;
 }
+
+.placar-final {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    color: #00d2ff;
+    margin-bottom: 5px;
+}
+.encerrado { background: #555 !important; color: #fff !important; }
