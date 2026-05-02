@@ -4,7 +4,7 @@ const JOGOS = [
         escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Palmeiras_logo.svg/330px-Palmeiras_logo.svg.png", 
         time2: "Santos",
         escudo2: "https://upload.wikimedia.org/wikipedia/commons/9/92/LogoSantosFC.png",
-        placar1: 2, // Adicione o placar aqui
+        placar1: 1, // Adicione o placar aqui
         placar2: 1,
         encerrado: true, // Marque como true quando o jogo acabar
         campeonato: "Brasileirão Série A",
