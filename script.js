@@ -7,9 +7,9 @@ const JOGOS = [
         campeonato: "Brasileirão Série A",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-02", 
-        horario: "18:30",    
-        link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
-    },
+        horario: "10:30",    
+        link: "https://jack01bp.mp7786j2ncsusov57general.ru/br/football/bundesliga-4199889/fc-bayern-munich-vs-1-fc-heidenheim-1846.html?icg=QlI"
+    },    
     {
         time1: "Flamengo",
         escudo1: "https://upload.wikimedia.org/wikipedia/commons/9/93/Flamengo-RJ_%28BRA%29.png", 
@@ -20,7 +20,8 @@ const JOGOS = [
         data: "2026-05-03", 
         horario: "16:00",    
         link: "https://meuplayeronlinehd.com/myplay/watch.html?id=sportynet" 
-    }
+    },
+
 ];
 
 // FUNÇÕES DO PLAYER MODAL
@@ -114,3 +115,25 @@ document.onkeydown = function(e) {
         return false;
     }
 };
+
+function openPlayer(link) {
+    const modal = document.getElementById('playerModal');
+    const iframe = document.getElementById('videoIframe');
+
+    // Tenta decodificar o link. Se não for Base64, ele usa o link direto.
+    try {
+        iframe.src = atob(link);
+    } catch (e) {
+        iframe.src = link;
+    }
+    
+    modal.style.display = 'flex';
+}
+
+function closePlayer() {
+    const modal = document.getElementById('playerModal');
+    const iframe = document.getElementById('videoIframe');
+    
+    modal.style.display = 'none';
+    iframe.src = ''; // Limpa o player para não continuar o som
+}

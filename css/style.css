@@ -545,3 +545,44 @@ main {
 .menu a:hover::after {
     width: 100%; /* A linha azul "cresce" ao passar o mouse */
 }
+
+/* Container que vai esconder as bordas do player */
+.iframe-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    overflow: hidden; /* Corta o que estiver fora do limite */
+    background: #000;
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    top: -50px;    /* Empurra o player para cima para esconder o topo */
+    left: -2px;   /* Ajuste fino lateral */
+    width: calc(100% + 4px); /* Aumenta a largura para compensar o ajuste lateral */
+    height: calc(100% + 100px); /* Aumenta a altura para esconder topo e fundo */
+    border: none;
+}
+
+/* Essa é a moldura do vídeo */
+.video-mask {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* Mantém a proporção 16:9 */
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+/* Essa é a tarja preta que esconde o topo e o botão embed */
+.video-mask::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55px;
+    background: #000;
+    z-index: 40; /* Fica acima de tudo */
+    pointer-events: auto;
+}
