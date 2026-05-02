@@ -8,7 +8,7 @@ const JOGOS = [
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-02", 
         horario: "18:30",    
-        link: "https://meuplayeronlinehd.com/myplay/watch.html?id=premiere-2"
+        link: "https://zac22bp.mpipzni2naturally32kistomach.ru/br/player.html?mdata=NDMyNDA1NV8x&ilang=br"
     },    
     {
         time1: "Flamengo",
