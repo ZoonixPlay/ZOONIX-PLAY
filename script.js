@@ -1,54 +1,29 @@
-// 1. CONFIGURAÇÃO OFICIAL
-const firebaseConfig = {
-    databaseURL: "https://zonix-play-default-rtdb.firebaseio.com/" 
-};
+// 1. LÓGICA DE CONTAGEM REAL (Via API Gratuita - Sem Firebase/Console)
+async function atualizarContadorReal() {
+    const contadorEl = document.getElementById('pessoal-online');
+    
+    // Usamos o serviço CountAPI que é aberto e funciona na hora
+    // O 'zonix-play-2026' é a sua chave única
+    const url = "https://api.countapi.xyz/hit/zonix-play-oficial/visitas";
 
-// 2. LÓGICA DE CONTAGEM 100% REAL
-try {
-    // Inicializa se ainda não estiver inicializado
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-    const database = firebase.database();
-    const visitantesRef = database.ref('visitantes_online');
-    const meuVisitanteRef = visitantesRef.push();
-
-    // Plano de Emergência: Se em 4 segundos não carregar, assume que você é o único online
-    const fallbackTimeout = setTimeout(() => {
-        const el = document.getElementById('pessoal-online');
-        if (el && el.innerText === "Carregando...") {
-            el.innerText = "1"; 
-        }
-    }, 4000);
-
-    // Sistema de Presença
-    database.ref('.info/connected').on('value', (snap) => {
-        if (snap.val() === true) {
-            // Remove do banco quando o usuário fecha a aba
-            meuVisitanteRef.onDisconnect().remove();
-            // Registra a entrada real
-            meuVisitanteRef.set(true);
-        }
-    });
-
-    // Escuta e atualiza o total de pessoas reais
-    visitantesRef.on('value', (snap) => {
-        clearTimeout(fallbackTimeout); // Cancela o emergência se o banco responder
-        const totalReal = snap.numChildren();
-        const contadorEl = document.getElementById('pessoal-online');
+    try {
+        const resposta = await fetch(url);
+        const dados = await JSON.parse(await resposta.text());
+        
         if (contadorEl) {
-            // Se o banco retornar 0 mas você está conectado, mostra 1
-            contadorEl.innerText = totalReal > 0 ? totalReal.toLocaleString('pt-BR') : "1";
+            // Exibe o número real de vezes que o site foi carregado
+            contadorEl.innerText = dados.value.toLocaleString('pt-BR');
         }
-    });
-
-} catch (error) {
-    console.error("Erro na conexão:", error);
-    const el = document.getElementById('pessoal-online');
-    if (el) el.innerText = "1";
+    } catch (erro) {
+        console.error("Erro ao carregar contador:", erro);
+        if (contadorEl) contadorEl.innerText = "1";
+    }
 }
 
-// 3. LISTA DE JOGOS
+// Atualiza ao carregar a página
+atualizarContadorReal();
+
+// 2. LISTA DE JOGOS
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -57,7 +32,6 @@ const JOGOS = [
         escudo2: "https://upload.wikimedia.org/wikipedia/commons/9/92/LogoSantosFC.png",
         placar1: 1, placar2: 1, encerrado: true,
         campeonato: "Brasileirão Série A",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-02", horario: "18:30",    
         link: "https://zac22bp.mpipzni2naturally32kistomach.ru/br/player.html?mdata=NDMyNDA1NV8x&ilang=br"
     },   
@@ -68,13 +42,12 @@ const JOGOS = [
         escudo2: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Atletico_mineiro_galo.png/250px-Atletico_mineiro_galo.png",
         placar1: 0, placar2: 0, encerrado: false,
         campeonato: "Brasileirão Série A",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-02", horario: "21:00",    
         link: "https://zac22bp.mpipzni2naturally32kistomach.ru/br/player.html?mdata=NDMyNDA2MV8x&ilang=br" 
     }
 ];
 
-// 4. LÓGICA DE INTERFACE
+// 3. FUNÇÕES DE STATUS E UI
 function checkStatus(j) {
     const now = new Date();
     const gameTime = new Date(`${j.data}T${j.horario}:00`);
@@ -106,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// 5. PLAYER
+// 4. FUNÇÕES DO PLAYER
 function openPlayer(link) {
     document.getElementById('videoIframe').src = link;
     document.getElementById('playerModal').style.display = 'flex';
