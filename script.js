@@ -1,29 +1,38 @@
-// 1. GERADOR DE PÚBLICO REALISTA (Baseado no Horário)
-function atualizarContadorRealista() {
-    const contadorEl = document.getElementById('pessoal-online');
-    if (!contadorEl) return;
+// 1. CONFIGURAÇÃO FIREBASE
+const firebaseConfig = {
+    databaseURL: "https://zonix-play-default-rtdb.firebaseio.com/" 
+};
 
-    // Pega a hora atual (0-23)
-    const hora = new Date().getHours();
-    let basePessoas;
+// 2. CONTADOR DE PESSOAS REAIS
+try {
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const visitantesRef = database.ref('visitantes_online');
+    const meuVisitanteRef = visitantesRef.push();
 
-    // Define um público baseado no horário do dia para parecer real
-    if (hora >= 18 && hora <= 23) {
-        basePessoas = Math.floor(Math.random() * (250 - 180 + 1)) + 180; // Horário de pico (noite)
-    } else if (hora >= 12 && hora <= 17) {
-        basePessoas = Math.floor(Math.random() * (150 - 90 + 1)) + 90;  // Tarde
-    } else {
-        basePessoas = Math.floor(Math.random() * (60 - 20 + 1)) + 20;    // Madrugada/Manhã
-    }
+    // Remove o "Carregando" se o banco demorar
+    setTimeout(() => {
+        const el = document.getElementById('pessoal-online');
+        if (el && el.innerText === "Carregando...") el.innerText = "1";
+    }, 3000);
 
-    contadorEl.innerText = basePessoas.toLocaleString('pt-BR');
+    database.ref('.info/connected').on('value', (snap) => {
+        if (snap.val() === true) {
+            meuVisitanteRef.onDisconnect().remove();
+            meuVisitanteRef.set(true);
+        }
+    });
+
+    visitantesRef.on('value', (snap) => {
+        const total = snap.numChildren();
+        const el = document.getElementById('pessoal-online');
+        if (el) el.innerText = total > 0 ? total : "1";
+    });
+} catch (e) {
+    document.getElementById('pessoal-online').innerText = "1";
 }
 
-// Atualiza o número assim que abre e depois a cada 30 segundos
-atualizarContadorRealista();
-setInterval(atualizarContadorRealista, 30000);
-
-// 2. LISTA DE JOGOS (Atualizada)
+// 3. LISTA DE JOGOS
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -47,7 +56,7 @@ const JOGOS = [
     }
 ];
 
-// 3. LÓGICA DE INTERFACE
+// 4. FUNÇÕES DO SISTEMA
 function checkStatus(j) {
     const now = new Date();
     const gameTime = new Date(`${j.data}T${j.horario}:00`);
@@ -63,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     JOGOS.forEach(j => {
         const s = checkStatus(j);
         const btn = s.status === "live" ? `<button class="btn-assistir" onclick="openPlayer('${j.link}')">ASSISTIR</button>` : "";
-        const placar = s.status === "finalizado" ? `<div class="placar-final" style="font-size:24px; font-weight:900; color:#00d2ff; text-align:center; margin:10px 0;">${j.placar1} X ${j.placar2}</div>` : "";
+        const placar = s.status === "finalizado" ? `<div class="placar-final" style="font-size:24px; font-weight:900; color:#00d2ff; text-align:center;">${j.placar1} X ${j.placar2}</div>` : "";
 
         list.innerHTML += `
             <div class="match-card ${s.classe}">
@@ -79,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// 4. FUNÇÕES DO PLAYER
 function openPlayer(link) {
     document.getElementById('videoIframe').src = link;
     document.getElementById('playerModal').style.display = 'flex';
