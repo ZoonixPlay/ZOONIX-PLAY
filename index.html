@@ -9,63 +9,54 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="img/logo-zoonix.png">
 </head>
-<body>
+<body style="background-color: #0d0d0d; color: #ffffff; margin: 0; padding: 0; font-family: 'Roboto', sans-serif;">
 
     <!-- MODAL DO PLAYER -->
     <div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; align-items:center; justify-content:center;">
-        <div style="position:relative; width:95%; max-width:900px; background:#000; border:2px solid #00d2ff;">
-            <button onclick="closePlayer()" style="position:absolute; top:-35px; right:0; background:none; border:none; color:#00d2ff; font-family:'Orbitron'; cursor:pointer; font-weight:900;">FECHAR [X]</button>
-            <div class="video-mask" style="width: 100%; height: 0; padding-bottom: 56.25%; position: relative; overflow: hidden; background: #000;">
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 55px; background: #000; z-index: 105;"></div>
-                <iframe id="videoIframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" frameborder="0" scrolling="no" allowfullscreen playsinline></iframe>
+        <div style="position:relative; width:95%; max-width:900px; background:#000; border:2px solid #00d2ff; box-shadow: 0 0 20px #00d2ff;">
+            <button onclick="closePlayer()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#00d2ff; font-family:'Orbitron'; cursor:pointer; font-weight:900; font-size:16px;">FECHAR [X]</button>
+            <div style="width: 100%; height: 0; padding-bottom: 56.25%; position: relative; overflow: hidden;">
+                <iframe id="videoIframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" scrolling="no" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
-    <header class="navbar">
-        <div class="navbar-content container">
-            <div class="logo-area">
-                <img src="img/logo-zoonix.png" alt="Logo ZONIX PLAY" class="main-logo">
-                <span class="site-name-animated">ZONIX PLAY</span>
+    <header style="background: #000; border-bottom: 2px solid #00d2ff; padding: 15px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="img/logo-zoonix.png" alt="Zonix" style="width: 45px;">
+                <span style="font-family: 'Orbitron'; color: #00d2ff; font-size: 26px; font-weight: 900; letter-spacing: 2px;">ZONIX PLAY</span>
             </div>
-            <nav class="menu">
-                <a href="index.html">INÍCIO</a>
-                <a href="pix.html" class="btn-top-doe">DOAR</a>
+            <nav>
+                <a href="index.html" style="color: white; text-decoration: none; font-weight: bold; margin-right: 20px; font-family: 'Orbitron'; font-size: 14px;">INÍCIO</a>
+                <a href="pix.html" style="background: #00d2ff; color: #000; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; font-family: 'Orbitron';">DOAR PIX</a>
             </nav>
         </div>
     </header>
 
-    <main class="container main-layout" style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
-        <!-- LADO ESQUERDO: JOGOS -->
-        <div class="content-left" style="flex: 2; min-width: 300px;">
-            <div style="background: rgba(0, 210, 255, 0.1); border: 1px solid #00d2ff; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; color: #fff;">
-                <p>🚀 <strong>DICA:</strong> Use o navegador <strong>Brave</strong> para evitar anúncios indesejados!</p>
+    <main style="display: flex; flex-wrap: wrap; gap: 25px; max-width: 1200px; margin: 30px auto; padding: 0 20px;">
+        
+        <!-- COLUNA JOGOS -->
+        <div style="flex: 2; min-width: 320px;">
+            <div style="background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 10px; margin-bottom: 25px; text-align: center; border-left: 5px solid #00ff00;">
+                <p style="margin: 0; font-size: 15px; font-weight: bold;">🟢 <span id="pessoal-online" style="color: #00ff00;">1</span> pessoas assistindo agora</p>
             </div>
 
-            <div class="online-counter" style="text-align: center; color: #fff; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <span style="height: 8px; width: 8px; background-color: #00ff00; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #00ff00;"></span>
-                <span id="pessoal-online">1</span> pessoas assistindo agora
+            <h3 style="font-family: 'Orbitron'; color: #00d2ff; border-left: 4px solid #00d2ff; padding-left: 15px; margin-bottom: 20px; text-transform: uppercase;">Partidas Disponíveis</h3>
+            <div id="lista-jogos">
+                <!-- Injetado via JS -->
             </div>
-
-            <section class="welcome-section">
-                <h2>Seja bem-vindo ao <span>ZONIX PLAY</span></h2>
-                <div class="pix-center-container">
-                    <a href="pix.html" class="btn-pix-animated">DOE UM PIX</a>
-                </div>
-            </section>
-
-            <h3 class="matches-title">PARTIDAS DISPONÍVEIS</h3>
-            <div id="lista-jogos" class="jogos-grid"></div>
         </div>
 
-        <!-- LADO DIREITO: CHAT VIA RUMBLE (MUITO ESTÁVEL) -->
-        <aside class="chat-sidebar" style="flex: 1; min-width: 300px;">
-            <h3 class="matches-title" style="font-size: 14px; margin-bottom: 15px;">CHAT AO VIVO</h3>
-            <div class="chat-wrapper" style="background: #0a0a0a; border: 1px solid #00d2ff; border-radius: 10px; overflow: hidden; height: 500px; position: relative;">
-                <!-- Chat alternativo via Rumble/Popout (Não cai e não dá 404) -->
-                <iframe src="https://vaughn.live/embed/chat/zonixplay" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
+        <!-- COLUNA CHAT -->
+        <aside style="flex: 1; min-width: 320px;">
+            <h3 style="font-family: 'Orbitron'; color: #00d2ff; font-size: 16px; margin-bottom: 15px; text-align: center;">CHAT DA GALERA</h3>
+            <div style="background: #1a1a1a; border: 2px solid #00d2ff; border-radius: 12px; padding: 5px; height: 550px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);">
+                <!-- Chat alternativo estável (Meutube) -->
+                <iframe src="https://www.chatwee.com/public/chat/663409ae985e05001c000001" width="100%" height="100%" frameborder="0"></iframe>
             </div>
         </aside>
+
     </main>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>

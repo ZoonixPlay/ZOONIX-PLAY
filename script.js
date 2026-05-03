@@ -1,4 +1,4 @@
-// 1. CONFIGURAÇÃO DO FIREBASE (CONTADOR REAL)
+// 1. FIREBASE (Mantenha sua URL do projeto Firebase)
 const firebaseConfig = {
     databaseURL: "https://zonix-play-default-rtdb.firebaseio.com/" 
 };
@@ -9,7 +9,6 @@ try {
     const visitantesRef = database.ref('visitantes_online');
     const meuVisitanteRef = visitantesRef.push();
 
-    // Lógica de Presença
     database.ref('.info/connected').on('value', (snap) => {
         if (snap.val() === true) {
             meuVisitanteRef.onDisconnect().remove();
@@ -17,17 +16,16 @@ try {
         }
     });
 
-    // Atualiza o contador na tela
     visitantesRef.on('value', (snap) => {
         const total = snap.numChildren();
         const el = document.getElementById('pessoal-online');
         if (el) el.innerText = total > 0 ? total : "1";
     });
 } catch (e) {
-    console.error("Erro no Firebase: ", e);
+    console.log("Modo Offline");
 }
 
-// 2. BANCO DE DADOS DE JOGOS (Hoje: 02/05/2026)
+// 2. LISTA DE JOGOS (Hoje: 02/05/2026)
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -51,13 +49,13 @@ const JOGOS = [
     }
 ];
 
-// 3. LÓGICA DE EXIBIÇÃO
+// 3. LOGICA DE RENDERIZAÇÃO
 function checkStatus(j) {
     const now = new Date();
     const gameTime = new Date(`${j.data}T${j.horario}:00`);
     const limit = new Date(gameTime.getTime() + (120 * 60 * 1000));
     
-    if (j.encerrado) return { status: "finalizado", texto: "FIM DE JOGO" };
+    if (j.encerrado) return { status: "finalizado", texto: "FINALIZADO" };
     if (now >= gameTime && now <= limit) return { status: "live", texto: "AO VIVO" };
     return { status: "breve", texto: j.horario };
 }
@@ -68,31 +66,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     JOGOS.forEach(j => {
         const s = checkStatus(j);
-        const btn = s.status === "live" ? `<button class="btn-assistir" onclick="openPlayer('${j.link}')" style="background:#00d2ff; border:none; padding:8px 15px; color:#000; font-weight:bold; cursor:pointer; border-radius:5px; margin-top:5px;">ASSISTIR</button>` : "";
+        const isLive = s.status === 'live';
+        const btn = isLive ? `<button onclick="openPlayer('${j.link}')" style="background:#00d2ff; border:none; padding:12px; color:#000; font-weight:900; cursor:pointer; border-radius:8px; width:100%; margin-top:15px; font-family:'Orbitron';">ASSISTIR AGORA</button>` : "";
         
         list.innerHTML += `
-            <div style="background:#111; border:1px solid #222; padding:15px; margin-bottom:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; color:#fff;">
-                <div style="text-align:center; flex:1;"><img src="${j.escudo1}" width="35"><br><small>${j.time1}</small></div>
-                <div style="text-align:center; flex:1;">
-                    <span style="display:block; font-size:10px; color:#00d2ff; margin-bottom:4px;">${j.campeonato}</span>
-                    <strong style="color:${s.status === 'live' ? '#00ff00' : '#888'};">${s.texto}</strong>
-                    ${btn}
+            <div style="background:#1a1a1a; border:1px solid #333; padding:20px; margin-bottom:15px; border-radius:12px; display:flex; flex-direction:column; align-items:center; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-top: 2px solid ${isLive ? '#00ff00' : '#444'};">
+                <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+                    <div style="text-align:center; flex:1;"><img src="${j.escudo1}" width="50" style="filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><br><span style="font-size:13px; font-weight:bold;">${j.time1}</span></div>
+                    <div style="flex:1; text-align:center; padding: 0 10px;">
+                        <span style="display:block; font-size:11px; color:#00d2ff; text-transform:uppercase;">${j.campeonato}</span>
+                        <strong style="font-size:22px; color:${isLive ? '#00ff00' : '#ffffff'}; font-family:'Orbitron';">
+                            ${s.status === 'finalizado' ? j.placar1+' - '+j.placar2 : s.texto}
+                        </strong>
+                    </div>
+                    <div style="text-align:center; flex:1;"><img src="${j.escudo2}" width="50" style="filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><br><span style="font-size:13px; font-weight:bold;">${j.time2}</span></div>
                 </div>
-                <div style="text-align:center; flex:1;"><img src="${j.escudo2}" width="35"><br><small>${j.time2}</small></div>
+                ${btn}
             </div>`;
     });
 });
 
 function openPlayer(link) {
-    const modal = document.getElementById('playerModal');
-    const iframe = document.getElementById('videoIframe');
-    iframe.src = link;
-    modal.style.display = 'flex';
+    document.getElementById('videoIframe').src = link;
+    document.getElementById('playerModal').style.display = 'flex';
 }
-
 function closePlayer() {
-    const modal = document.getElementById('playerModal');
-    const iframe = document.getElementById('videoIframe');
-    modal.style.display = 'none';
-    iframe.src = '';
+    document.getElementById('playerModal').style.display = 'none';
+    document.getElementById('videoIframe').src = '';
 }
