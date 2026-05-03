@@ -1,13 +1,22 @@
-// 1. CONFIGURAÇÃO FIREBASE (OFICIAL)
+// 1. CONFIGURAÇÃO FIREBASE
 const firebaseConfig = {
     databaseURL: "https://zonix-play-default-rtdb.firebaseio.com/" 
 };
 
+// 2. LÓGICA DO CONTADOR COM "PLANO B"
 try {
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
     const visitantesRef = database.ref('visitantes_online');
     const meuVisitanteRef = visitantesRef.push();
+
+    // Se o Firebase não responder em 3 segundos, ele força um número para não ficar "Carregando"
+    const timeoutContador = setTimeout(() => {
+        const el = document.getElementById('pessoal-online');
+        if (el && el.innerText === "Carregando...") {
+            el.innerText = "148"; 
+        }
+    }, 3000);
 
     database.ref('.info/connected').on('value', (snap) => {
         if (snap.val() === true) {
@@ -17,14 +26,17 @@ try {
     });
 
     visitantesRef.on('value', (snap) => {
+        clearTimeout(timeoutContador); // Cancela o "Plano B" se o oficial responder
         const totalOnline = snap.numChildren();
         const contadorEl = document.getElementById('pessoal-online');
-        // Soma um número base para o site nunca parecer vazio
-        if(contadorEl) contadorEl.innerText = (totalOnline + 125).toLocaleString('pt-BR');
+        if(contadorEl) contadorEl.innerText = (totalOnline + 148).toLocaleString('pt-BR');
     });
-} catch (e) { console.error("Erro Firebase:", e); }
+} catch (e) {
+    console.error("Erro Firebase:", e);
+    document.getElementById('pessoal-online').innerText = "148";
+}
 
-// 2. LISTA DE JOGOS ATUALIZADA
+// 3. LISTA DE JOGOS
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -50,7 +62,7 @@ const JOGOS = [
     }
 ];
 
-// 3. FUNÇÕES DE STATUS E UI
+// 4. FUNÇÕES DE STATUS E UI
 function checkStatus(j) {
     const now = new Date();
     const gameTime = new Date(`${j.data}T${j.horario}:00`);
@@ -65,13 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
     JOGOS.forEach(j => {
         const s = checkStatus(j);
         const btn = s.status === "live" ? `<button class="btn-assistir" onclick="openPlayer('${j.link}')">ASSISTIR</button>` : "";
-        const placar = s.status === "finalizado" ? `<div class="placar-final">${j.placar1} X ${j.placar2}</div>` : "";
+        const placar = s.status === "finalizado" ? `<div class="placar-final" style="font-size:24px; font-weight:900; color:#00d2ff; text-align:center;">${j.placar1} X ${j.placar2}</div>` : "";
 
         list.innerHTML += `
             <div class="match-card ${s.classe}">
                 <div class="team"><img src="${j.escudo1}"><span>${j.time1}</span></div>
                 <div class="info-central">
-                    <span>${j.campeonato}</span>
+                    <span style="font-size:12px; opacity:0.8;">${j.campeonato}</span>
                     ${placar}
                     <span class="badge-status">${s.texto}</span>
                     ${btn}
@@ -81,11 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// 5. PLAYER
 function openPlayer(link) {
     document.getElementById('videoIframe').src = link;
     document.getElementById('playerModal').style.display = 'flex';
 }
-
 function closePlayer() {
     document.getElementById('playerModal').style.display = 'none';
     document.getElementById('videoIframe').src = '';
