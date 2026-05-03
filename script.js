@@ -1,43 +1,46 @@
-// 1. CONFIGURAÇÃO FIREBASE (Use o seu link do Firebase aqui)
+// 1. CONFIGURAÇÃO
 const firebaseConfig = {
     databaseURL: "https://zonix-play-default-rtdb.firebaseio.com/" 
 };
 
-// 2. LÓGICA DO CONTADOR 100% REAL
+// 2. LÓGICA DE CONTAGEM REAL
 try {
-    firebase.initializeApp(firebaseConfig);
+    // Inicializa o Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
     const database = firebase.database();
     const visitantesRef = database.ref('visitantes_online');
+    
+    // Cria uma entrada única para este celular/PC
     const meuVisitanteRef = visitantesRef.push();
 
-    // Se em 5 segundos o Firebase não responder, remove o "Carregando" e põe "1"
-    setTimeout(() => {
-        const el = document.getElementById('pessoal-online');
-        if (el && el.innerText === "Carregando...") {
-            el.innerText = "1"; 
-        }
-    }, 5000);
-
+    // Sistema de Presença
     database.ref('.info/connected').on('value', (snap) => {
         if (snap.val() === true) {
+            // Se o celular desconectar ou fechar a aba, remove da contagem
             meuVisitanteRef.onDisconnect().remove();
+            // Registra que este aparelho está online
             meuVisitanteRef.set(true);
         }
     });
 
+    // Escuta mudanças no total de pessoas
     visitantesRef.on('value', (snap) => {
-        const totalOnline = snap.numChildren();
+        const totalReal = snap.numChildren();
         const contadorEl = document.getElementById('pessoal-online');
-        if(contadorEl) {
-            // MOSTRA APENAS O NÚMERO REAL
-            contadorEl.innerText = totalOnline > 0 ? totalOnline.toLocaleString('pt-BR') : "1";
+        if (contadorEl) {
+            // Mostra o número real (se for 0, mostra 1 porque você está logado)
+            contadorEl.innerText = totalReal > 0 ? totalReal : "1";
         }
     });
-} catch (e) {
+
+} catch (error) {
+    console.error("Erro técnico:", error);
     document.getElementById('pessoal-online').innerText = "1";
 }
 
-// 3. LISTA DE JOGOS
+// 3. SEUS JOGOS (Mantenha o restante como está)
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -63,7 +66,7 @@ const JOGOS = [
     }
 ];
 
-// 4. FUNÇÕES DE UI
+// Funções de Interface
 function checkStatus(j) {
     const now = new Date();
     const gameTime = new Date(`${j.data}T${j.horario}:00`);
