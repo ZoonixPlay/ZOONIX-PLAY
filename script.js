@@ -1,29 +1,29 @@
-// 1. LÓGICA DE CONTAGEM REAL (Via API Gratuita - Sem Firebase/Console)
-async function atualizarContadorReal() {
+// 1. GERADOR DE PÚBLICO REALISTA (Baseado no Horário)
+function atualizarContadorRealista() {
     const contadorEl = document.getElementById('pessoal-online');
-    
-    // Usamos o serviço CountAPI que é aberto e funciona na hora
-    // O 'zonix-play-2026' é a sua chave única
-    const url = "https://api.countapi.xyz/hit/zonix-play-oficial/visitas";
+    if (!contadorEl) return;
 
-    try {
-        const resposta = await fetch(url);
-        const dados = await JSON.parse(await resposta.text());
-        
-        if (contadorEl) {
-            // Exibe o número real de vezes que o site foi carregado
-            contadorEl.innerText = dados.value.toLocaleString('pt-BR');
-        }
-    } catch (erro) {
-        console.error("Erro ao carregar contador:", erro);
-        if (contadorEl) contadorEl.innerText = "1";
+    // Pega a hora atual (0-23)
+    const hora = new Date().getHours();
+    let basePessoas;
+
+    // Define um público baseado no horário do dia para parecer real
+    if (hora >= 18 && hora <= 23) {
+        basePessoas = Math.floor(Math.random() * (250 - 180 + 1)) + 180; // Horário de pico (noite)
+    } else if (hora >= 12 && hora <= 17) {
+        basePessoas = Math.floor(Math.random() * (150 - 90 + 1)) + 90;  // Tarde
+    } else {
+        basePessoas = Math.floor(Math.random() * (60 - 20 + 1)) + 20;    // Madrugada/Manhã
     }
+
+    contadorEl.innerText = basePessoas.toLocaleString('pt-BR');
 }
 
-// Atualiza ao carregar a página
-atualizarContadorReal();
+// Atualiza o número assim que abre e depois a cada 30 segundos
+atualizarContadorRealista();
+setInterval(atualizarContadorRealista, 30000);
 
-// 2. LISTA DE JOGOS
+// 2. LISTA DE JOGOS (Atualizada)
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -47,7 +47,7 @@ const JOGOS = [
     }
 ];
 
-// 3. FUNÇÕES DE STATUS E UI
+// 3. LÓGICA DE INTERFACE
 function checkStatus(j) {
     const now = new Date();
     const gameTime = new Date(`${j.data}T${j.horario}:00`);
