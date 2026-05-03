@@ -10,7 +10,7 @@ try {
     const visitantesRef = database.ref('visitantes_online');
     const meuVisitanteRef = visitantesRef.push();
 
-    // Plano B: Se o banco demorar 3 segundos, exibe "1" para o usuário
+    // Plano B: Se o banco demorar, exibe "1"
     setTimeout(() => {
         const el = document.getElementById('pessoal-online');
         if (el && el.innerText === "Carregando...") el.innerText = "1";
@@ -29,10 +29,12 @@ try {
         if (el) el.innerText = total > 0 ? total : "1";
     });
 } catch (e) {
-    document.getElementById('pessoal-online').innerText = "1";
+    if (document.getElementById('pessoal-online')) {
+        document.getElementById('pessoal-online').innerText = "1";
+    }
 }
 
-// 3. LISTA DE JOGOS (DATA: 02/05/2026)
+// 3. LISTA DE JOGOS
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -75,15 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const placar = s.status === "finalizado" ? `<div class="placar-final" style="font-size:24px; font-weight:900; color:#00d2ff; text-align:center;">${j.placar1} X ${j.placar2}</div>` : "";
 
         list.innerHTML += `
-            <div class="match-card ${s.classe}">
-                <div class="team"><img src="${j.escudo1}"><span>${j.time1}</span></div>
-                <div class="info-central">
+            <div class="match-card ${s.classe}" style="background:#1a1a1a; padding:15px; margin-bottom:10px; border-left:4px solid #00d2ff; display:flex; justify-content:space-between; align-items:center; border-radius:8px;">
+                <div class="team" style="display:flex; flex-direction:column; align-items:center;"><img src="${j.escudo1}" width="40"><span>${j.time1}</span></div>
+                <div class="info-central" style="text-align:center;">
                     <span style="font-size:12px; opacity:0.8;">${j.campeonato}</span>
                     ${placar}
-                    <span class="badge-status">${s.texto}</span>
+                    <span class="badge-status" style="display:block; font-weight:bold; color:#00ff00;">${s.texto}</span>
                     ${btn}
                 </div>
-                <div class="team"><img src="${j.escudo2}"><span>${j.time2}</span></div>
+                <div class="team" style="display:flex; flex-direction:column; align-items:center;"><img src="${j.escudo2}" width="40"><span>${j.time2}</span></div>
             </div>`;
     });
 });
