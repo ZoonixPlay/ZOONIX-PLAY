@@ -3,14 +3,14 @@ const firebaseConfig = {
     databaseURL: "https://zonix-play-default-rtdb.firebaseio.com/" 
 };
 
-// 2. CONTADOR DE PESSOAS REAIS
+// 2. CONTADOR DE PESSOAS REAIS (Sem travar)
 try {
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
     const visitantesRef = database.ref('visitantes_online');
     const meuVisitanteRef = visitantesRef.push();
 
-    // Remove o "Carregando" se o banco demorar
+    // Plano B: Se o banco demorar 3 segundos, exibe "1" para o usuário
     setTimeout(() => {
         const el = document.getElementById('pessoal-online');
         if (el && el.innerText === "Carregando...") el.innerText = "1";
@@ -32,7 +32,7 @@ try {
     document.getElementById('pessoal-online').innerText = "1";
 }
 
-// 3. LISTA DE JOGOS
+// 3. LISTA DE JOGOS (DATA: 02/05/2026)
 const JOGOS = [
     {
         time1: "Palmeiras",
