@@ -1,33 +1,5 @@
 const JOGOS = [
     {
-        time1: "Palmeiras",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Palmeiras_logo.svg/330px-Palmeiras_logo.svg.png", 
-        time2: "Santos",
-        escudo2: "https://upload.wikimedia.org/wikipedia/commons/9/92/LogoSantosFC.png",
-        placar1: 1, // Adicione o placar aqui
-        placar2: 1,
-        encerrado: true, // Marque como true quando o jogo acabar
-        campeonato: "Brasileirão Série A",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
-        data: "2026-05-02", 
-        horario: "18:30",    
-        link: "https://zac22bp.mpipzni2naturally32kistomach.ru/br/player.html?mdata=NDMyNDA1NV8x&ilang=br"
-    },   
-    {
-        time1: "Cruzeiro",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Cruzeiro_Esporte_Clube_%28logo%29.svg/1280px-Cruzeiro_Esporte_Clube_%28logo%29.svg.png", 
-        time2: "Atlético Mineiro",
-        escudo2: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Atletico_mineiro_galo.png/250px-Atletico_mineiro_galo.png",
-        placar1: 1,
-        placar2: 3,
-        encerrado: true,
-        campeonato: "Brasileirão Série A",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
-        data: "2026-05-02", 
-        horario: "21:00",    
-        link: "https://zac22bp.mpipzni2naturally32kistomach.ru/br/player.html?mdata=NDMyNDA2MV8x&ilang=br" 
-    },
-    {
         time1: "Internacional",
         escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sport_Club_Internacional_logo.svg/3840px-Sport_Club_Internacional_logo.svg.png", 
         time2: "Fluminense",
