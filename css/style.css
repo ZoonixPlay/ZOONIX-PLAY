@@ -40,7 +40,7 @@ body {
 }
 
 main {
-    flex: 1 0 auto; /* Empurra o footer para o fim da página */
+    flex: 1 0 auto;
 }
 
 /* ==========================================================================
@@ -110,6 +110,29 @@ main {
     font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.menu a:hover {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+    letter-spacing: 1px;
+}
+
+.menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--neon-blue);
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
 }
 
 /* ==========================================================================
@@ -151,7 +174,7 @@ main {
 }
 
 /* ==========================================================================
-   4. CARDS DE JOGOS
+   4. CARDS DE JOGOS E ALINHAMENTOS (CORRIGIDO)
    ========================================================================== */
 .jogos-grid {
     display: flex;
@@ -170,6 +193,7 @@ main {
     min-height: 120px;
     z-index: 1;
     overflow: hidden;
+    gap: 10px;
 }
 
 .match-card::before {
@@ -192,10 +216,53 @@ main {
     z-index: -1;
 }
 
+.info-central {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+    text-align: center;
+}
+
+.logo-campeonato {
+    width: 45px !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+.campeonato-nome {
+    font-size: 11px;
+    color: #ffffff;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.team {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 2;
+}
+
 .team img {
     width: 50px;
     height: 50px;
     object-fit: contain;
+}
+
+.team span {
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
 }
 
 .badge-status.ao-vivo {
@@ -205,7 +272,50 @@ main {
 }
 
 /* ==========================================================================
-   5. FOOTER COM BORDA ANIMADA E CENTRALIZAÇÃO
+   5. PLAYER E IFRAME (SOLUÇÃO SEM ZOOM)
+   ========================================================================== */
+.iframe-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    overflow: hidden; 
+    background: #000;
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    /* Reduzido para evitar o efeito de zoom */
+    top: -30px;    
+    left: 0;
+    width: 100%; 
+    /* Altura ajustada proporcionalmente ao deslocamento do topo */
+    height: calc(100% + 60px); 
+    border: none;
+}
+
+.video-mask {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-mask::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; /* Reduzido para não cobrir o jogo */
+    background: #000;
+    z-index: 40;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   6. FOOTER E ANIMAÇÕES
    ========================================================================== */
 .footer-final {
     position: relative !important;
@@ -213,7 +323,7 @@ main {
     background: #000 !important;
     padding: 20px 0 !important;
     margin-top: 50px !important;
-    z-index: 999999 !important;
+    z-index: 9999;
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -234,14 +344,8 @@ main {
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
-    flex-direction: column; /* Centralização solicitada */
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.footer-brand-area {
-    display: flex;
     align-items: center;
     gap: 10px;
 }
@@ -262,9 +366,6 @@ main {
     text-transform: uppercase;
 }
 
-/* ==========================================================================
-   6. ANIMAÇÕES E PARTICULAS
-   ========================================================================== */
 @keyframes borderMove {
     0% { transform: translateX(-50%); }
     100% { transform: translateX(0%); }
@@ -291,133 +392,9 @@ main {
 
 @keyframes blink { 50% { opacity: 0.4; } }
 
-.particles-container {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-.particle {
-    position: absolute;
-    top: -10px;
-    width: 3px;
-    height: 3px;
-    background: var(--neon-blue);
-    box-shadow: 0 0 10px var(--neon-blue);
-    animation: fall linear infinite;
-}
-
-@keyframes fall { to { transform: translateY(105vh); } }
-
 /* ==========================================================================
    7. RESPONSIVIDADE
    ========================================================================== */
-@media (max-width: 600px) {
-    .match-card { padding: 10px; flex-wrap: wrap; justify-content: center; gap: 10px; }
-    .team span { font-size: 10px; }
-    .site-name-animated { font-size: 18px; }
-}
-
-/* AJUSTE DO CARD PARA NÃO QUEBRAR */
-.match-card {
-    position: relative;
-    background: #0a0a0a;
-    padding: 15px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 120px;
-    z-index: 1;
-    overflow: hidden;
-    gap: 10px; /* Garante que os itens não grudem */
-}
-
-/* FIX DA LOGO DO CAMPEONATO (O QUE ESTÁ BUGANDO A IMAGEM) */
-.logo-campeonato {
-    width: 60px !important; /* Ajuste o tamanho conforme sua preferência */
-    height: auto !important;
-    object-fit: contain;
-    margin-bottom: 5px;
-}
-
-/* AJUSTE DOS TIMES PARA FICAREM ALINHADOS */
-.team {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    z-index: 2;
-}
-
-.team img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-/* --- AJUSTE DA SEÇÃO CENTRAL (ONDE ESTÁ O BUG) --- */
-.info-central {
-    flex: 1.5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; /* Cria espaço uniforme entre logo, nome e data */
-    z-index: 2;
-    text-align: center;
-}
-
-.logo-campeonato {
-    width: 45px !important; /* Tamanho fixo para não explodir */
-    height: auto !important;
-    object-fit: contain;
-    display: block;
-}
-
-.campeonato-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.campeonato-nome {
-    font-size: 11px;
-    color: #ffffff;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 5px;
-}
-
-/* --- AJUSTE DOS TIMES PARA ALINHAMENTO VERTICAL PERFEITO --- */
-.team {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    z-index: 2;
-}
-
-.team img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-
-.team span {
-    font-size: 13px;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: #fff;
-    white-space: nowrap; /* Impede que o nome do time quebre em duas linhas */
-}
-
-/* --- MEDIA QUERY PARA CELULARES (RESPONSIVIDADE) --- */
 @media (max-width: 600px) {
     .match-card {
         padding: 15px 10px;
@@ -438,163 +415,11 @@ main {
         width: 35px !important;
     }
 
-    .campeonato-nome, .badge-status {
+    .campeonato-nome {
         font-size: 9px;
     }
-}
 
-/* BOTÃO ASSISTIR PREMIUM */
-.btn-assistir {
-    background: linear-gradient(-45deg, #000000, #00d2ff, #000000);
-    background-size: 300% 300%;
-    color: #fff !important;
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 12px;
-    padding: 8px 20px;
-    border: 1px solid #fff;
-    cursor: pointer;
-    transition: 0.3s;
-    animation: moveGradient 3s infinite;
-    text-transform: uppercase;
+    .site-name-animated {
+        font-size: 18px;
+    }
 }
-
-.btn-assistir:hover {
-    box-shadow: 0 0 15px #ff0000;
-    transform: scale(1.05);
-}
-
-/* ESTILO DO MODAL (PLAYER INTEGRADO) */
-.modal-player {
-    display: none; /* Escondido por padrão */
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.95);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    position: relative;
-    width: 90%;
-    max-width: 800px;
-    background: #000;
-    border: 2px solid var(--neon-blue);
-}
-
-.close-modal {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    color: #fff;
-    font-size: 30px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-}
-
-.iframe-container {
-    position: relative;
-    padding-bottom: 56.25%; /* Proporção 16:9 */
-    height: 0;
-}
-
-.iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* Estilo base dos links do menu */
-.menu a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    position: relative;
-    transition: all 0.3s ease; /* Tempo da animação */
-}
-
-/* Animação ao passar o mouse (Hover) */
-.menu a:hover {
-    color: var(--neon-blue); /* Muda a cor para azul */
-    text-shadow: 0 0 10px var(--neon-blue); /* Adiciona um brilho neon */
-    letter-spacing: 1px; /* Efeito de leve expansão nas letras */
-}
-
-/* Linha animada embaixo do link (opcional, fica bem profissional) */
-.menu a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--neon-blue);
-    transition: width 0.3s ease;
-}
-
-.menu a:hover::after {
-    width: 100%; /* A linha azul "cresce" ao passar o mouse */
-}
-
-/* Container que vai esconder as bordas do player */
-.iframe-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* Proporção 16:9 */
-    overflow: hidden; /* Corta o que estiver fora do limite */
-    background: #000;
-}
-
-.iframe-wrapper iframe {
-    position: absolute;
-    top: -50px;    /* Empurra o player para cima para esconder o topo */
-    left: -2px;   /* Ajuste fino lateral */
-    width: calc(100% + 4px); /* Aumenta a largura para compensar o ajuste lateral */
-    height: calc(100% + 100px); /* Aumenta a altura para esconder topo e fundo */
-    border: none;
-}
-
-/* Essa é a moldura do vídeo */
-.video-mask {
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* Mantém a proporção 16:9 */
-    position: relative;
-    overflow: hidden;
-    background: #000;
-}
-
-/* Essa é a tarja preta que esconde o topo e o botão embed */
-.video-mask::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 55px;
-    background: #000;
-    z-index: 40; /* Fica acima de tudo */
-    pointer-events: auto;
-}
-
-.placar-final {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 24px;
-    color: #00d2ff;
-    margin-bottom: 5px;
-}
-.encerrado { background: #555 !important; color: #fff !important; }
