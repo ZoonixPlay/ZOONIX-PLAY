@@ -1,46 +1,54 @@
-// 1. CONFIGURAÇÃO
+// 1. CONFIGURAÇÃO OFICIAL
 const firebaseConfig = {
     databaseURL: "https://zonix-play-default-rtdb.firebaseio.com/" 
 };
 
-// 2. LÓGICA DE CONTAGEM REAL
+// 2. LÓGICA DE CONTAGEM 100% REAL
 try {
-    // Inicializa o Firebase
+    // Inicializa se ainda não estiver inicializado
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
     const database = firebase.database();
     const visitantesRef = database.ref('visitantes_online');
-    
-    // Cria uma entrada única para este celular/PC
     const meuVisitanteRef = visitantesRef.push();
+
+    // Plano de Emergência: Se em 4 segundos não carregar, assume que você é o único online
+    const fallbackTimeout = setTimeout(() => {
+        const el = document.getElementById('pessoal-online');
+        if (el && el.innerText === "Carregando...") {
+            el.innerText = "1"; 
+        }
+    }, 4000);
 
     // Sistema de Presença
     database.ref('.info/connected').on('value', (snap) => {
         if (snap.val() === true) {
-            // Se o celular desconectar ou fechar a aba, remove da contagem
+            // Remove do banco quando o usuário fecha a aba
             meuVisitanteRef.onDisconnect().remove();
-            // Registra que este aparelho está online
+            // Registra a entrada real
             meuVisitanteRef.set(true);
         }
     });
 
-    // Escuta mudanças no total de pessoas
+    // Escuta e atualiza o total de pessoas reais
     visitantesRef.on('value', (snap) => {
+        clearTimeout(fallbackTimeout); // Cancela o emergência se o banco responder
         const totalReal = snap.numChildren();
         const contadorEl = document.getElementById('pessoal-online');
         if (contadorEl) {
-            // Mostra o número real (se for 0, mostra 1 porque você está logado)
-            contadorEl.innerText = totalReal > 0 ? totalReal : "1";
+            // Se o banco retornar 0 mas você está conectado, mostra 1
+            contadorEl.innerText = totalReal > 0 ? totalReal.toLocaleString('pt-BR') : "1";
         }
     });
 
 } catch (error) {
-    console.error("Erro técnico:", error);
-    document.getElementById('pessoal-online').innerText = "1";
+    console.error("Erro na conexão:", error);
+    const el = document.getElementById('pessoal-online');
+    if (el) el.innerText = "1";
 }
 
-// 3. SEUS JOGOS (Mantenha o restante como está)
+// 3. LISTA DE JOGOS
 const JOGOS = [
     {
         time1: "Palmeiras",
@@ -66,7 +74,7 @@ const JOGOS = [
     }
 ];
 
-// Funções de Interface
+// 4. LÓGICA DE INTERFACE
 function checkStatus(j) {
     const now = new Date();
     const gameTime = new Date(`${j.data}T${j.horario}:00`);
@@ -82,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     JOGOS.forEach(j => {
         const s = checkStatus(j);
         const btn = s.status === "live" ? `<button class="btn-assistir" onclick="openPlayer('${j.link}')">ASSISTIR</button>` : "";
-        const placar = s.status === "finalizado" ? `<div class="placar-final" style="font-size:24px; font-weight:900; color:#00d2ff; text-align:center;">${j.placar1} X ${j.placar2}</div>` : "";
+        const placar = s.status === "finalizado" ? `<div class="placar-final" style="font-size:24px; font-weight:900; color:#00d2ff; text-align:center; margin:10px 0;">${j.placar1} X ${j.placar2}</div>` : "";
 
         list.innerHTML += `
             <div class="match-card ${s.classe}">
@@ -98,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// 5. PLAYER
 function openPlayer(link) {
     document.getElementById('videoIframe').src = link;
     document.getElementById('playerModal').style.display = 'flex';
