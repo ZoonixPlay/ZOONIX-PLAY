@@ -28,17 +28,17 @@ const JOGOS = [
         link: "https://zac22bp.mpipzni2naturally32kistomach.ru/br/player.html?mdata=NDMyNDA2MV8x&ilang=br" 
     },
     {
-        time1: "Flamengo",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/9/93/Flamengo-RJ_%28BRA%29.png", 
-        time2: "Vasco Da Gama",
-        escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
+        time1: "Internacional",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sport_Club_Internacional_logo.svg/3840px-Sport_Club_Internacional_logo.svg.png", 
+        time2: "Fluminense",
+        escudo2: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fluminense_Football_Club.svg/500px-Fluminense_Football_Club.svg.png",
         placar1: 0,
         placar2: 0,
         encerrado: false,
         campeonato: "Brasileirão Série A",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-03", 
-        horario: "16:00",    
+        horario: "18:30",    
         link: "#" 
     },
 ];
