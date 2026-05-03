@@ -11,12 +11,12 @@
 </head>
 <body>
 
-    <!-- MODAL DO PLAYER UNIFICADO -->
+    <!-- MODAL DO PLAYER -->
     <div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; align-items:center; justify-content:center;">
         <div style="position:relative; width:95%; max-width:900px; background:#000; border:2px solid #00d2ff;">
-            <button onclick="closePlayer()" style="position:absolute; top:-35px; right:0; background:none; border:none; color:#00d2ff; font-family:'Orbitron'; cursor:pointer; font-weight:900; z-index:110;">FECHAR [X]</button>
+            <button onclick="closePlayer()" style="position:absolute; top:-35px; right:0; background:none; border:none; color:#00d2ff; font-family:'Orbitron'; cursor:pointer; font-weight:900;">FECHAR [X]</button>
             <div class="video-mask" style="width: 100%; height: 0; padding-bottom: 56.25%; position: relative; overflow: hidden; background: #000;">
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 55px; background: #000; z-index: 105; pointer-events: auto;"></div>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 55px; background: #000; z-index: 105;"></div>
                 <iframe id="videoIframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" frameborder="0" scrolling="no" allowfullscreen playsinline></iframe>
             </div>
         </div>
@@ -35,10 +35,10 @@
         </div>
     </header>
 
-    <main class="container main-layout">
-        <!-- COLUNA DA ESQUERDA: JOGOS -->
-        <div class="content-left">
-            <div class="alert-brave" style="background: rgba(0, 210, 255, 0.1); border: 1px solid #00d2ff; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; color: #fff;">
+    <main class="container main-layout" style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+        <!-- LADO ESQUERDO: JOGOS -->
+        <div class="content-left" style="flex: 2; min-width: 300px;">
+            <div style="background: rgba(0, 210, 255, 0.1); border: 1px solid #00d2ff; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; color: #fff;">
                 <p>🚀 <strong>DICA:</strong> Use o navegador <strong>Brave</strong> para facilitar na hora de assistir!</p>
             </div>
 
@@ -58,17 +58,15 @@
             <div id="lista-jogos" class="jogos-grid"></div>
         </div>
 
-        <!-- COLUNA DA DIREITA: CHAT -->
-        <aside class="chat-sidebar">
-            <h3 class="matches-title" style="font-size: 14px; margin-bottom: 15px;">CHAT DA GALERA</h3>
-            <div class="chat-wrapper" style="background: #0a0a0a; border: 1px solid #00d2ff; border-radius: 10px; overflow: hidden;">
-                <!-- Chatroll (Alternativa estável) -->
-                <iframe width="100%" height="450" src="https://chatroll.com/embed/chat/zonix-play?id=zonix-play&platform=html" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true"></iframe>
+        <!-- LADO DIREITO: NOVO CHAT ESTÁVEL -->
+        <aside class="chat-sidebar" style="flex: 1; min-width: 300px;">
+            <h3 class="matches-title" style="font-size: 14px; margin-bottom: 15px;">CHAT AO VIVO</h3>
+            <div class="chat-wrapper" style="background: #0a0a0a; border: 1px solid #00d2ff; border-radius: 10px; overflow: hidden; height: 500px;">
+                <iframe src="https://deadsimplechat.com/3_vD-6qXb" width="100%" height="500px" frameborder="0"></iframe>
             </div>
         </aside>
     </main>
 
-    <!-- SCRIPTS DO FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
     <script src="script.js"></script>
