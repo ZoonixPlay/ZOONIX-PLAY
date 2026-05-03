@@ -5,62 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZONIX PLAY | OFFICIAL</title>
     <meta name="referrer" content="no-referrer">
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="img/logo-zoonix.png">
 </head>
-<body style="background-color: #0d0d0d; color: #ffffff; margin: 0; padding: 0; font-family: 'Roboto', sans-serif;">
 
-    <!-- MODAL DO PLAYER -->
-    <div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; align-items:center; justify-content:center;">
-        <div style="position:relative; width:95%; max-width:900px; background:#000; border:2px solid #00d2ff; box-shadow: 0 0 20px #00d2ff;">
-            <button onclick="closePlayer()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#00d2ff; font-family:'Orbitron'; cursor:pointer; font-weight:900; font-size:16px;">FECHAR [X]</button>
-            <div style="width: 100%; height: 0; padding-bottom: 56.25%; position: relative; overflow: hidden;">
-                <iframe id="videoIframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" scrolling="no" allowfullscreen></iframe>
-            </div>
+<body style="background-color:#0d0d0d; color:#fff; margin:0; font-family:Roboto">
+
+<!-- PLAYER -->
+<div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; align-items:center; justify-content:center;">
+    <div style="position:relative; width:95%; max-width:900px; background:#000; border:2px solid #00d2ff;">
+        <button onclick="closePlayer()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#00d2ff; font-family:Orbitron; font-weight:900; cursor:pointer;">
+            FECHAR [X]
+        </button>
+
+        <div style="position:relative; padding-bottom:56.25%; height:0;">
+            <iframe id="videoIframe" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
+</div>
 
-    <header style="background: #000; border-bottom: 2px solid #00d2ff; padding: 15px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <img src="img/logo-zoonix.png" alt="Zonix" style="width: 45px;">
-                <span style="font-family: 'Orbitron'; color: #00d2ff; font-size: 26px; font-weight: 900; letter-spacing: 2px;">ZONIX PLAY</span>
-            </div>
-            <nav>
-                <a href="index.html" style="color: white; text-decoration: none; font-weight: bold; margin-right: 20px; font-family: 'Orbitron'; font-size: 14px;">INÍCIO</a>
-                <a href="pix.html" style="background: #00d2ff; color: #000; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; font-family: 'Orbitron';">DOAR PIX</a>
-            </nav>
+<!-- HEADER -->
+<header style="display:flex; justify-content:space-between; align-items:center; padding:15px 20px; border-bottom:2px solid #00d2ff;">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <img src="img/logo-zoonix.png" style="width:40px;">
+        <span style="font-family:Orbitron; color:#00d2ff; font-size:22px;">ZONIX PLAY</span>
+    </div>
+
+    <nav>
+        <a href="index.html" style="color:#fff; margin-right:15px; text-decoration:none; font-family:Orbitron;">INÍCIO</a>
+        <a href="pix.html" style="background:#00d2ff; padding:8px 15px; color:#000; text-decoration:none; font-family:Orbitron; border-radius:5px;">
+            DOAR PIX
+        </a>
+    </nav>
+</header>
+
+<!-- CONTEÚDO -->
+<main style="display:flex; gap:20px; max-width:1200px; margin:20px auto; padding:0 15px; flex-wrap:wrap;">
+
+    <!-- JOGOS -->
+    <section style="flex:2; min-width:300px;">
+
+        <!-- ONLINE -->
+        <div style="background:#1a1a1a; padding:10px; border-left:4px solid #00ff00; margin-bottom:20px; text-align:center;">
+            🟢 <span id="pessoal-online" style="color:#00ff00;">0</span> pessoas assistindo agora
         </div>
-    </header>
 
-    <main style="display: flex; flex-wrap: wrap; gap: 25px; max-width: 1200px; margin: 30px auto; padding: 0 20px;">
-        
-        <!-- COLUNA JOGOS -->
-        <div style="flex: 2; min-width: 320px;">
-            <div style="background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 10px; margin-bottom: 25px; text-align: center; border-left: 5px solid #00ff00;">
-                <p style="margin: 0; font-size: 15px; font-weight: bold;">🟢 <span id="pessoal-online" style="color: #00ff00;">1</span> pessoas assistindo agora</p>
-            </div>
+        <h3 style="font-family:Orbitron; color:#00d2ff;">Partidas Disponíveis</h3>
 
-            <h3 style="font-family: 'Orbitron'; color: #00d2ff; border-left: 4px solid #00d2ff; padding-left: 15px; margin-bottom: 20px; text-transform: uppercase;">Partidas Disponíveis</h3>
-            <div id="lista-jogos">
-                <!-- Injetado via JS -->
-            </div>
+        <div id="lista-jogos"></div>
+
+    </section>
+
+    <!-- CHAT -->
+    <aside style="flex:1; min-width:300px;">
+        <h3 style="font-family:Orbitron; color:#00d2ff; text-align:center;">CHAT AO VIVO</h3>
+
+        <div style="height:550px; border:2px solid #00d2ff; border-radius:10px; overflow:hidden;">
+            
+            <!-- CHAT TAWK (OFICIAL E FUNCIONANDO) -->
+            <script type="text/javascript">
+                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+                (function(){
+                    var s1=document.createElement("script"),
+                        s0=document.getElementsByTagName("script")[0];
+                    s1.async=true;
+                    s1.src='https://embed.tawk.to/69f6a5f7b4a1331c31f0734c/1jnlngk01';
+                    s1.charset='UTF-8';
+                    s1.setAttribute('crossorigin','*');
+                    s0.parentNode.insertBefore(s1,s0);
+                })();
+            </script>
+
         </div>
+    </aside>
 
-        <!-- COLUNA CHAT -->
-        <aside style="flex: 1; min-width: 320px;">
-            <h3 style="font-family: 'Orbitron'; color: #00d2ff; font-size: 16px; margin-bottom: 15px; text-align: center;">CHAT DA GALERA</h3>
-            <div style="background: #1a1a1a; border: 2px solid #00d2ff; border-radius: 12px; padding: 5px; height: 550px; overflow: hidden; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);">
-                <!-- Chat alternativo estável (Meutube) -->
-                <iframe src="https://www.chatwee.com/public/chat/663409ae985e05001c000001" width="100%" height="100%" frameborder="0"></iframe>
-            </div>
-        </aside>
+</main>
 
-    </main>
+<!-- SCRIPTS -->
+<script src="script.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
