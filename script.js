@@ -165,3 +165,7 @@ document.onkeydown = function(e) {
         return false;
     }
 };
+
+const firebaseConfig = {
+    databaseURL: "https://zoonixplay.github.io/ZOONIX-PLAY/" // COLE O SEU LINK AQUI
+};
