@@ -3,88 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZONIX PLAY | OFFICIAL</title>
-    <meta name="referrer" content="no-referrer">
+    <title>ZONIX PLAY | CHAT AO VIVO</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="img/logo-zoonix.png">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Roboto;
+            background: #0d0d0d;
+            color: #fff;
+        }
+
+        header {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #00d2ff;
+            font-family: Orbitron;
+            color: #00d2ff;
+            font-size: 22px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        .jogos {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .chat {
+            flex: 1;
+            min-width: 300px;
+            background: #1a1a1a;
+            border: 2px solid #00d2ff;
+            border-radius: 10px;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .card {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00d2ff;
+        }
+
+        .online {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #00ff00;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
-<body style="background-color:#0d0d0d; color:#fff; margin:0; font-family:Roboto">
+<body>
 
-<!-- PLAYER -->
-<div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; align-items:center; justify-content:center;">
-    <div style="position:relative; width:95%; max-width:900px; background:#000; border:2px solid #00d2ff;">
-        <button onclick="closePlayer()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#00d2ff; font-family:Orbitron; font-weight:900; cursor:pointer;">
-            FECHAR [X]
-        </button>
-
-        <div style="position:relative; padding-bottom:56.25%; height:0;">
-            <iframe id="videoIframe" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
-</div>
-
-<!-- HEADER -->
-<header style="display:flex; justify-content:space-between; align-items:center; padding:15px 20px; border-bottom:2px solid #00d2ff;">
-    <div style="display:flex; align-items:center; gap:10px;">
-        <img src="img/logo-zoonix.png" style="width:40px;">
-        <span style="font-family:Orbitron; color:#00d2ff; font-size:22px;">ZONIX PLAY</span>
-    </div>
-
-    <nav>
-        <a href="index.html" style="color:#fff; margin-right:15px; text-decoration:none; font-family:Orbitron;">INÍCIO</a>
-        <a href="pix.html" style="background:#00d2ff; padding:8px 15px; color:#000; text-decoration:none; font-family:Orbitron; border-radius:5px;">
-            DOAR PIX
-        </a>
-    </nav>
+<header>
+    ZONIX PLAY - CHAT AO VIVO
 </header>
 
-<!-- CONTEÚDO -->
-<main style="display:flex; gap:20px; max-width:1200px; margin:20px auto; padding:0 15px; flex-wrap:wrap;">
+<div class="container">
 
     <!-- JOGOS -->
-    <section style="flex:2; min-width:300px;">
+    <div class="jogos">
 
-        <!-- ONLINE -->
-        <div style="background:#1a1a1a; padding:10px; border-left:4px solid #00ff00; margin-bottom:20px; text-align:center;">
-            🟢 <span id="pessoal-online" style="color:#00ff00;">0</span> pessoas assistindo agora
+        <div class="online">
+            🟢 <span id="pessoal-online">0</span> pessoas online
         </div>
 
-        <h3 style="font-family:Orbitron; color:#00d2ff;">Partidas Disponíveis</h3>
+        <div class="card">
+            🔴 Palmeiras x Santos - AO VIVO
+        </div>
 
-        <div id="lista-jogos"></div>
+        <div class="card">
+            ⏰ Cruzeiro x Atlético - 21:00
+        </div>
 
-    </section>
+    </div>
 
     <!-- CHAT -->
-    <aside style="flex:1; min-width:300px;">
-        <h3 style="font-family:Orbitron; color:#00d2ff; text-align:center;">CHAT AO VIVO</h3>
+    <div class="chat">
 
-        <div style="height:550px; border:2px solid #00d2ff; border-radius:10px; overflow:hidden;">
-            
-            <!-- CHAT TAWK (OFICIAL E FUNCIONANDO) -->
-            <script type="text/javascript">
-                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-                (function(){
-                    var s1=document.createElement("script"),
-                        s0=document.getElementsByTagName("script")[0];
-                    s1.async=true;
-                    s1.src='https://embed.tawk.to/69f6a5f7b4a1331c31f0734c/1jnlngk01';
-                    s1.charset='UTF-8';
-                    s1.setAttribute('crossorigin','*');
-                    s0.parentNode.insertBefore(s1,s0);
-                })();
-            </script>
+        <iframe 
+            src="https://www3.cbox.ws/box/?boxid=SEU_BOXID&boxtag=zoonixplay"
+            width="100%" 
+            height="100%" 
+            frameborder="0">
+        </iframe>
 
-        </div>
-    </aside>
+    </div>
 
-</main>
-
-<!-- SCRIPTS -->
-<script src="script.js"></script>
+</div>
 
 </body>
 </html>
