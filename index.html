@@ -3,91 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZONIX PLAY | OFFICIAL</title>
+    <title>ZONIX PLAY | AO VIVO</title>
     <meta name="referrer" content="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="img/logo-zoonix.png">
 </head>
 <body>
 
-<!-- MODAL DO PLAYER UNIFICADO -->
-<div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; align-items:center; justify-content:center;">
-    <div style="position:relative; width:95%; max-width:900px; background:#000; border:2px solid #00d2ff;">
-        
-        <button onclick="closePlayer()" style="position:absolute; top:-35px; right:0; background:none; border:none; color:#00d2ff; font-family:'Orbitron'; cursor:pointer; font-weight:900; z-index:110;">FECHAR [X]</button>
-
-        <div class="video-mask" style="width: 100%; height: 0; padding-bottom: 56.25%; position: relative; overflow: hidden; background: #000;">
-            
-            <!-- TARJA PARA ESCONDER O EMBED -->
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 55px; background: #000; z-index: 105; pointer-events: auto;"></div>
-
-            <!-- IFRAME MULTIPLATAFORMA -->
-            <iframe id="videoIframe" 
-                    src="" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" 
-                    frameborder="0" 
-                    scrolling="no" 
-                    allowfullscreen="yes"
-                    webkitallowfullscreen="true" 
-                    mozallowfullscreen="true"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    playsinline> 
-            </iframe>
+    <!-- MODAL DO PLAYER -->
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePlayer()">FECHAR [X]</span>
+            <div class="iframe-container">
+                <iframe id="videoIframe" src="" frameborder="0" allowfullscreen scrolling="no"></iframe>
+            </div>
         </div>
     </div>
-</div>
 
-    <!-- EFEITO DE PARTÍCULAS NO FUNDO -->
-    <div class="particles-container">
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-
+    <!-- NAVBAR -->
     <header class="navbar">
         <div class="navbar-content container">
-            <div class="logo-area">
-                <img src="img/logo-zoonix.png" alt="Logo ZONIX PLAY" class="main-logo">
-                <span class="site-name-animated">ZONIX PLAY</span>
-            </div>
-            <nav class="menu">
-                <a href="index.html">INÍCIO</a>
-                <a href="pix.html" class="btn-top-doe">DOAR</a>
-            </nav>
+            <div class="logo-text">ZONIX PLAY</div>
+            <div class="tagline">ESPORTES HD</div>
         </div>
     </header>
 
     <main class="container">
-        <!-- AVISO DO NAVEGADOR BRAVE -->
-        <div style="background: rgba(0, 210, 255, 0.1); border: 1px solid #00d2ff; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; font-family: 'Roboto'; color: #fff;">
-            <p style="margin: 0; font-size: 14px;">🚀 <strong>DICA:</strong> Use o navegador <strong>Brave</strong> para facilitar na hora de assistir e bloquear anúncios chatos!</p>
+            <section class="welcome-section">
+        <!-- AVISO BRAVE -->
+        <div class="brave-alert">
+            🚀 <strong>DICA:</strong> Use o navegador <strong>Brave</strong> para bloquear anúncios e assistir sem interrupções!
         </div>
+        
+        <h2 class="main-title logo-text">SEJA BEM VINDO AO ZONIX PLAY</h2>
+        <p class="welcome-text">
+            Assista seus jogos, lutas e muito mais — tudo totalmente de graça! <br>
+            Aqui você aproveita o melhor do esporte sem pagar nada.
+        </p>
+        
+        <p class="support-text">
+            Se você curtir o site e quiser apoiar, você pode fazer uma doação para ajudar a melhorar o domínio e manter tudo funcionando bem 💙
+        </p>
 
-        <section class="welcome-section">
-            <h2>Seja bem-vindo ao <span>ZONIX PLAY</span></h2>
-            <p>Assista seus jogos, lutas e muito mais — tudo totalmente de graça! Aqui você aproveita o melhor do esporte sem pagar nada.<br><br>
-            Se você curtir o site e quiser apoiar, você pode fazer uma doação para ajudar a melhorar o domínio e manter tudo funcionando bem 💙</p>
-            <div class="pix-center-container">
-                <a href="pix.html" class="btn-pix-animated">DOE UM PIX</a>
-            </div>
-        </section>
+        <!-- APOIE O PROJETO -->
+        <a href="pix.html" class="btn-pix-animated">APOIE O PROJETO</a>
+    </section>
 
-        <h3 class="matches-title">PARTIDAS DISPONÍVEIS</h3>
-        <div id="lista-jogos" class="jogos-grid"></div>
+        <h3 class="section-label">PARTIDAS DISPONÍVEIS</h3>
+        <div id="lista-jogos" class="jogos-grid">
+            <!-- JAVASCRIPT INJETA OS CARDS AQUI -->
+        </div>
     </main>
 
     <footer class="footer-final">
-        <div class="footer-content">
-            <div class="footer-brand-area">
-                <img src="img/logo-zoonix.png" alt="ZONIX PLAY">
-                <span>ZONIX PLAY</span>
-            </div>
-            <div class="footer-copyright-area">
-                <p>&copy; 2026 ZONIX PLAY</p>
-            </div>
-        </div>
+        <div class="footer-brand logo-text">ZONIX PLAY</div> <!-- Adicionei logo-text aqui -->
+        <p class="copyright">&copy; 2026 - Todos os direitos reservados.</p>
     </footer>
 
     <script src="script.js"></script>

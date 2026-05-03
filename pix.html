@@ -3,82 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZONIX PLAY | PIX</title>
+    <title>APOIAR | ZONIX PLAY</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="icone-zonix" href="img/logo-zoonix.png">
-    <style>
-        /* Ajuste específico para centralização total nesta página */
-        .pix-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 70vh; /* Garante espaço vertical para centralizar */
-            gap: 25px;
-        }
-
-        .qrcode-box {
-            background: #0a0a0a;
-            padding: 20px;
-            border: 2px solid var(--neon-blue);
-            display: inline-block;
-        }
-
-        .qrcode-box img {
-            width: 250px;
-            height: 250px;
-            display: block;
-            border: 5px solid #fff;
-        }
-    </style>
 </head>
 <body>
 
     <header class="navbar">
         <div class="navbar-content container">
-            <div class="logo-area">
-                <img src="img/logo-zoonix.png" alt="Logo" class="main-logo">
-                <span class="site-name-animated">ZONIX PLAY</span>
-            </div>
-            <nav class="menu">
-                <a href="index.html">VOLTAR</a>
-            </nav>
+            <div class="logo-text">ZONIX PLAY</div>
+            <a href="index.html" class="btn-voltar">VOLTAR</a>
         </div>
     </header>
 
     <main class="container">
-        <section class="pix-wrapper">
-            <div class="welcome-section" style="padding: 0; margin: 0;">
-                <h2>DOE VIA <span>PIX</span></h2>
-                <p>Escaneie o código abaixo para contribuir.</p>
+        <section class="pix-section">
+            <h2 class="main-title">APOIE O PROJETO</h2>
+            <p class="pix-description">
+                Sua doação ajuda a manter os servidores ativos e a transmissão sem anúncios. 
+                Qualquer valor é bem-vindo!
+            </p>
+
+            <div class="pix-card">
+                <div class="pix-header">
+                    <span>VIA PIX</span>
+                </div>
+                
+                <!-- QR CODE (Substitua o src pela sua imagem de QR Code) -->
+                <div class="qr-container">
+                    <img src="img/qrcode.png" alt="QR Code Pix" class="qr-code">
+                </div>
+
+                <div class="pix-input-group">
+                    <label>CHAVE PIX ALEATORIA:</label>
+                    <div class="copy-box">
+                        <input type="text" value="d1a0c1c2-5cae-4b5b-8a27-bcb04a5cd663" id="pixKey" readonly>
+                        <button onclick="copyPix()">COPIAR</button>
+                    </div>
+                </div>
             </div>
 
-            <!-- QR CODE CENTRALIZADO -->
-            <div class="qrcode-box">
-                <img src="img/qrcode.png" alt="QR Code Pix">
+            <div class="pix-footer-msg">
+                Obrigado por fortalecer a comunidade <strong>Zonix Play</strong>!
             </div>
-
-            <!-- BOTÃO COPIAR -->
-            <div class="btn-pix-animated" style="cursor: pointer;" onclick="copyPix()">
-                COPIAR CHAVE PIX
-            </div>
-            
-            <input type="text" value="d1a0c1c2-5cae-4b5b-8a27-bcb04a5cd663" id="pixKey" style="position: absolute; left: -9999px;">
         </section>
     </main>
 
     <footer class="footer-final">
-        <div class="footer-content">
-            <div class="footer-brand-area">
-                <img src="img/logo-zoonix.png" alt="ZONIX PLAY">
-                <span>ZONIX PLAY</span>
-            </div>
-            <div class="footer-copyright-area">
-                <p>&copy; 2026 ZONIX PLAY</p>
-            </div>
-        </div>
+        <div class="footer-brand">ZONIX PLAY</div>
     </footer>
 
     <script>
@@ -86,8 +58,8 @@
             var copyText = document.getElementById("pixKey");
             copyText.select();
             copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value);
-            alert("Chave PIX copiada!");
+            document.execCommand("copy");
+            alert("Chave Pix copiada com sucesso!");
         }
     </script>
 </body>

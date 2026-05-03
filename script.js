@@ -10,8 +10,8 @@ const JOGOS = [
         campeonato: "Brasileirão Série A",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/1/18/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A.png", 
         data: "2026-05-03", 
-        horario: "18:30",    
-        link: "#" 
+        horario: "20:30",    
+        link: "https://nossoplayeronlinehd.cfd/tv/premiere" 
     },
 ];
 
@@ -23,17 +23,14 @@ function checkStatus(jogo) {
     const [ano, mes, dia] = jogo.data.split('-'); 
     const dataBr = `${dia}/${mes}/${ano}`;
 
-    // Se o jogo estiver marcado como encerrado
     if (jogo.encerrado) {
         return { status: "finalizado", classe: "card-encerrado", badge: "encerrado", texto: "FIM DE JOGO" };
     }
 
-    // Se estiver no horário do jogo
     if (now >= gameTime && now <= limit) {
         return { status: "live", classe: "card-ao-vivo", badge: "ao-vivo", texto: "AO VIVO" };
     }
 
-    // Se for antes do jogo
     return { status: "breve", classe: "", badge: "em-breve", texto: `${dataBr} - ${jogo.horario}` };
 }
 
@@ -43,11 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     JOGOS.forEach(j => {
         const s = checkStatus(j);
         
-        // Lógica do Placar e Botão
         let infoCentroHtml = "";
         
         if (s.status === "finalizado") {
-            // Se acabou: Mostra Placar e Tira o Botão
             infoCentroHtml = `
                 <div class="placar-final">
                     <span class="gols">${j.placar1}</span>
@@ -57,21 +52,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span class="badge-status ${s.badge}">${s.texto}</span>
             `;
         } else if (s.status === "live") {
-            // Se está ao vivo: Mostra Botão
             infoCentroHtml = `
                 <span class="badge-status ${s.badge}">${s.texto}</span>
                 <button class="btn-assistir" onclick="openPlayer('${j.link}')">ASSISTIR</button>
             `;
         } else {
-            // Se ainda vai começar: Mostra data/hora
             infoCentroHtml = `
                 <span class="badge-status ${s.badge}">${s.texto}</span>
                 <div class="btn-placeholder"></div>
             `;
         }
 
+        // Template com os Logos de Fundo (BG-LOGO) incluídos
         list.innerHTML += `
             <div class="match-card ${s.classe}">
+                <!-- Logos Gigantes Animados no Fundo -->
+                <div class="bg-logo-container">
+                    <img src="${j.escudo1}" class="bg-logo left">
+                    <img src="${j.escudo2}" class="bg-logo right">
+                </div>
+
                 <div class="team">
                     <img src="${j.escudo1}">
                     <span>${j.time1}</span>
@@ -110,7 +110,6 @@ function closePlayer() {
     document.getElementById('videoIframe').src = '';
 }
 
-// Fechar ao clicar fora
 window.onclick = function(event) {
     const modal = document.getElementById('playerModal');
     if (event.target == modal) { closePlayer(); }
