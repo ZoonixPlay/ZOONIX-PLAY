@@ -752,3 +752,51 @@ main.container {
 body {
     padding-top: 70px;
 }
+
+/* ===== FIX TIMES MOBILE ===== */
+@media (max-width: 768px) {
+
+    .match-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .team {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .team img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .team span {
+        font-size: 12px;
+    }
+
+    .info-central {
+        width: 100%;
+        order: -1; /* sobe o placar/info */
+    }
+
+    .placar-final {
+        font-size: 18px;
+        gap: 8px;
+    }
+
+    .btn-assistir {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .campeonato-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
