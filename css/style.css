@@ -636,3 +636,89 @@ body {
     position: relative;
     z-index: 10; 
 }
+
+
+/* --- AJUSTE DE VISIBILIDADE DO CAMPEONATO --- */
+.campeonato-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding: 5px 15px;
+    /* Fundo leve para destacar o texto */
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+}
+
+.logo-campeonato {
+    width: 32px; /* Aumentado de 25px */
+    height: auto;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+    object-fit: contain;
+}
+
+.campeonato-nome {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px; /* Aumentado */
+    font-weight: 900; /* Super negrito */
+    color: #ffffff; /* Branco puro para contraste máximo */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    /* Brilho leve no texto */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* --- CONTAINER DO HEADER --- */
+.main-header {
+    background: rgba(10, 10, 10, 0.95);
+    padding: 15px 5%;
+    border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- LINKS DE NAVEGAÇÃO --- */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    color: #00d2ff;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+}
+
+/* Destaque especial para o link de DOAR */
+.donate-link {
+    color: #fcf6ba; /* Tom dourado suave */
+    border: 1px solid rgba(252, 246, 186, 0.3);
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+.donate-link:hover {
+    background: rgba(252, 246, 186, 0.1);
+    color: #fcf6ba;
+    border-color: #fcf6ba;
+}
