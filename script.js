@@ -9,8 +9,8 @@ const JOGOS = [
         encerrado: false, // Se mudar para true, encerra na hora. Se for false, encerra automático após 2h.
         campeonato: "CONMEBOL Sudamericana",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/e/e4/Conmebol_Sudamericana_logo.png", 
-        data: "2026-05-06", 
-        horario: "19:00",    
+        data: "2026-05-03", 
+        horario: "22:00",    
         link: "https://nossoplayeronlinehd.cfd/tv/premiere" 
     },
 ];
