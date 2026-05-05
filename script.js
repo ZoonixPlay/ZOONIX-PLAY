@@ -4,9 +4,7 @@ const JOGOS = [
         escudo1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/4138.png", 
         time2: "Vasco Da Gama",
         escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo-1.png",
-        placar1: 0,
-        placar2: 0,
-        encerrado: false, // Se mudar para true, encerra na hora. Se for false, encerra automático após 2h.
+        encerrado: false, 
         campeonato: "CONMEBOL Sudamericana",
         logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/e/e4/Conmebol_Sudamericana_logo.png", 
         data: "2026-05-06", 
@@ -18,24 +16,19 @@ const JOGOS = [
 function checkStatus(jogo) {
     const now = new Date();
     const gameTime = new Date(`${jogo.data}T${jogo.horario}:00`);
-    
-    // Define o limite de 120 minutos (2 horas) para encerramento automático
     const limit = new Date(gameTime.getTime() + (120 * 60 * 1000));
     
     const [ano, mes, dia] = jogo.data.split('-'); 
     const dataBr = `${dia}/${mes}/${ano}`;
 
-    // REGRA DE ENCERRAMENTO: Se marcado como encerrado OU se o horário atual passou do limite de 2h
     if (jogo.encerrado || now > limit) {
         return { status: "finalizado", classe: "card-encerrado", badge: "encerrado", texto: "FIM DE JOGO" };
     }
 
-    // REGRA AO VIVO: Se está entre o horário de início e o limite de 2h
     if (now >= gameTime && now <= limit) {
         return { status: "live", classe: "card-ao-vivo", badge: "ao-vivo", texto: "AO VIVO" };
     }
 
-    // REGRA AGENDADO: Antes do início
     return { status: "breve", classe: "", badge: "em-breve", texto: `${dataBr} - ${jogo.horario}` };
 }
 
@@ -43,7 +36,7 @@ function renderizarJogos() {
     const list = document.getElementById('lista-jogos');
     if (!list) return;
     
-    list.innerHTML = ""; // Limpa a lista para atualizar
+    list.innerHTML = ""; 
     
     JOGOS.forEach(j => {
         const s = checkStatus(j);
@@ -52,9 +45,7 @@ function renderizarJogos() {
         if (s.status === "finalizado") {
             infoCentroHtml = `
                 <div class="placar-final">
-                    <span class="gols">${j.placar1}</span>
-                    <span class="vs">X</span>
-                    <span class="gols">${j.placar2}</span>
+                    <span class="vs">ENCERRADO</span>
                 </div>
                 <span class="badge-status ${s.badge}">${s.texto}</span>
             `;
@@ -97,11 +88,9 @@ function renderizarJogos() {
 
 document.addEventListener("DOMContentLoaded", () => {
     renderizarJogos();
-    // Atualiza a lista automaticamente a cada 60 segundos para virar o status sem F5
     setInterval(renderizarJogos, 60000); 
 });
 
-// Funções do Modal e Segurança permanecem as mesmas...
 function openPlayer(link) {
     const modal = document.getElementById('playerModal');
     const iframe = document.getElementById('videoIframe');
@@ -118,10 +107,3 @@ window.onclick = function(event) {
     const modal = document.getElementById('playerModal');
     if (event.target == modal) { closePlayer(); }
 }
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.onkeydown = function(e) {
-    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
-        return false;
-    }
-};
