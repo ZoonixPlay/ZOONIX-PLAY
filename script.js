@@ -7,7 +7,7 @@ const JOGOS = [
         encerrado: false, 
         campeonato: "Liga dos Campeões da UEFA",
         data: "2026-05-06", 
-        horario: "18:00",    
+        horario: "16:30",    
         link: "#" 
     },
     
