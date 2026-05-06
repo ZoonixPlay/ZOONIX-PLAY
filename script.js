@@ -6,7 +6,6 @@ const JOGOS = [
         escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo-1.png",
         encerrado: false, 
         campeonato: "CONMEBOL Sudamericana",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/e/e4/Conmebol_Sudamericana_logo.png", 
         data: "2026-05-06", 
         horario: "19:00",    
         link: "https://nossoplayeronlinehd.cfd/tv/paramountplus" 
@@ -18,7 +17,6 @@ const JOGOS = [
         escudo2: "https://logodownload.org/wp-content/uploads/2016/11/Corinthians-logo-escudo-1.png",
         encerrado: false, 
         campeonato: "CONMEBOL Libertadores",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/thumb/9/95/Conmebol_Libertadores_logo.svg/3840px-Conmebol_Libertadores_logo.svg.png", 
         data: "2026-05-06", 
         horario: "21:30",    
         link: "https://nossoplayeronlinehd.ink/tv/globosp" 
@@ -30,7 +28,6 @@ const JOGOS = [
         escudo2: "https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_PSG.png",
         encerrado: false, 
         campeonato: "Liga dos Campeões da UEFA",
-        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/9/9b/116px-UEFA_Champions_League_logo_2_svg.png", 
         data: "2026-05-06", 
         horario: "16:00",    
         link: "https://nossoplayeronlinehd.ink/tv/tnt" 
@@ -42,11 +39,8 @@ function checkStatus(jogo) {
     const gameTime = new Date(`${jogo.data}T${jogo.horario}:00`);
     const limit = new Date(gameTime.getTime() + (120 * 60 * 1000));
     
-    // Lógica para verificar se o jogo é HOJE
     const hoje = now.toISOString().split('T')[0];
     const [ano, mes, dia] = jogo.data.split('-');
-    
-    // Se a data do jogo for igual a data de hoje, usa "Hoje", senão usa a data formatada
     const dataExibicao = (jogo.data === hoje) ? "Hoje" : `${dia}/${mes}/${ano}`;
 
     if (jogo.encerrado || now > limit) {
@@ -57,7 +51,6 @@ function checkStatus(jogo) {
         return { status: "live", classe: "card-ao-vivo", badge: "ao-vivo", texto: "AO VIVO" };
     }
 
-    // Retorna "Hoje - 19:00" ou "DD/MM/AAAA - 19:00"
     return { status: "breve", classe: "", badge: "em-breve", texto: `${dataExibicao} - ${jogo.horario}` };
 }
 
@@ -102,7 +95,6 @@ function renderizarJogos() {
                 </div>
                 <div class="info-central">
                     <div class="campeonato-container">
-                        <img src="${j.logoCampeonato}" class="logo-campeonato">
                         <span class="campeonato-nome">${j.campeonato}</span>
                     </div>
                     ${infoCentroHtml}
