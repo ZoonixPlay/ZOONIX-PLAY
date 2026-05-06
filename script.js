@@ -23,6 +23,17 @@ const JOGOS = [
         link: "https://nossoplayeronlinehd.cfd/tv/paramountplus" 
     },
     {
+        time1: "Botafogo",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Botafogo_de_Futebol_e_Regatas_logo.svg/500px-Botafogo_de_Futebol_e_Regatas_logo.svg.png", 
+        time2: "Racing",
+        escudo2: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Escudo_de_Racing_Club_%282014%29.svg/500px-Escudo_de_Racing_Club_%282014%29.svg.png",
+        encerrado: false, 
+        campeonato: "CONMEBOL Sudamericana",
+        data: "2026-05-06", 
+        horario: "21:30",    
+        link: "https://nossoplayeronlinehd.cfd/tv/paramountplus" 
+    },     
+    {
         time1: "Santa Fe",
         escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Escudo_de_Independiente_Santa_Fe.png/250px-Escudo_de_Independiente_Santa_Fe.png", 
         time2: "Corinthians",
@@ -44,6 +55,17 @@ const JOGOS = [
         horario: "21:30",    
         link: "https://nossoplayeronlinehd.ink/tv/globorj" 
     },
+    {
+        time1: "Universidade Católica",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Escudo_Club_Deportivo_Universidad_Cat%C3%B3lica.svg/3840px-Escudo_Club_Deportivo_Universidad_Cat%C3%B3lica.svg.png", 
+        time2: "Cruzeiro",
+        escudo2: "https://upload.wikimedia.org/wikipedia/commons/9/90/Cruzeiro_Esporte_Clube_%28logo%29.svg",
+        encerrado: false, 
+        campeonato: "CONMEBOL Libertadores",
+        data: "2026-05-06", 
+        horario: "23:00",    
+        link: "https://nossoplayeronlinehd.cfd/tv/espn" 
+    },        
 ];
 
 function checkStatus(jogo) {
