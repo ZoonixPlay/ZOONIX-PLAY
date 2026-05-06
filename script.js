@@ -7,10 +7,9 @@ const JOGOS = [
         encerrado: false, 
         campeonato: "Liga dos Campeões da UEFA",
         data: "2026-05-06", 
-        horario: "16:30",    
+        horario: "16:00",    
         link: "#" 
     },
-    
     {
         time1: "Audax Italiano",
         escudo1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/4138.png", 
@@ -31,7 +30,7 @@ const JOGOS = [
         campeonato: "CONMEBOL Sudamericana",
         data: "2026-05-06", 
         horario: "21:30",    
-        link: "https://nossoplayeronlinehd.ink/tv/paramountpluss" 
+        link: "https://nossoplayeronlinehd.cfd/tv/paramountplus" 
     },     
     {
         time1: "Santa Fe",
@@ -65,14 +64,13 @@ const JOGOS = [
         data: "2026-05-06", 
         horario: "23:00",    
         link: "https://nossoplayeronlinehd.cfd/tv/espn" 
-    },        
+    }
 ];
 
 function checkStatus(jogo) {
     const now = new Date();
     const gameTime = new Date(`${jogo.data}T${jogo.horario}:00`);
     const limit = new Date(gameTime.getTime() + (120 * 60 * 1000));
-    
     const hoje = now.toISOString().split('T')[0];
     const [ano, mes, dia] = jogo.data.split('-');
     const dataExibicao = (jogo.data === hoje) ? "Hoje" : `${dia}/${mes}/${ano}`;
@@ -80,11 +78,9 @@ function checkStatus(jogo) {
     if (jogo.encerrado || now > limit) {
         return { status: "finalizado", classe: "card-encerrado", badge: "encerrado", texto: "FIM DE JOGO" };
     }
-
     if (now >= gameTime && now <= limit) {
         return { status: "live", classe: "card-ao-vivo", badge: "ao-vivo", texto: "AO VIVO" };
     }
-
     return { status: "breve", classe: "", badge: "em-breve", texto: `${dataExibicao} - ${jogo.horario}` };
 }
 
@@ -141,68 +137,51 @@ function renderizarJogos() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    renderizarJogos();
-    setInterval(renderizarJogos, 60000); 
-});
-
 function openPlayer(link) {
+    if (!link || link === "#") return;
+
     const modal = document.getElementById('playerModal');
     const iframe = document.getElementById('videoIframe');
-    const container = document.querySelector('.iframe-container');
 
-    // Remove mensagem anterior se existir para não duplicar
-    const oldMsg = document.getElementById('msg-aguarde');
-    if (oldMsg) oldMsg.remove();
+    // Limpa o player antes de abrir
+    iframe.src = "about:blank";
 
-    // Cria a mensagem de "Aguarde"
-    const msgDiv = document.createElement('div');
-    msgDiv.id = 'msg-aguarde';
-    msgDiv.className = 'player-placeholder';
-    msgDiv.innerHTML = `
-        <div class="loader-text">AGUARDE...</div>
-        <div class="sub-text">Se o player não aparecer em instantes, atualize a página.</div>
-    `;
+    // Adiciona apenas as permissões de vídeo, sem o 'sandbox' restritivo
+    iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen; picture-in-picture");
+    iframe.setAttribute("referrerpolicy", "no-referrer");
 
-    // Adiciona a mensagem dentro do container do vídeo
-    container.appendChild(msgDiv);
-
-    // Carrega o link
-    let url;
+    let urlFinal;
     try {
-        url = atob(link);
+        urlFinal = atob(link);
     } catch (e) {
-        url = link;
+        urlFinal = link;
     }
-    
-    iframe.src = url;
+
+    // Abre o modal primeiro
     modal.style.display = 'flex';
 
-    // Remove a mensagem após 7 segundos para mostrar o player
+    // Dá um tempo para o CSS processar e injeta o link
     setTimeout(() => {
-        if (msgDiv) {
-            msgDiv.style.opacity = '0';
-            msgDiv.style.transition = 'opacity 1s ease';
-            setTimeout(() => msgDiv.remove(), 1000);
-        }
-    }, 7000);
+        iframe.src = urlFinal;
+    }, 300);
 }
 
-// Função para fechar (MUITO IMPORTANTE)
 function closePlayer() {
     const modal = document.getElementById('playerModal');
     const iframe = document.getElementById('videoIframe');
-    modal.style.display = 'none';
-    iframe.src = ""; // Para o som quando fecha
-}
-
-function closePlayer() {
-    document.getElementById('playerModal').style.display = 'none';
-    document.getElementById('videoIframe').src = '';
+    if (modal) modal.style.display = 'none';
+    if (iframe) iframe.src = ""; // Para o som quando fecha o modal
 }
 
 window.onclick = function(event) {
     const modal = document.getElementById('playerModal');
-    if (event.target == modal) { closePlayer(); }
+    if (event.target == modal) { 
+        closePlayer(); 
+    }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderizarJogos();
+    setInterval(renderizarJogos, 60000); 
+});
 
