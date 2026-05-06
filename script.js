@@ -11,6 +11,18 @@ const JOGOS = [
         horario: "19:00",    
         link: "https://nossoplayeronlinehd.cfd/tv/paramountplus" 
     },
+    {
+        time1: "Santa Fe",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Escudo_de_Independiente_Santa_Fe.png/250px-Escudo_de_Independiente_Santa_Fe.png", 
+        time2: "Corinthians",
+        escudo2: "https://logodownload.org/wp-content/uploads/2016/11/Corinthians-logo-escudo-1.png",
+        encerrado: false, 
+        campeonato: "CONMEBOL Libertadores",
+        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/thumb/9/95/Conmebol_Libertadores_logo.svg/3840px-Conmebol_Libertadores_logo.svg.png", 
+        data: "2026-05-06", 
+        horario: "21:30",    
+        link: "https://nossoplayeronlinehd.ink/tv/globosp" 
+    },
 ];
 
 function checkStatus(jogo) {
