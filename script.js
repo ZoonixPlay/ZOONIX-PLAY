@@ -33,6 +33,17 @@ const JOGOS = [
         horario: "21:30",    
         link: "https://nossoplayeronlinehd.ink/tv/globosp" 
     },
+    {
+        time1: "Rivadavia",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Escudo_del_Club_Independiente_Rivadavia.svg/960px-Escudo_del_Club_Independiente_Rivadavia.svg.png", 
+        time2: "Fluminense",
+        escudo2: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fluminense_Football_Club.svg/1920px-Fluminense_Football_Club.svg.png",
+        encerrado: false, 
+        campeonato: "CONMEBOL Libertadores",
+        data: "2026-05-06", 
+        horario: "21:30",    
+        link: "https://nossoplayeronlinehd.ink/tv/globorj" 
+    },
 ];
 
 function checkStatus(jogo) {
