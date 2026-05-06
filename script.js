@@ -7,8 +7,8 @@ const JOGOS = [
         encerrado: false, 
         campeonato: "Liga dos Campeões da UEFA",
         data: "2026-05-06", 
-        horario: "16:00",    
-        link: "https://nossoplayeronlinehd.ink/tv/tnt" 
+        horario: "18:00",    
+        link: "#" 
     },
     
     {
@@ -149,8 +149,51 @@ document.addEventListener("DOMContentLoaded", () => {
 function openPlayer(link) {
     const modal = document.getElementById('playerModal');
     const iframe = document.getElementById('videoIframe');
-    try { iframe.src = atob(link); } catch (e) { iframe.src = link; }
+    const container = document.querySelector('.iframe-container');
+
+    // Remove mensagem anterior se existir para não duplicar
+    const oldMsg = document.getElementById('msg-aguarde');
+    if (oldMsg) oldMsg.remove();
+
+    // Cria a mensagem de "Aguarde"
+    const msgDiv = document.createElement('div');
+    msgDiv.id = 'msg-aguarde';
+    msgDiv.className = 'player-placeholder';
+    msgDiv.innerHTML = `
+        <div class="loader-text">AGUARDE...</div>
+        <div class="sub-text">Se o player não aparecer em instantes, atualize a página.</div>
+    `;
+
+    // Adiciona a mensagem dentro do container do vídeo
+    container.appendChild(msgDiv);
+
+    // Carrega o link
+    let url;
+    try {
+        url = atob(link);
+    } catch (e) {
+        url = link;
+    }
+    
+    iframe.src = url;
     modal.style.display = 'flex';
+
+    // Remove a mensagem após 7 segundos para mostrar o player
+    setTimeout(() => {
+        if (msgDiv) {
+            msgDiv.style.opacity = '0';
+            msgDiv.style.transition = 'opacity 1s ease';
+            setTimeout(() => msgDiv.remove(), 1000);
+        }
+    }, 7000);
+}
+
+// Função para fechar (MUITO IMPORTANTE)
+function closePlayer() {
+    const modal = document.getElementById('playerModal');
+    const iframe = document.getElementById('videoIframe');
+    modal.style.display = 'none';
+    iframe.src = ""; // Para o som quando fecha
 }
 
 function closePlayer() {
@@ -162,3 +205,4 @@ window.onclick = function(event) {
     const modal = document.getElementById('playerModal');
     if (event.target == modal) { closePlayer(); }
 }
+
