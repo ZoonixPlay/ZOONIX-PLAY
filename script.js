@@ -31,7 +31,7 @@ const JOGOS = [
         campeonato: "CONMEBOL Sudamericana",
         data: "2026-05-06", 
         horario: "21:30",    
-        link: "https://nossoplayeronlinehd.cfd/tv/paramountplus" 
+        link: "https://nossoplayeronlinehd.ink/tv/paramountpluss" 
     },     
     {
         time1: "Santa Fe",
