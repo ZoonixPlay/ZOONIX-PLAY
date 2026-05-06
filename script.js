@@ -18,8 +18,12 @@ function checkStatus(jogo) {
     const gameTime = new Date(`${jogo.data}T${jogo.horario}:00`);
     const limit = new Date(gameTime.getTime() + (120 * 60 * 1000));
     
-    const [ano, mes, dia] = jogo.data.split('-'); 
-    const dataBr = `${dia}/${mes}/${ano}`;
+    // Lógica para verificar se o jogo é HOJE
+    const hoje = now.toISOString().split('T')[0];
+    const [ano, mes, dia] = jogo.data.split('-');
+    
+    // Se a data do jogo for igual a data de hoje, usa "Hoje", senão usa a data formatada
+    const dataExibicao = (jogo.data === hoje) ? "Hoje" : `${dia}/${mes}/${ano}`;
 
     if (jogo.encerrado || now > limit) {
         return { status: "finalizado", classe: "card-encerrado", badge: "encerrado", texto: "FIM DE JOGO" };
@@ -29,7 +33,8 @@ function checkStatus(jogo) {
         return { status: "live", classe: "card-ao-vivo", badge: "ao-vivo", texto: "AO VIVO" };
     }
 
-    return { status: "breve", classe: "", badge: "em-breve", texto: `${dataBr} - ${jogo.horario}` };
+    // Retorna "Hoje - 19:00" ou "DD/MM/AAAA - 19:00"
+    return { status: "breve", classe: "", badge: "em-breve", texto: `${dataExibicao} - ${jogo.horario}` };
 }
 
 function renderizarJogos() {
