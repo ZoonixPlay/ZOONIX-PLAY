@@ -138,32 +138,29 @@ function renderizarJogos() {
 }
 
 function openPlayer(link) {
-    if (!link || link === "#") return;
-
     const modal = document.getElementById('playerModal');
     const iframe = document.getElementById('videoIframe');
 
-    // 1. Limpa o cache do iframe
-    iframe.src = "about:blank";
-
-    // 2. Garante que o link use HTTPS (ajusta automaticamente)
     let urlFinal;
     try {
         urlFinal = atob(link);
     } catch (e) {
         urlFinal = link;
     }
-    
-    // Troca http por https caso o link venha errado
-    urlFinal = urlFinal.replace("http://", "https://");
 
-    // 3. Configura permissões totais
-    iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen; piture-in-picture");
-    
-    // 4. Abre o modal e injeta o link
-    modal.style.display = 'flex';
+    // Smart TVs exigem HTTPS para mostrar imagem se o site for HTTPS
+    if (window.location.protocol === 'https:') {
+        urlFinal = urlFinal.replace("http://", "https://");
+    }
+
+    modal.style.display = 'block'; // TVs lidam melhor com block do que flex
+
+    // Limpeza profunda para a TV processar o novo sinal
+    iframe.src = "about:blank";
     
     setTimeout(() => {
+        // Atributos específicos para players de Smart TV
+        iframe.setAttribute("allow", "autoplay; fullscreen");
         iframe.src = urlFinal;
     }, 500);
 }
