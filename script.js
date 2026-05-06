@@ -143,27 +143,29 @@ function openPlayer(link) {
     const modal = document.getElementById('playerModal');
     const iframe = document.getElementById('videoIframe');
 
-    // Limpa o player antes de abrir
+    // 1. Limpa o cache do iframe
     iframe.src = "about:blank";
 
-    // Adiciona apenas as permissões de vídeo, sem o 'sandbox' restritivo
-    iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen; picture-in-picture");
-    iframe.setAttribute("referrerpolicy", "no-referrer");
-
+    // 2. Garante que o link use HTTPS (ajusta automaticamente)
     let urlFinal;
     try {
         urlFinal = atob(link);
     } catch (e) {
         urlFinal = link;
     }
+    
+    // Troca http por https caso o link venha errado
+    urlFinal = urlFinal.replace("http://", "https://");
 
-    // Abre o modal primeiro
+    // 3. Configura permissões totais
+    iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen; piture-in-picture");
+    
+    // 4. Abre o modal e injeta o link
     modal.style.display = 'flex';
-
-    // Dá um tempo para o CSS processar e injeta o link
+    
     setTimeout(() => {
         iframe.src = urlFinal;
-    }, 300);
+    }, 500);
 }
 
 function closePlayer() {

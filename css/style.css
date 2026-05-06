@@ -964,3 +964,137 @@ body {
 .iframe-container iframe {
     z-index: 5;
 }
+
+/* Garante que o container do iframe tenha altura */
+.iframe-container {
+    position: relative;
+    width: 100%;
+    background: #000;
+    aspect-ratio: 16 / 9; /* Mantém o formato de TV */
+}
+
+#videoIframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #111;
+}
+
+.btn-refresh {
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.btn-close {
+    background: #ff3333;
+    color: #fff;
+    border: none;
+    padding: 5px 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#videoIframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #000;
+    /* Força a renderização correta em navegadores Chrome/Edge */
+    image-rendering: auto;
+    outline: none;
+}
+
+.iframe-container {
+    position: relative;
+    width: 100%;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    overflow: hidden; /* Garante que nada escape da área do vídeo */
+}
+
+
+/* --- ESTILO DO MODAL --- */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.98); /* Fundo quase todo preto */
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 95%;
+    max-width: 1000px;
+    position: relative;
+    background: #000;
+    border: 2px solid #00d2ff; /* Bordas Neon para destacar */
+}
+
+/* --- CONTAINER DO VÍDEO (CRÍTICO) --- */
+.iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Mantém proporção 16:9 */
+    height: 0;
+    background: #000;
+}
+
+#videoIframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+    display: block !important; /* Força o elemento a existir */
+    
+    /* Remove filtros que podem causar tela preta em vídeo protegido */
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+/* --- MENSAGEM DE AGUARDE --- */
+.player-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    text-align: center;
+}
+
+.loader-text {
+    color: #00d2ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px #00d2ff;
+}
+
+.close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
