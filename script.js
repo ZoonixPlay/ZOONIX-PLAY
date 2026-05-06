@@ -23,6 +23,18 @@ const JOGOS = [
         horario: "21:30",    
         link: "https://nossoplayeronlinehd.ink/tv/globosp" 
     },
+    {
+        time1: "Bayern München",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/500px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png", 
+        time2: "Psg",
+        escudo2: "https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_PSG.png",
+        encerrado: false, 
+        campeonato: "Liga dos Campeões da UEFA",
+        logoCampeonato: "https://upload.wikimedia.org/wikipedia/pt/9/9b/116px-UEFA_Champions_League_logo_2_svg.png", 
+        data: "2026-05-06", 
+        horario: "16:00",    
+        link: "https://nossoplayeronlinehd.ink/tv/tnt" 
+    },
 ];
 
 function checkStatus(jogo) {
