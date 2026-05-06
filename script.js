@@ -1,5 +1,17 @@
 const JOGOS = [
     {
+        time1: "Bayern München",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/500px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png", 
+        time2: "Psg",
+        escudo2: "https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_PSG.png",
+        encerrado: false, 
+        campeonato: "Liga dos Campeões da UEFA",
+        data: "2026-05-06", 
+        horario: "16:00",    
+        link: "https://nossoplayeronlinehd.ink/tv/tnt" 
+    },
+    
+    {
         time1: "Audax Italiano",
         escudo1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/4138.png", 
         time2: "Vasco Da Gama",
@@ -20,17 +32,6 @@ const JOGOS = [
         data: "2026-05-06", 
         horario: "21:30",    
         link: "https://nossoplayeronlinehd.ink/tv/globosp" 
-    },
-    {
-        time1: "Bayern München",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/500px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png", 
-        time2: "Psg",
-        escudo2: "https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_PSG.png",
-        encerrado: false, 
-        campeonato: "Liga dos Campeões da UEFA",
-        data: "2026-05-06", 
-        horario: "16:00",    
-        link: "https://nossoplayeronlinehd.ink/tv/tnt" 
     },
 ];
 
