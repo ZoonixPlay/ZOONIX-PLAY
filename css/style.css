@@ -800,3 +800,98 @@ body {
         gap: 5px;
     }
 }
+
+/* --- AJUSTE ORGANIZADO DOS TIMES --- */
+
+.team { 
+    width: 32%; /* Define uma largura fixa para evitar que o centro se mova */
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    gap: 12px; 
+    z-index: 10; 
+    position: relative;
+    padding: 10px;
+}
+
+/* Container do Escudo para dar destaque */
+.team img { 
+    width: 75px; /* Aumentei um pouco para destaque */
+    height: 75px; 
+    object-fit: contain; 
+    filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.6)); 
+    transition: transform 0.3s ease;
+}
+
+.match-card:hover .team img {
+    transform: scale(1.1); /* Efeito de zoom leve ao passar o mouse no card */
+}
+
+/* Estilo do Nome do Time */
+.team span { 
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 14px; 
+    font-weight: 900; 
+    text-transform: uppercase; 
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    white-space: nowrap; /* Impede que o nome quebre em duas linhas */
+}
+
+/* --- LOGOS DE FUNDO (MARCA D'ÁGUA) --- */
+.bg-logo-container {
+    position: absolute;
+    inset: 0; 
+    z-index: 0;
+    opacity: 0.15; /* Levemente mais visível para o efeito que você quer */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bg-logo {
+    position: absolute;
+    width: 250px; 
+    height: 250px;
+    filter: grayscale(1) brightness(0.5);
+    object-fit: contain;
+}
+
+/* Posicionamento preciso nos cantos */
+.bg-logo.left { 
+    left: -40px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
+.bg-logo.right { 
+    right: -40px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
+/* --- AJUSTE PARA MOBILE --- */
+@media (max-width: 768px) {
+    .team {
+        width: 100%;
+        padding: 5px;
+    }
+    
+    .team span {
+        font-size: 12px;
+        white-space: normal; /* No mobile permite quebrar se o nome for gigante */
+    }
+
+    .team img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .bg-logo {
+        width: 150px;
+        height: 150px;
+        opacity: 0.1;
+    }
+}
