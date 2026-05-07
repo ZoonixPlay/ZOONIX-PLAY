@@ -22,12 +22,24 @@ function checkStatus(jogo) {
     const dataFormatada = (jogo.data === hoje) ? "HOJE" : `${dia}/${mes}`;
 
     if (jogo.encerrado || now > limit) {
-        return { status: "finalizado", labelTopo: "FIM DE JOGO", textoBotao: "ENCERRADO" };
+        return {
+            status: "finalizado",
+            labelHorario: "FIM DE JOGO",
+            textoBotao: "ENCERRADO"
+        };
     }
     if (now >= gameTime && now <= limit) {
-        return { status: "live", labelTopo: jogo.campeonato, textoBotao: "ASSISTIR AGORA" };
+        return {
+            status: "live",
+            labelHorario: null, // ao vivo não precisa de horário, usa o badge
+            textoBotao: "ASSISTIR AGORA"
+        };
     }
-    return { status: "breve", labelTopo: `${dataFormatada} ÀS ${jogo.horario}`, textoBotao: "AGUARDE" };
+    return {
+        status: "breve",
+        labelHorario: `${dataFormatada} ÀS ${jogo.horario}`,
+        textoBotao: "AGUARDE"
+    };
 }
 
 function irParaPlayer(l1, l2) {
@@ -37,7 +49,7 @@ function irParaPlayer(l1, l2) {
 function criarCard(j) {
     const s = checkStatus(j);
     const card = document.createElement("div");
-    
+
     card.className = `match-card ${s.status === "live" ? "card-ao-vivo" : ""}`;
 
     card.innerHTML = `
@@ -52,21 +64,24 @@ function criarCard(j) {
         </div>
 
         <div class="info-central">
+            <!-- Nome do campeonato SEMPRE aparece aqui -->
             <div class="campeonato-container">
-                <span class="campeonato-nome">${s.labelTopo}</span>
+                <span class="campeonato-nome">${j.campeonato}</span>
             </div>
-            
+
             <div class="placar-final">
                 <span class="vs">VS</span>
             </div>
 
-            ${s.status === "live" ? 
-                `<div class="badge-status ao-vivo">AO VIVO</div>` : 
-                `<div class="badge-status">${s.textoBotao}</div>`
+            <!-- Horário (breve/finalizado) ou badge AO VIVO -->
+            ${s.status === "live"
+                ? `<div class="badge-status ao-vivo">● AO VIVO</div>`
+                : `<div class="badge-status">${s.labelHorario}</div>`
             }
 
-            <button class="btn-assistir" 
-                ${s.status !== "live" ? "disabled style='opacity:0.5; cursor:not-allowed'" : ""} 
+            <!-- Botão: habilitado só ao vivo -->
+            <button class="btn-assistir"
+                ${s.status !== "live" ? "disabled style='opacity:0.5; cursor:not-allowed'" : ""}
                 onclick="irParaPlayer('${j.link1}', '${j.link2}')">
                 ${s.textoBotao}
             </button>
