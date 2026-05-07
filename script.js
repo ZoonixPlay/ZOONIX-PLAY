@@ -7,7 +7,7 @@ const JOGOS = [
         encerrado: false,
         campeonato: "CONMEBOL Libertadores",
         data: "2026-05-07",
-        horario: "21:30",
+        horario: "15:30",
         link1: "https://w1.embedtv.live/espn",
         link2: "https://5embeddecanais.xyz/espn/"
     }
@@ -53,6 +53,8 @@ function criarCard(j) {
     card.className = `match-card ${s.status === "live" ? "card-ao-vivo" : ""}`;
 
     card.innerHTML = `
+        <div class="scanlines"></div>
+
         <div class="bg-logo-container">
             <img src="${j.escudo1}" class="bg-logo left">
             <img src="${j.escudo2}" class="bg-logo right">

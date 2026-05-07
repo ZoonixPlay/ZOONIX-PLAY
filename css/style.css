@@ -50,7 +50,7 @@ body {
    HEADER E NAVEGAÇÃO
    ============================================================ */
 .main-header {
-    background: rgba(10,10,10,0.95);
+    background: rgba(0,0,0,0.52);
     height: 70px;
     border-bottom: 2px solid rgba(0,210,255,0.3);
     position: fixed;
@@ -94,6 +94,36 @@ body {
     color: #fcf6ba;
     border: 1px solid rgba(252,246,186,0.3);
     padding: 5px 15px;
+}
+
+/* Logo no header */
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.header-logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(0,210,255,0.4));
+    transition: filter 0.3s;
+}
+
+.header-brand:hover .header-logo {
+    filter: drop-shadow(0 0 14px rgba(0,210,255,0.8));
+}
+
+/* Logo + nome no footer */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
 }
 
 /* ============================================================
@@ -173,6 +203,27 @@ body {
     overflow: hidden;
 }
 
+/* Scanlines sobrepostas ao card */
+.match-card .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.13) 3px,
+        rgba(0, 0, 0, 0.13) 4px
+    );
+    pointer-events: none;
+    z-index: 5;
+    animation: scanline-move 8s linear infinite;
+}
+
+@keyframes scanline-move {
+    0%   { background-position: 0 0; }
+    100% { background-position: 0 100px; }
+}
+
 /* --- Borda neon giratória via pseudo-elemento --- */
 .match-card::before {
     content: "";
@@ -216,21 +267,22 @@ body {
 }
 
 .team img {
-    width: 52px;
-    height: 52px;
+    width: 68px;
+    height: 68px;
     object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(0,210,255,0.6));
+    filter: drop-shadow(0 0 14px rgba(0,210,255,0.7));
     transition: filter 0.3s;
 }
 
 .team span {
     font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 900;
     text-transform: uppercase;
     white-space: normal;
     line-height: 1.2;
     margin-top: 2px;
+    text-shadow: 0 0 8px rgba(255,255,255,0.3);
 }
 
 .info-central {
@@ -293,21 +345,22 @@ body {
     position: absolute;
     inset: 0;
     z-index: 0;
-    opacity: 0.15;
     pointer-events: none;
-    display: flex;
-    justify-content: space-between;
+    overflow: hidden;
 }
 
 .bg-logo {
-    width: 250px;
-    height: 250px;
-    filter: grayscale(1) brightness(0.5);
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    filter: grayscale(1) brightness(0.7);
     object-fit: contain;
+    opacity: 0.28;
+    top: 50%;
 }
 
-.bg-logo.left  { align-self: center; }
-.bg-logo.right { align-self: center; }
+.bg-logo.left  { left: -80px; transform: translateY(-40%) rotate(-15deg); }
+.bg-logo.right { right: -80px; transform: translateY(-40%) rotate(15deg); }
 
 /* ============================================================
    BOTÕES DE AÇÃO
@@ -337,15 +390,20 @@ body {
     box-shadow: 0 0 20px var(--neon-blue);
 }
 
-/* Pulso no botão quando o card está ao vivo */
+/* Pulso + piscar no botão quando o card está ao vivo */
 .card-ao-vivo .btn-assistir {
-    animation: pulse-blue 2s infinite;
+    animation: pulse-blue 2s infinite, blink-btn 1.2s infinite;
 }
 
 @keyframes pulse-blue {
     0%   { box-shadow: 0 0 0 0   rgba(0,210,255,0.7); }
     70%  { box-shadow: 0 0 0 10px rgba(0,210,255,0);   }
     100% { box-shadow: 0 0 0 0   rgba(0,210,255,0);   }
+}
+
+@keyframes blink-btn {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.6; }
 }
 
 /* ============================================================
@@ -364,11 +422,21 @@ body {
    FOOTER
    ============================================================ */
 .footer-final {
-    background: #000;
+    background: #00000085;
     padding: 30px 0;
     border-top: 2px solid var(--neon-blue);
     text-align: center;
     margin-top: auto;
+}
+
+/* Logo no footer */
+.footer-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(0,210,255,0.3));
+    opacity: 0.85;
 }
 
 .copyright {
@@ -463,89 +531,84 @@ html {
 }
 
 /* ============================================================
-   CELULAR PEQUENO — até 380px (Galaxy A, iPhone SE, etc.)
+   CELULAR PEQUENO — ate 380px (Galaxy A, iPhone SE, etc.)
    ============================================================ */
 @media (max-width: 380px) {
     body { padding-top: 60px; }
-
     .main-header { height: 60px; }
-
     .nav-links { gap: 12px; }
-
     .nav-item { font-size: 11px; letter-spacing: 0; }
-
     .welcome-section { padding: 20px 0; }
-
     .brave-alert { font-size: 12px; padding: 10px; }
 
+    /* Card em linha: time | centro | time */
     .match-card {
-        flex-direction: column;
-        padding: 16px 12px;
-        gap: 12px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 8px;
+        gap: 4px;
         min-height: unset;
     }
-
     .team {
-        width: 100%;
-        flex-direction: row;
-        justify-content: center;
-        gap: 12px;
+        width: 22%;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
     }
-
-    .team img { width: 40px; height: 40px; }
-
-    .team span { font-size: 10px; text-align: left; max-width: 100px; }
-
-    .info-central { width: 100%; gap: 6px; }
-
-    .campeonato-nome { font-size: 9px; }
-
-    .placar-final { font-size: 16px; }
-
+    .team img { width: 34px; height: 34px; }
+    .team span { font-size: 8px; text-align: center; }
+    .info-central { width: 52%; gap: 4px; }
+    .campeonato-container { padding: 2px 8px; }
+    .campeonato-nome { font-size: 8px; }
+    .placar-final { font-size: 14px; }
+    .badge-status { font-size: 8px; padding: 2px 6px; }
     .btn-assistir {
         width: 100%;
         clip-path: none;
-        height: 44px;
-        font-size: 11px;
+        height: 30px;
+        font-size: 8px;
+        margin-top: 2px;
     }
 
-    .bg-logo { display: none; }
+    .jogos-grid { gap: 12px; }
 }
 
 /* ============================================================
-   CELULAR PADRÃO — 381px até 768px
+   CELULAR PADRAO — 381px ate 768px
    ============================================================ */
 @media (min-width: 381px) and (max-width: 768px) {
+    /* Card em linha: time | centro | time */
     .match-card {
-        flex-direction: column;
-        gap: 14px;
-        padding: 18px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 12px;
+        gap: 6px;
         min-height: unset;
     }
-
     .team {
-        width: 100%;
-        flex-direction: row;
-        justify-content: center;
-        gap: 14px;
+        width: 22%;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
     }
-
-    .team img { width: 50px; height: 50px; }
-
-    .team span { font-size: 11px; text-align: left; max-width: 130px; }
-
-    .info-central { width: 100%; gap: 8px; }
-
+    .team img { width: 44px; height: 44px; }
+    .team span { font-size: 9px; text-align: center; }
+    .info-central { width: 52%; gap: 6px; }
+    .campeonato-container { padding: 3px 10px; }
+    .campeonato-nome { font-size: 9px; }
+    .placar-final { font-size: 18px; }
+    .badge-status { font-size: 9px; }
     .btn-assistir {
-        width: 90%;
-        max-width: 280px;
-        height: 44px;
-        font-size: 11px;
+        width: 100%;
+        clip-path: none;
+        height: 36px;
+        font-size: 9px;
+        margin-top: 3px;
     }
 
-    .bg-logo { width: 100px; opacity: 0.06; }
-
-    .jogos-grid { gap: 16px; }
+    .jogos-grid { gap: 14px; }
 }
 
 /* ============================================================
@@ -574,7 +637,7 @@ html {
 }
 
 /* ============================================================
-   TABLET — 769px até 1024px
+   TABLET — 769px ate 1024px
    ============================================================ */
 @media (min-width: 769px) and (max-width: 1024px) {
     .container { max-width: 900px; }
@@ -586,6 +649,15 @@ html {
     .match-card { padding: 10px 20px; }
 
     .jogos-grid { gap: 20px; }
+
+    .bg-logo { width: 200px; height: 200px; }
+}
+
+/* ============================================================
+   DESKTOP — 1025px ate 1440px
+   ============================================================ */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .bg-logo { width: 260px; height: 260px; }
 }
 
 /* ============================================================
