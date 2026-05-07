@@ -7,7 +7,7 @@ const JOGOS = [
         encerrado: false,
         campeonato: "CONMEBOL Libertadores",
         data: "2026-05-07",
-        horario: "15:30",
+        horario: "21:30",
         link1: "https://w1.embedtv.live/espn",
         link2: "https://5embeddecanais.xyz/espn/"
     }
