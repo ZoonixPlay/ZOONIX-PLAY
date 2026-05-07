@@ -3,63 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APOIAR | ZONIX PLAY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Apoie o Zonix Play</title>
+    <link rel="stylesheet" href="css/pix.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="pix-container">
+        <header>
+            <h1 class="logo-text">APOIE O PROJETO</h1>
+            <p>Sua doação ajuda a manter o servidor online e sem anúncios travando.</p>
+        </header>
 
-    <header class="navbar">
-        <div class="navbar-content container">
-            <div class="logo-text">ZONIX PLAY</div>
-            <a href="index.html" class="btn-voltar">VOLTAR</a>
+        <div class="pix-card">
+            <div class="qr-placeholder">
+                <img src="img/qrcode.png" alt="QR Code PIX">
+            </div>
+
+            <div class="pix-info">
+                <span>Chave PIX (E-mail/CPF/Aleatória):</span>
+                <div class="copy-box">
+                    <input type="text" value="d1a0c1c2-5cae-4b5b-8a27-bcb04a5cd663" id="pixKey" readonly>
+                    <button onclick="copiarPix()">COPIAR</button>
+                </div>
+            </div>
+
+            <a href="index.html" class="btn-voltar">VOLTAR PARA O INÍCIO</a>
         </div>
-    </header>
-
-    <main class="container">
-        <section class="pix-section">
-            <h2 class="main-title">APOIE O PROJETO</h2>
-            <p class="pix-description">
-                Sua doação ajuda a manter os servidores ativos e a transmissão sem anúncios. 
-                Qualquer valor é bem-vindo!
-            </p>
-
-            <div class="pix-card">
-                <div class="pix-header">
-                    <span>VIA PIX</span>
-                </div>
-                
-                <!-- QR CODE (Substitua o src pela sua imagem de QR Code) -->
-                <div class="qr-container">
-                    <img src="img/qrcode.png" alt="QR Code Pix" class="qr-code">
-                </div>
-
-                <div class="pix-input-group">
-                    <label>CHAVE PIX ALEATORIA:</label>
-                    <div class="copy-box">
-                        <input type="text" value="d1a0c1c2-5cae-4b5b-8a27-bcb04a5cd663" id="pixKey" readonly>
-                        <button onclick="copyPix()">COPIAR</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pix-footer-msg">
-                Obrigado por fortalecer a comunidade <strong>Zonix Play</strong>!
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer-final">
-        <div class="footer-brand">ZONIX PLAY</div>
-    </footer>
+    </div>
 
     <script>
-        function copyPix() {
+        function copiarPix() {
             var copyText = document.getElementById("pixKey");
             copyText.select();
             copyText.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            alert("Chave Pix copiada com sucesso!");
+            navigator.clipboard.writeText(copyText.value);
+            alert("Chave PIX copiada!");
         }
     </script>
 </body>

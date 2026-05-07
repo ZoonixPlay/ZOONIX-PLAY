@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistir Jogo - Player</title>
+    <link rel="stylesheet" href="css/player.css">
+</head>
+<body>
+
+<div class="container-player">
+    <div class="nav-topo">
+        <a href="index.html" class="btn-nav">⬅ VOLTAR PARA A LISTA</a>
+    </div>
+
+    <div class="card-doacao-topo">
+        <p>Gosta do nosso conteúdo? Faça uma doação para ajudar o criador do site!</p>
+        <a href="pix.html" class="link-doar">CLIQUE AQUI PARA DOAR</a>
+    </div>
+
+    <div class="moldura-video">
+        <iframe id="main-player" src="" frameborder="0" allowfullscreen referrerpolicy="no-referrer"></iframe>
+    </div>
+
+    <div class="topo-aviso-baixo">
+        Se o jogo demorar muito, <span onclick="recarregarPagina()">CLIQUE AQUI</span> para tentar rodar o vídeo novamente.
+    </div>
+
+    <div class="selecao-opcoes">
+        <h3>Escolha uma opção abaixo para assistir</h3>
+        <div class="botoes-opcoes">
+            <button id="btn-op1" class="btn-canal" onclick="trocarCanal(1)">OPÇÃO 01</button>
+            <button id="btn-op2" class="btn-canal" onclick="trocarCanal(2)">OPÇÃO 02</button>
+        </div>
+    </div>
+
+    <div class="rodape-logo">
+        ZONIX PLAY - TODOS OS DIREITOS RESERVADOS
+    </div>
+</div>
+
+<script src="player.js"></script>
+</body>
+</html>

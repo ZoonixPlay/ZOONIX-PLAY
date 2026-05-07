@@ -1,695 +1,74 @@
-/* --- CONFIGURAÇÕES GERAIS --- */
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    border-radius: 0 !important; 
+/* ============================================================
+   ZONIX PLAY — style.css
+   ============================================================ */
+
+/* --- RESET E BASE --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 0 !important;
 }
 
+/* --- VARIÁVEIS GLOBAIS --- */
 :root {
-    --neon-blue: #00d2ff;
+    --neon-blue:   #00d2ff;
     --neon-purple: #9d00ff;
-    --live-red: #ff3333;
-    --dark-glass: rgba(10, 10, 10, 0.9);
+    --live-red:    #ff3333;
+    --dark-bg:     #050505;
+    --card-bg:     #0a0a0a;
 }
 
+/* --- BODY --- */
 body {
-    background: #050505 url('../img/fundo.png') no-repeat center center fixed;
+    background:
+        linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
+        url('../img/fundo.png') no-repeat center center fixed;
     background-size: cover;
-    color: white;
+    color: #fff;
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: 70px; /* espaço para o header fixo */
 }
 
-.container { 
-    max-width: 1100px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-    width: 100%; 
-}
-
-/* --- NAVBAR --- */
-.navbar {
-    background: rgba(0, 0, 0, 0.95);
-    border-bottom: 2px solid rgba(0, 210, 255, 0.3);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar-content { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    height: 70px; 
-}
-
-.logo-text { 
-    font-family: 'Orbitron'; 
-    font-size: 22px; 
-    color: var(--neon-blue); 
-    font-weight: 900; 
-}
-
-.tagline { 
-    font-size: 12px; 
-    font-weight: 900; 
-    letter-spacing: 1px;
-}
-
-/* --- AVISO DO BRAVE EM AZUL --- */
-.brave-alert {
-    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), rgba(0, 0, 0, 0.8));
-    border-left: 4px solid #00d2ff; /* Azul Neon */
-    padding: 15px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 14px;
-    color: #fff;
-    animation: fadeInDown 0.8s ease;
-}
-
-.brave-alert strong { 
-    color: #00d2ff; 
-    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
-}
-.welcome-section { 
-    padding: 30px 0 40px;
-}
-
-main.container {
-    margin-top: 70px; /* altura EXATA do seu header */
-}
-
-.main-title { 
-    font-family: 'Orbitron'; 
-    font-size: 28px; 
-    margin-bottom: 10px;
-}
-
-.btn-pix-animated {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-    color: #fff;
-    text-decoration: none;
-    padding: 15px 35px;
-    font-family: 'Orbitron';
-    font-weight: 900;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    transition: 0.3s;
-    margin-top: 20px;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
-}
-
-.btn-pix-animated:hover { 
-    transform: scale(1.05); 
-    filter: brightness(1.2); 
-    box-shadow: 0 0 25px rgba(157, 0, 255, 0.5);
-}
-
-.section-label {
-    font-family: 'Orbitron';
-    text-align: center;
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-}
-
-/* --- CARDS DE JOGOS --- */
-.jogos-grid { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 20px; 
-    padding-bottom: 50px; 
-}
-
-.match-card {
-    background: #0a0a0a; /* Fundo sólido para o conteúdo */
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    border: 1px solid rgba(0, 210, 255, 0.2); /* Borda padrão */
-}
-
-/* O "Brilho" que corre na borda */
-.match-card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        transparent, 
-        #00d2ff, 
-        transparent 30%
-    );
-    animation: rotate-border 4s linear infinite;
-    z-index: -2;
-}
-
-/* Capa interna para o fundo não sumir */
-.match-card::after {
-    content: "";
-    position: absolute;
-    inset: 2px; /* Espessura da borda */
-    background: #0a0a0a;
-    z-index: -1;
-}
-
-@keyframes rotate-border {
-    100% { transform: rotate(360deg); }
-}
-
-/* Destaque extra se o jogo estiver AO VIVO */
-.match-card.card-ao-vivo::before {
-    background: conic-gradient(
-        transparent, 
-        #ff3333, 
-        transparent 30%
-    );
-    animation-duration: 2s; /* Gira mais rápido no ao vivo */
-}
-
-/* ANIMAÇÃO PISCANTE AO VIVO */
-@keyframes blink-live {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
-}
-
-.badge-ao-vivo {
-    color: var(--live-red);
-    border: 1px solid var(--live-red);
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 900;
-    animation: blink-live 1.2s infinite;
-    display: inline-block;
-}
-
-.btn-assistir {
-    background: var(--neon-blue);
-    border: none;
-    color: #000;
-    padding: 10px 30px;
-    font-family: 'Orbitron';
-    font-weight: 900;
-    cursor: pointer;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    transition: 0.3s;
-}
-
-.btn-assistir:hover {
-    background: #fff;
-    box-shadow: 0 0 15px var(--neon-blue);
-}
-
-/* --- FOOTER COMPACTO --- */
-.footer-final {
-    background: #000;
-    padding: 20px 0;
-    border-top: 2px solid var(--neon-blue);
-    margin-top: auto;
-    text-align: center;
-}
-
-.footer-brand { 
-    font-family: 'Orbitron'; 
-    color: var(--neon-blue); 
-    font-size: 16px; 
-    font-weight: 900;
-}
-
-.copyright { 
-    font-size: 10px; 
-    color: #555; 
-    margin-top: 5px; 
-    text-transform: uppercase;
-}
-
-/* --- MODAL PLAYER --- */
-.modal {
-    position: fixed; 
-    inset: 0; 
-    background: rgba(0,0,0,0.98);
-    display: none; 
-    align-items: center; 
-    justify-content: center; 
-    z-index: 2000;
-}
-
-.modal-content { 
-    width: 95%; 
-    max-width: 900px; 
-    border: 2px solid var(--neon-blue); 
-    position: relative; 
-}
-
-.iframe-container { 
-    position: relative; 
-    padding-bottom: 56.25%; 
-    height: 0; 
-}
-
-.iframe-container iframe { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-}
-
-.close-btn { 
-    position: absolute; 
-    top: -35px; 
-    right: 0; 
-    color: var(--neon-blue); 
-    cursor: pointer; 
-    font-family: 'Orbitron'; 
-    font-weight: 900;
-}
-
-/* --- ESTILOS EXCLUSIVOS PARA O PIX.HTML --- */
-
-.pix-section {
-    padding: 120px 0 50px;
-    text-align: center;
-    max-width: 600px;
+/* --- CONTAINERS --- */
+.container {
+    max-width: 1100px;
     margin: 0 auto;
-}
-
-.pix-description {
-    color: #aaa;
-    font-size: 14px;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.pix-card {
-    background: var(--dark-glass);
-    border: 2px solid var(--neon-blue);
-    padding: 40px;
-    position: relative;
-    box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
-}
-
-.pix-header {
-    background: var(--neon-blue);
-    color: #000;
-    font-family: 'Orbitron';
-    font-weight: 900;
-    padding: 5px 20px;
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
-}
-
-.qr-container {
-    background: #fff;
-    padding: 15px;
-    display: inline-block;
-    margin-bottom: 25px;
-    border: 4px solid var(--neon-purple);
-}
-
-.qr-code {
-    width: 200px;
-    height: 200px;
-    display: block;
-}
-
-.pix-input-group {
-    text-align: left;
-}
-
-.pix-input-group label {
-    display: block;
-    font-family: 'Orbitron';
-    font-size: 11px;
-    color: var(--neon-blue);
-    margin-bottom: 10px;
-}
-
-.copy-box {
-    display: flex;
-    gap: 0;
-}
-
-.copy-box input {
-    flex: 1;
-    background: #111;
-    border: 1px solid #333;
-    color: #fff;
-    padding: 12px;
-    font-size: 14px;
-}
-
-.copy-box button {
-    background: var(--neon-blue);
-    border: none;
-    color: #000;
     padding: 0 20px;
-    font-family: 'Orbitron';
-    font-weight: 900;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.copy-box button:hover {
-    background: #fff;
-}
-
-.pix-footer-msg {
-    margin-top: 30px;
-    font-size: 13px;
-    color: #666;
-}
-
-/* BOTÃO VOLTAR NA NAVBAR */
-.btn-voltar {
-    color: #fff;
-    text-decoration: none;
-    font-family: 'Orbitron';
-    font-size: 12px;
-    border: 1px solid #333;
-    padding: 8px 15px;
-    transition: 0.3s;
-}
-
-.btn-voltar:hover {
-    border-color: var(--neon-blue);
-    color: var(--neon-blue);
-}
-
-body {
-    /* Camada preta (80% de opacidade) por cima da imagem para escurecer */
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
-                url('../img/fundo.png');
-    
-    background-size: cover;
-    background-position: center;
-    
-    /* Faz o fundo ficar parado enquanto o conteúdo rola */
-    background-attachment: fixed; 
-    
-    background-repeat: no-repeat;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-/* --- RESET E FUNDO --- */
-* { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
-
-body {
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../img/fundo.png');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; width: 100%; }
-
-/* --- NAVBAR & AVISO --- */
-.navbar { background: rgba(0, 0, 0, 0.95); border-bottom: 2px solid #00d2ff; position: fixed; width: 100%; top: 0; z-index: 1000; }
-.navbar-content { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-.logo-text { font-family: 'Orbitron'; font-size: 22px; color: #00d2ff; font-weight: 900; }
-
-.brave-alert {
-    background: linear-gradient(90deg, rgba(0, 210, 255, 0.1), rgba(0, 0, 0, 0.8));
-    border-left: 4px solid #00d2ff;
-    padding: 15px; margin-bottom: 30px; text-align: center; font-size: 14px;
-}
-.brave-alert strong { color: #00d2ff; }
-
-/* --- CARDS DE JOGO --- */
-.welcome-section { text-align: center; padding: 120px 0 40px; }
-.jogos-grid { display: flex; flex-direction: column; gap: 20px; padding-bottom: 50px; }
-
-.match-card {
-    background: rgba(10, 10, 10, 0.9);
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.match-card:hover { border-color: #00d2ff; }
-
-.team { width: 30%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.team img { width: 60px; height: 60px; object-fit: contain; }
-.team span { font-family: 'Orbitron'; font-size: 13px; font-weight: 900; }
-
-.info-central { width: 40%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-
-.campeonato-container { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-.logo-campeonato { width: 25px; height: auto; }
-.campeonato-nome { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-
-/* --- PLACAR E BADGES --- */
-.placar-final { display: flex; align-items: center; gap: 15px; font-family: 'Orbitron'; font-size: 24px; font-weight: 900; color: #fff; }
-.placar-final .vs { font-size: 14px; color: #555; }
-
-.badge-status { font-family: 'Orbitron'; font-size: 11px; font-weight: 900; padding: 4px 12px; border: 1px solid #444; }
-
-@keyframes blink { 0% {opacity: 1} 50% {opacity: 0.3} 100% {opacity: 1} }
-.badge-status.ao-vivo { color: #ff3333; border-color: #ff3333; animation: blink 1.2s infinite; }
-.badge-status.encerrado { color: #ffff; background: rgb(34 161 175 / 94%); }
-
-/* --- BOTÕES --- */
-.btn-assistir {
-    background: #00d2ff; color: #000; border: none; padding: 12px 30px; 
-    font-family: 'Orbitron'; font-weight: 900; cursor: pointer;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    transition: 0.3s;
-}
-.btn-assistir:hover { background: #fff; box-shadow: 0 0 20px #00d2ff; }
-
-.btn-pix-animated {
-    display: inline-block; text-decoration: none; background: linear-gradient(135deg, #00d2ff, #9d00ff);
-    color: #fff; padding: 15px 35px; font-family: 'Orbitron'; font-weight: 900;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); transition: 0.3s;
-}
-.btn-pix-animated:hover { transform: scale(1.05); filter: brightness(1.2); }
-
-/* --- FOOTER & MODAL --- */
-.footer-final { background: #000; padding: 25px 0; border-top: 2px solid #00d2ff; text-align: center; margin-top: auto; }
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; align-items: center; justify-content: center; z-index: 2000; }
-.modal-content { width: 95%; max-width: 900px; border: 2px solid #00d2ff; position: relative; }
-.iframe-container { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
-.iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-.close-btn { position: absolute; top: -35px; right: 0; color: #00d2ff; cursor: pointer; font-family: 'Orbitron'; font-weight: 900; }
-
-
-/* --- LOGO E TÍTULO COM DEGRADÊ SUAVE (MENOS PRETO) --- */
-.logo-text, .main-title.logo-text {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    letter-spacing: 2px;
-    
-    /* Trocamos o preto por um Azul Marinho Profundo (#001529) */
-    background: linear-gradient(
-        to right, 
-        #00d2ff, 
-        #003366, 
-        #00d2ff, 
-        #003366, 
-        #00d2ff
-    );
-    background-size: 200% auto;
-    
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
-    /* Animação suave */
-    animation: shine-blue 5s linear infinite;
-    
-    /* Glow leve para destacar no fundo do site */
-    filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.4));
-}
-
-/* Ajuste específico para o tamanho do título principal */
-.main-title.logo-text {
-    font-size: 32px;
-    text-align: center;
-    margin-bottom: 15px;
-    display: block;
-}
-
-@keyframes shine-blue {
-    to {
-        background-position: 200% center;
-    }
-}
-
-.team img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    /* Sombra azul leve */
-    filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.5));
-    transition: 0.3s;
-}
-
-/* Efeito de pulso quando o jogo está ao vivo */
-.card-ao-vivo .team img {
-    animation: pulse-blue 2s infinite;
-}
-
-@keyframes pulse-blue {
-    0% { filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.4)); }
-    50% { filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.7)); }
-    100% { filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.4)); }
-}
-
-.match-card {
-    background: #0a0a0a; 
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-    overflow: hidden; /* Garante que os logos gigantes não saiam do card */
-    border-radius: 8px;
-}
-
-/* Brilho da borda animada */
-.match-card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        transparent, 
-        #00d2ff, 
-        transparent 30%
-    );
-    animation: rotate-border 4s linear infinite;
-    z-index: -2; /* Fica atrás de tudo */
-}
-
-/* Fundo preto interno que deixa a borda visível */
-.match-card::after {
-    content: "";
-    position: absolute;
-    inset: 2px; /* Define a grossura da borda */
-    background: #0a0a0a;
-    border-radius: 6px;
-    z-index: -1; /* Fica acima da borda mas abaixo dos logos gigantes */
-}
-
-.bg-logo-container {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 0; /* Agora ele aparece sobre o fundo preto central */
-    pointer-events: none;
-    opacity: 0.12; /* Ajuste aqui se quiser mais claro ou escuro */
 }
 
-.bg-logo {
-    position: absolute;
-    width: 280px; /* Bem grande mesmo */
-    height: 280px;
-    object-fit: contain;
-    filter: grayscale(1) brightness(0.4);
+/* display:contents remove o container do fluxo, deixando o filho obedecer ao pai direto */
+.container-botao {
+    display: contents;
 }
 
-/* Posicionamento e Animação */
-.bg-logo.left {
-    left: -60px;
-    top: -40px;
-    animation: float-bg-left 12s ease-in-out infinite;
-}
-
-.bg-logo.right {
-    right: -60px;
-    bottom: -40px;
-    animation: float-bg-right 12s ease-in-out infinite;
-}
-
-/* Garante que o conteúdo (Placar e Times) fique NA FRENTE de tudo */
-.team, .info-central {
-    position: relative;
-    z-index: 10; 
-}
-
-
-/* --- AJUSTE DE VISIBILIDADE DO CAMPEONATO --- */
-.campeonato-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    padding: 5px 15px;
-    /* Fundo leve para destacar o texto */
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 20px;
-}
-
-.logo-campeonato {
-    width: 32px; /* Aumentado de 25px */
-    height: auto;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
-    object-fit: contain;
-}
-
-.campeonato-nome {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px; /* Aumentado */
-    font-weight: 900; /* Super negrito */
-    color: #ffffff; /* Branco puro para contraste máximo */
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    /* Brilho leve no texto */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-/* --- CONTAINER DO HEADER --- */
+/* ============================================================
+   HEADER E NAVEGAÇÃO
+   ============================================================ */
 .main-header {
-    background: rgba(10, 10, 10, 0.95);
-    padding: 15px 5%;
-    border-bottom: 2px solid rgba(0, 210, 255, 0.3);
-    position: sticky;
+    background: rgba(10,10,10,0.95);
+    height: 70px;
+    border-bottom: 2px solid rgba(0,210,255,0.3);
+    position: fixed;
     top: 0;
-    z-index: 1000;
+    width: 100%;
+    z-index: 9999;
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* --- LINKS DE NAVEGAÇÃO --- */
 .nav-links {
     display: flex;
     list-style: none;
@@ -698,456 +77,554 @@ body {
 
 .nav-item {
     text-decoration: none;
-    color: #ffffff;
+    color: #fff;
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
     font-size: 14px;
     letter-spacing: 1px;
-    transition: 0.3s;
+    transition: color 0.3s, text-shadow 0.3s;
 }
 
 .nav-item:hover {
-    color: #00d2ff;
-    text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0,210,255,0.6);
 }
 
-/* Destaque especial para o link de DOAR */
 .donate-link {
-    color: #fcf6ba; /* Tom dourado suave */
-    border: 1px solid rgba(252, 246, 186, 0.3);
-    padding: 5px 15px;
-    border-radius: 4px;
-}
-
-.donate-link:hover {
-    background: rgba(252, 246, 186, 0.1);
     color: #fcf6ba;
-    border-color: #fcf6ba;
+    border: 1px solid rgba(252,246,186,0.3);
+    padding: 5px 15px;
 }
 
-
-/* ===== FIX ESPAÇO TOPO ===== */
-
-/* remove qualquer espaço invisível */
-main.container {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+/* ============================================================
+   LOGO / TÍTULOS COM EFEITO SHINE
+   ============================================================ */
+.logo-text,
+.main-title.logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, #00d2ff, #003366, #00d2ff, #003366, #00d2ff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-blue 5s linear infinite;
+    filter: drop-shadow(0 0 8px rgba(0,210,255,0.4));
 }
 
-/* controla o espaço REAL abaixo do header */
+@keyframes shine-blue {
+    to { background-position: 200% center; }
+}
+
+/* ============================================================
+   SEÇÃO DE BOAS-VINDAS
+   ============================================================ */
 .welcome-section {
-    padding-top: 20px !important;
+    text-align: center;
+    padding: 40px 0;
 }
 
-/* garante que o header não empurre nada */
-.main-header {
+.brave-alert {
+    background: linear-gradient(90deg, rgba(0,210,255,0.1), rgba(0,0,0,0.8));
+    border-left: 4px solid var(--neon-blue);
+    padding: 15px;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.btn-pix-animated {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 35px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    transition: transform 0.3s, filter 0.3s;
+    margin-top: 20px;
+}
+
+.btn-pix-animated:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+/* ============================================================
+   GRID E CARDS DE JOGO
+   ============================================================ */
+.jogos-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-bottom: 60px;
+}
+
+.match-card {
+    background: var(--card-bg);
+    min-height: 80px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* --- Borda neon giratória via pseudo-elemento --- */
+.match-card::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent, var(--neon-blue), transparent 30%);
+    animation: rotate-border 4s linear infinite;
+    z-index: -2;
+}
+
+.match-card::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: var(--card-bg);
+    z-index: -1;
+}
+
+/* Variante ao vivo: borda vermelha e animação mais rápida */
+.match-card.card-ao-vivo::before {
+    background: conic-gradient(transparent, var(--live-red), transparent 30%);
+    animation-duration: 2s;
+}
+
+@keyframes rotate-border {
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   CONTEÚDO DO CARD (TIMES E PLACAR)
+   ============================================================ */
+.team {
+    width: 25%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+}
+
+.team img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(0,210,255,0.6));
+    transition: filter 0.3s;
+}
+
+.team span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: normal;
+    line-height: 1.2;
+    margin-top: 2px;
+}
+
+.info-central {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    z-index: 2;
+}
+
+.campeonato-container {
+    background: rgba(255,255,255,0.08);
+    padding: 4px 20px;
+    width: fit-content;
+}
+
+.campeonato-nome {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.placar-final {
+    font-size: 20px;
+    color: #fff;
+    margin: 2px 0;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* ============================================================
+   BADGES DE STATUS
+   ============================================================ */
+.badge-status {
+    font-size: 10px;
+    padding: 2px 8px;
+    border: 1px solid #444;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.badge-status.ao-vivo {
+    color: var(--live-red);
+    border-color: var(--live-red);
+    animation: blink 1.2s infinite;
+    max-width: 200px;
+    text-align: center;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+}
+
+/* ============================================================
+   LOGOS DE FUNDO (MARCA D'ÁGUA)
+   ============================================================ */
+.bg-logo-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.15;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bg-logo {
+    width: 250px;
+    height: 250px;
+    filter: grayscale(1) brightness(0.5);
+    object-fit: contain;
+}
+
+.bg-logo.left  { align-self: center; }
+.bg-logo.right { align-self: center; }
+
+/* ============================================================
+   BOTÕES DE AÇÃO
+   ============================================================ */
+.btn-assistir {
+    background: var(--neon-blue);
+    color: #000;
+    width: 150px;
+    height: 32px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin-top: 5px;
+    transition: background 0.3s, box-shadow 0.3s;
+    z-index: 10;
+}
+
+.btn-assistir:hover:not(:disabled) {
+    background: #fff;
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* Pulso no botão quando o card está ao vivo */
+.card-ao-vivo .btn-assistir {
+    animation: pulse-blue 2s infinite;
+}
+
+@keyframes pulse-blue {
+    0%   { box-shadow: 0 0 0 0   rgba(0,210,255,0.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(0,210,255,0);   }
+    100% { box-shadow: 0 0 0 0   rgba(0,210,255,0);   }
+}
+
+/* ============================================================
+   SECTION LABEL
+   ============================================================ */
+.section-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer-final {
+    background: #000;
+    padding: 30px 0;
+    border-top: 2px solid var(--neon-blue);
+    text-align: center;
+    margin-top: auto;
+}
+
+.copyright {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-top: 8px;
+}
+
+/* ============================================================
+   MODAL DO PLAYER
+   ============================================================ */
+.modal {
+    display: none;
     position: fixed;
-    top: 0;
-    height: 70px;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active { display: flex; }
+
+.modal-content {
+    width: 90%;
+    max-width: 900px;
+    background: var(--card-bg);
+    border: 2px solid var(--neon-blue);
+    padding: 20px;
+}
+
+.close-btn {
+    display: block;
+    text-align: right;
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.iframe-container {
+    position: relative;
     width: 100%;
-    z-index: 9999;
+    padding-top: 56.25%; /* 16:9 */
 }
 
-/* cria o espaço correto abaixo do header */
+.iframe-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================================
+   CORREÇÕES GLOBAIS iOS / SAFARI MOBILE
+   ============================================================ */
+
+/* Evita zoom automático em inputs no iOS */
+input, select, textarea { font-size: 16px; }
+
+/* Corrige tremido do header fixo no Safari mobile */
+.main-header {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Área segura para iPhones com notch / Dynamic Island */
 body {
-    padding-top: 70px;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* ===== FIX TIMES MOBILE ===== */
-@media (max-width: 768px) {
+/* Smooth scroll nativo */
+html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Touch targets mínimos 44px (Apple HIG / Material Design) */
+.btn-assistir,
+.nav-item,
+.close-btn,
+.donate-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================================
+   CELULAR PEQUENO — até 380px (Galaxy A, iPhone SE, etc.)
+   ============================================================ */
+@media (max-width: 380px) {
+    body { padding-top: 60px; }
+
+    .main-header { height: 60px; }
+
+    .nav-links { gap: 12px; }
+
+    .nav-item { font-size: 11px; letter-spacing: 0; }
+
+    .welcome-section { padding: 20px 0; }
+
+    .brave-alert { font-size: 12px; padding: 10px; }
 
     .match-card {
         flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        text-align: center;
+        padding: 16px 12px;
+        gap: 12px;
+        min-height: unset;
     }
 
     .team {
         width: 100%;
         flex-direction: row;
         justify-content: center;
-        align-items: center;
-        gap: 10px;
+        gap: 12px;
     }
 
-    .team img {
-        width: 40px;
-        height: 40px;
-    }
+    .team img { width: 40px; height: 40px; }
 
-    .team span {
-        font-size: 12px;
-    }
+    .team span { font-size: 10px; text-align: left; max-width: 100px; }
 
-    .info-central {
-        width: 100%;
-        order: -1; /* sobe o placar/info */
-    }
+    .info-central { width: 100%; gap: 6px; }
 
-    .placar-final {
-        font-size: 18px;
-        gap: 8px;
-    }
+    .campeonato-nome { font-size: 9px; }
+
+    .placar-final { font-size: 16px; }
 
     .btn-assistir {
         width: 100%;
-        max-width: 200px;
+        clip-path: none;
+        height: 44px;
+        font-size: 11px;
     }
 
-    .campeonato-container {
+    .bg-logo { display: none; }
+}
+
+/* ============================================================
+   CELULAR PADRÃO — 381px até 768px
+   ============================================================ */
+@media (min-width: 381px) and (max-width: 768px) {
+    .match-card {
         flex-direction: column;
-        gap: 5px;
+        gap: 14px;
+        padding: 18px 16px;
+        min-height: unset;
     }
-}
 
-/* --- AJUSTE ORGANIZADO DOS TIMES --- */
-
-.team { 
-    width: 32%; /* Define uma largura fixa para evitar que o centro se mova */
-    text-align: center; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    gap: 12px; 
-    z-index: 10; 
-    position: relative;
-    padding: 10px;
-}
-
-/* Container do Escudo para dar destaque */
-.team img { 
-    width: 75px; /* Aumentei um pouco para destaque */
-    height: 75px; 
-    object-fit: contain; 
-    filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.6)); 
-    transition: transform 0.3s ease;
-}
-
-.match-card:hover .team img {
-    transform: scale(1.1); /* Efeito de zoom leve ao passar o mouse no card */
-}
-
-/* Estilo do Nome do Time */
-.team span { 
-    font-family: 'Orbitron', sans-serif; 
-    font-size: 14px; 
-    font-weight: 900; 
-    text-transform: uppercase; 
-    color: #ffffff;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    white-space: nowrap; /* Impede que o nome quebre em duas linhas */
-}
-
-/* --- LOGOS DE FUNDO (MARCA D'ÁGUA) --- */
-.bg-logo-container {
-    position: absolute;
-    inset: 0; 
-    z-index: 0;
-    opacity: 0.15; /* Levemente mais visível para o efeito que você quer */
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.bg-logo {
-    position: absolute;
-    width: 250px; 
-    height: 250px;
-    filter: grayscale(1) brightness(0.5);
-    object-fit: contain;
-}
-
-/* Posicionamento preciso nos cantos */
-.bg-logo.left { 
-    left: -40px; 
-    top: 50%; 
-    transform: translateY(-50%); 
-}
-
-.bg-logo.right { 
-    right: -40px; 
-    top: 50%; 
-    transform: translateY(-50%); 
-}
-
-/* --- AJUSTE PARA MOBILE --- */
-@media (max-width: 768px) {
     .team {
         width: 100%;
-        padding: 5px;
-    }
-    
-    .team span {
-        font-size: 12px;
-        white-space: normal; /* No mobile permite quebrar se o nome for gigante */
+        flex-direction: row;
+        justify-content: center;
+        gap: 14px;
     }
 
-    .team img {
-        width: 60px;
-        height: 60px;
+    .team img { width: 50px; height: 50px; }
+
+    .team span { font-size: 11px; text-align: left; max-width: 130px; }
+
+    .info-central { width: 100%; gap: 8px; }
+
+    .btn-assistir {
+        width: 90%;
+        max-width: 280px;
+        height: 44px;
+        font-size: 11px;
     }
-    
-    .bg-logo {
-        width: 150px;
-        height: 150px;
-        opacity: 0.1;
+
+    .bg-logo { width: 100px; opacity: 0.06; }
+
+    .jogos-grid { gap: 16px; }
+}
+
+/* ============================================================
+   LANDSCAPE — altura menor que 500px (celular deitado)
+   ============================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    body { padding-top: 55px; }
+
+    .main-header { height: 55px; }
+
+    .welcome-section { padding: 16px 0; }
+
+    .match-card {
+        flex-direction: row;
+        min-height: 70px;
+        padding: 6px 16px;
     }
+
+    .team img { width: 36px; height: 36px; }
+
+    .team span { font-size: 9px; }
+
+    .placar-final { font-size: 16px; }
+
+    .btn-assistir { height: 44px; width: 130px; font-size: 9px; }
 }
 
-#player-aviso {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1; /* Fica atrás do iframe quando ele carregar, mas visível antes */
-    text-align: center;
-    width: 80%;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
+/* ============================================================
+   TABLET — 769px até 1024px
+   ============================================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container { max-width: 900px; }
+
+    .team img { width: 58px; height: 58px; }
+
+    .team span { font-size: 12px; }
+
+    .match-card { padding: 10px 20px; }
+
+    .jogos-grid { gap: 20px; }
 }
 
-.loader-aviso p {
-    color: var(--neon-blue);
-    font-family: 'Orbitron', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
-}
+/* ============================================================
+   TV SMART / TELAS GRANDES — acima de 1440px
+   ============================================================ */
+@media (min-width: 1441px) {
+    body { padding-top: 90px; }
 
-.loader-aviso span {
-    color: #ccc;
-    font-size: 14px;
-}
+    .main-header { height: 90px; }
 
-/* Garante que o iframe fique por cima do aviso após carregar */
-#videoIframe {
-    position: relative;
-    z-index: 2;
-    background: black; /* Fundo preto enquanto carrega */
-}
-/* Container da mensagem de aguarde */
-.player-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #000; /* Fundo preto puro para esconder o iframe vazio */
-    z-index: 10; /* Fica NA FRENTE do iframe inicialmente */
-    text-align: center;
-    pointer-events: none; /* Permite clicar no player se necessário */
-}
+    .container { max-width: 1600px; }
 
-.loader-text {
-    color: #00d2ff;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 20px;
-    font-weight: 900;
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(0, 210, 255, 0.7);
-}
+    .nav-container { max-width: 1600px; }
 
-.sub-text {
-    color: #888;
-    font-size: 14px;
-    max-width: 80%;
-}
+    .nav-item { font-size: 20px; letter-spacing: 2px; }
 
-/* Esconde o iframe enquanto a mensagem estiver ativa */
-.iframe-container iframe {
-    z-index: 5;
-}
+    .donate-link { padding: 8px 24px; }
 
-/* Garante que o container do iframe tenha altura */
-.iframe-container {
-    position: relative;
-    width: 100%;
-    background: #000;
-    aspect-ratio: 16 / 9; /* Mantém o formato de TV */
-}
+    .match-card { min-height: 140px; padding: 16px 40px; }
 
-#videoIframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-}
+    .team img { width: 100px; height: 100px; }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background: #111;
-}
+    .team span { font-size: 18px; }
 
-.btn-refresh {
-    background: #444;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    font-size: 11px;
-    cursor: pointer;
-}
+    .info-central { gap: 14px; }
 
-.btn-close {
-    background: #ff3333;
-    color: #fff;
-    border: none;
-    padding: 5px 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
+    .campeonato-nome { font-size: 16px; }
 
-#videoIframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: #000;
-    /* Força a renderização correta em navegadores Chrome/Edge */
-    image-rendering: auto;
-    outline: none;
-}
+    .placar-final { font-size: 40px; }
 
-.iframe-container {
-    position: relative;
-    width: 100%;
-    background: #000;
-    aspect-ratio: 16 / 9;
-    overflow: hidden; /* Garante que nada escape da área do vídeo */
-}
+    .badge-status { font-size: 14px; padding: 4px 16px; }
 
+    .btn-assistir { width: 260px; height: 58px; font-size: 16px; }
 
-/* --- ESTILO DO MODAL --- */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.98); /* Fundo quase todo preto */
-    z-index: 99999;
-    align-items: center;
-    justify-content: center;
-}
+    .jogos-grid { gap: 30px; }
 
-.modal-content {
-    width: 95%;
-    max-width: 1000px;
-    position: relative;
-    background: #000;
-    border: 2px solid #00d2ff; /* Bordas Neon para destacar */
-}
+    .section-label { font-size: 20px; letter-spacing: 4px; margin-bottom: 30px; }
 
-/* --- CONTAINER DO VÍDEO (CRÍTICO) --- */
-.iframe-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* Mantém proporção 16:9 */
-    height: 0;
-    background: #000;
-}
+    .footer-final { padding: 50px 0; }
 
-#videoIframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    border: none;
-    display: block !important; /* Força o elemento a existir */
-    
-    /* Remove filtros que podem causar tela preta em vídeo protegido */
-    filter: none !important;
-    -webkit-filter: none !important;
-}
-
-/* --- MENSAGEM DE AGUARDE --- */
-.player-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    text-align: center;
-}
-
-.loader-text {
-    color: #00d2ff;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px #00d2ff;
-}
-
-.close-btn {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-}
-
-/* Centralização universal para TV e PC */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.98);
-    z-index: 10000;
-}
-
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* O segredo para centralizar na TV */
-    width: 90%;
-    max-width: 900px;
-    background: #000;
-    border: 2px solid #00d2ff;
-    box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
-}
-
-.iframe-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* Mantém o formato 16:9 fixo */
-    background: #000;
-}
-
-#videoIframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    border: none;
-}
-
-.close-btn {
-    position: absolute;
-    top: -45px;
-    right: 0;
-    color: #00d2ff;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 18px;
-    cursor: pointer;
-    background: rgba(0,0,0,0.5);
-    padding: 5px 10px;
+    .brave-alert { font-size: 18px; padding: 20px; }
 }

@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --neon-blue: #00d2ff;
+    --dark-bg: #050505;
+    --card-bg: #0d0d0d;
+}
+
+body {
+    background: var(--dark-bg);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.pix-container {
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+}
+
+.logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    color: var(--neon-blue);
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+}
+
+header p {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+/* --- CARD DO PIX --- */
+.pix-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    position: relative;
+}
+
+.qr-placeholder {
+    background: #fff;
+    padding: 15px;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 25px;
+}
+
+.qr-placeholder img {
+    width: 100%;
+    height: 100%;
+}
+
+.pix-info span {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--neon-blue);
+    font-family: 'Orbitron';
+}
+
+.copy-box {
+    display: flex;
+    gap: 0;
+    margin-bottom: 30px;
+}
+
+.copy-box input {
+    flex: 1;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 12px;
+    font-size: 13px;
+    outline: none;
+}
+
+.copy-box button {
+    background: var(--neon-blue);
+    border: none;
+    padding: 0 20px;
+    font-family: 'Orbitron';
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.copy-box button:hover {
+    filter: brightness(1.2);
+}
+
+.btn-voltar {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 11px;
+    font-family: 'Orbitron';
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    transition: 0.3s;
+}
+
+.btn-voltar:hover {
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+}

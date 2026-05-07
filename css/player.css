@@ -1,0 +1,224 @@
+body {
+    background-color: #050505;
+    color: #ffffff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container-player {
+    width: 95%;
+    max-width: 1000px;
+    text-align: center;
+    padding: 20px;
+}
+
+.topo-aviso {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.topo-aviso span {
+    color: #00d2ff;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Moldura com efeito Neon Azul */
+.moldura-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 2px solid #00d2ff44;
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+#main-player {
+    width: 100%;
+    height: 100%;
+}
+
+.selecao-opcoes h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: #eee;
+}
+
+.botoes-opcoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-canal {
+    background: #111;
+    color: #00d2ff;
+    border: 1px solid #00d2ff66;
+    padding: 12px 35px;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.btn-canal:hover {
+    background: #00d2ff;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+}
+
+.btn-canal.ativo {
+    background: #00d2ff;
+    color: #000;
+    border-color: #00d2ff;
+}
+
+.rodape-logo {
+    margin-top: 50px;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 2px;
+}
+
+/* Aviso de Doação no Topo */
+.card-doacao-topo {
+    background: rgba(0, 210, 255, 0.1);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.card-doacao-topo p {
+    font-size: 13px;
+    margin: 0 0 8px 0;
+    color: #eee;
+}
+
+.link-doar {
+    color: #00d2ff;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* Aviso de Recarregar embaixo do player */
+.topo-aviso-baixo {
+    font-size: 13px;
+    color: #888;
+    margin: 15px 0 25px 0;
+}
+
+.topo-aviso-baixo span {
+    color: #00d2ff;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Botão Voltar */
+.nav-topo {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.btn-nav {
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    border: 1px solid #333;
+}
+
+/* Reduz o tamanho geral da página para caber tudo na tela */
+body {
+    background-color: #050505;
+    color: #ffffff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 10px; /* Reduzi o padding geral */
+}
+
+.container-player {
+    width: 100%;
+    max-width: 850px; /* Reduzi a largura máxima do container */
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Deixa o aviso de doação mais fino */
+.card-doacao-topo {
+    background: rgba(0, 210, 255, 0.05);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.card-doacao-topo p {
+    font-size: 12px; /* Fonte menor */
+    margin: 0 0 5px 0;
+}
+
+/* PLAYER MAIS COMPACTO */
+.moldura-video {
+    width: 100%;
+    max-width: 800px; /* Limita a largura do player para ele não crescer demais */
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 10px auto; /* Reduzi a margem de baixo */
+    border: 2px solid #00d2ff33;
+    border-radius: 4px;
+}
+
+/* Aviso de erro mais discreto */
+.topo-aviso-baixo {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 15px; /* Reduzi para as opções subirem */
+}
+
+/* Seção de Opções mais colada no player */
+.selecao-opcoes h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.grade-canais {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-canal {
+    padding: 10px 20px; /* Botões menores */
+    font-size: 12px;
+    min-width: 120px;
+}
+
+/* Ajuste do Botão Voltar */
+.nav-topo {
+    margin-bottom: 10px;
+}
+.btn-nav {
+    padding: 4px 10px;
+    font-size: 10px;
+}
