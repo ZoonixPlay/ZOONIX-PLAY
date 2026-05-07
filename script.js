@@ -8,7 +8,7 @@ const JOGOS = [
         campeonato: "CONMEBOL Sudamericana",
         data: "2026-05-06", 
         horario: "21:30",    
-        link: "https://nossoplayeronlinehd.cfd/tv/paramountplus" 
+        link: "https://esportesembed.com/botafogo-x-racing-1" 
     },     
     {
         time1: "Santa Fe",
@@ -30,7 +30,7 @@ const JOGOS = [
         campeonato: "CONMEBOL Libertadores",
         data: "2026-05-06", 
         horario: "21:30",    
-        link: "https://nossoplayeronlinehd.ink/tv/globorj" 
+        link: "https://esportesembed.com/independiente-rivadavia-x-fluminense-1" 
     },
     {
         time1: "Universidade Católica",
