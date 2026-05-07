@@ -1,27 +1,5 @@
 const JOGOS = [
     {
-        time1: "Bayern München",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/500px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png", 
-        time2: "Psg",
-        escudo2: "https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_PSG.png",
-        encerrado: false, 
-        campeonato: "Liga dos Campeões da UEFA",
-        data: "2026-05-06", 
-        horario: "16:00",    
-        link: "#" 
-    },
-    {
-        time1: "Audax Italiano",
-        escudo1: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/4138.png", 
-        time2: "Vasco Da Gama",
-        escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo-1.png",
-        encerrado: false, 
-        campeonato: "CONMEBOL Sudamericana",
-        data: "2026-05-06", 
-        horario: "19:00",    
-        link: "https://nossoplayeronlinehd.ink/tv/paramountplus" 
-    },
-    {
         time1: "Botafogo",
         escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Botafogo_de_Futebol_e_Regatas_logo.svg/500px-Botafogo_de_Futebol_e_Regatas_logo.svg.png", 
         time2: "Racing",
@@ -141,6 +119,7 @@ function openPlayer(link) {
     const modal = document.getElementById('playerModal');
     const iframe = document.getElementById('videoIframe');
 
+    // 1. Decodifica o link
     let urlFinal;
     try {
         urlFinal = atob(link);
@@ -148,21 +127,19 @@ function openPlayer(link) {
         urlFinal = link;
     }
 
-    // Smart TVs exigem HTTPS para mostrar imagem se o site for HTTPS
+    // 2. Garante HTTPS (Obrigatório para TVs modernas)
     if (window.location.protocol === 'https:') {
         urlFinal = urlFinal.replace("http://", "https://");
     }
 
-    modal.style.display = 'block'; // TVs lidam melhor com block do que flex
+    // 3. Exibe o modal ANTES de injetar o link (isso acelera a renderização na TV)
+    modal.style.display = 'block';
 
-    // Limpeza profunda para a TV processar o novo sinal
-    iframe.src = "about:blank";
-    
+    // 4. Injeta o link com um delay mínimo
     setTimeout(() => {
-        // Atributos específicos para players de Smart TV
-        iframe.setAttribute("allow", "autoplay; fullscreen");
+        iframe.setAttribute("referrerpolicy", "no-referrer");
         iframe.src = urlFinal;
-    }, 500);
+    }, 100);
 }
 
 function closePlayer() {
