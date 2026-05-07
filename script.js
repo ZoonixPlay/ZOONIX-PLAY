@@ -19,7 +19,7 @@ const JOGOS = [
         campeonato: "CONMEBOL Libertadores",
         data: "2026-05-06", 
         horario: "21:30",    
-        link: "https://nossoplayeronlinehd.ink/tv/globosp" 
+        link: "https://esportesembed.com/independiente-santa-fe-x-corinthians-1" 
     },
     {
         time1: "Rivadavia",
