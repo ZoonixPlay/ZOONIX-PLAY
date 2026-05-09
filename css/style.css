@@ -1,62 +1,66 @@
 /* ============================================================
-   ZONIX PLAY — style.css
+   ZONIX PLAY — style.css  (novo visual 2026)
    ============================================================ */
 
-/* --- RESET E BASE --- */
+/* ---------- RESET ---------- */
 *, *::before, *::after {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     box-sizing: border-box;
-    border-radius: 0 !important;
 }
 
-/* --- VARIÁVEIS GLOBAIS --- */
+/* ---------- VARIÁVEIS ---------- */
 :root {
     --neon-blue:   #00d2ff;
     --neon-purple: #9d00ff;
     --live-red:    #ff3333;
-    --dark-bg:     #050505;
-    --card-bg:     #0a0a0a;
+    --gold:        #f0b429;
+    --dark-bg:     #07090f;
+    --card-bg:     #0c1120;
+    --card-border: #1a2540;
+    --text:        #e8eef8;
+    --muted:       #5a6a88;
+    --header-bg:   rgba(0,0,0,0.72);
+    --footer-bg:   rgba(0,0,0,0.72);
+    --radius:      14px;
 }
 
-/* --- BODY --- */
+/* ---------- BODY ---------- */
+html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+
 body {
-    background:
-        linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
-        url('../img/fundo.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark-bg);
+    /* grade sutil de fundo */
+    background-image:
+        linear-gradient(rgba(0,210,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,210,255,0.03) 1px, transparent 1px);
+    background-size: 56px 56px;
+    color: var(--text);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    padding-top: 70px; /* espaço para o header fixo */
-}
-
-/* --- CONTAINERS --- */
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-}
-
-/* display:contents remove o container do fluxo, deixando o filho obedecer ao pai direto */
-.container-botao {
-    display: contents;
+    overflow-x: hidden;
+    padding-top: 72px;
+    padding-left:  env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ============================================================
-   HEADER E NAVEGAÇÃO
+   HEADER
    ============================================================ */
 .main-header {
-    background: rgba(0,0,0,0.52);
-    height: 70px;
-    border-bottom: 2px solid rgba(0,210,255,0.3);
+    background: var(--header-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    height: 72px;
+    border-bottom: 1px solid rgba(0,210,255,0.18);
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 0; width: 100%;
     z-index: 9999;
+    -webkit-transform: translateZ(0); transform: translateZ(0);
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    padding-top: env(safe-area-inset-top);
 }
 
 .nav-container {
@@ -66,383 +70,816 @@ body {
     height: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-.nav-item {
-    text-decoration: none;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: color 0.3s, text-shadow 0.3s;
-}
-
-.nav-item:hover {
-    color: var(--neon-blue);
-    text-shadow: 0 0 10px rgba(0,210,255,0.6);
-}
-
-.donate-link {
-    color: #fcf6ba;
-    border: 1px solid rgba(252,246,186,0.3);
-    padding: 5px 15px;
-}
-
-/* Logo no header */
 .header-brand {
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .header-logo {
-    height: 48px;
-    width: auto;
+    height: 44px;
     object-fit: contain;
-    display: block;
-    filter: drop-shadow(0 0 8px rgba(0,210,255,0.4));
-    transition: filter 0.3s;
+    filter: drop-shadow(0 0 8px rgba(0,210,255,0.5));
+    transition: filter .3s;
 }
-
 .header-brand:hover .header-logo {
-    filter: drop-shadow(0 0 14px rgba(0,210,255,0.8));
+    filter: drop-shadow(0 0 16px rgba(0,210,255,0.9));
 }
 
-/* Logo + nome no footer */
-.footer-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 10px;
-}
-
-/* ============================================================
-   LOGO / TÍTULOS COM EFEITO SHINE
-   ============================================================ */
-.logo-text,
-.main-title.logo-text {
+/* Logo text (Orbitron shine) */
+.logo-text {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
     letter-spacing: 2px;
     background: linear-gradient(to right, #00d2ff, #003366, #00d2ff, #003366, #00d2ff);
     background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
+    -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine-blue 5s linear infinite;
-    filter: drop-shadow(0 0 8px rgba(0,210,255,0.4));
+    filter: drop-shadow(0 0 6px rgba(0,210,255,0.35));
 }
+@keyframes shine-blue { to { background-position: 200% center; } }
 
-@keyframes shine-blue {
-    to { background-position: 200% center; }
-}
-
-/* ============================================================
-   SEÇÃO DE BOAS-VINDAS
-   ============================================================ */
-.welcome-section {
-    text-align: center;
-    padding: 40px 0;
-}
-
-.brave-alert {
-    background: linear-gradient(90deg, rgba(0,210,255,0.1), rgba(0,0,0,0.8));
-    border-left: 4px solid var(--neon-blue);
-    padding: 15px;
-    margin-bottom: 30px;
-    font-size: 14px;
-}
-
-.btn-pix-animated {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-    color: #fff;
-    text-decoration: none;
-    padding: 15px 35px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-    transition: transform 0.3s, filter 0.3s;
-    margin-top: 20px;
-}
-
-.btn-pix-animated:hover {
-    transform: scale(1.05);
-    filter: brightness(1.2);
-}
-
-/* ============================================================
-   GRID E CARDS DE JOGO
-   ============================================================ */
-.jogos-grid {
+/* Nav links */
+.nav-links {
     display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding-bottom: 60px;
-}
-
-.match-card {
-    background: var(--card-bg);
-    min-height: 80px;
-    padding: 8px 20px;
-    display: flex;
+    list-style: none;
     align-items: center;
-    justify-content: space-around;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-}
-
-/* Scanlines sobrepostas ao card */
-.match-card .scanlines {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0, 0, 0, 0.13) 3px,
-        rgba(0, 0, 0, 0.13) 4px
-    );
-    pointer-events: none;
-    z-index: 5;
-    animation: scanline-move 8s linear infinite;
-}
-
-@keyframes scanline-move {
-    0%   { background-position: 0 0; }
-    100% { background-position: 0 100px; }
-}
-
-/* --- Borda neon giratória via pseudo-elemento --- */
-.match-card::before {
-    content: "";
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: conic-gradient(transparent, var(--neon-blue), transparent 30%);
-    animation: rotate-border 4s linear infinite;
-    z-index: -2;
-}
-
-.match-card::after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    background: var(--card-bg);
-    z-index: -1;
-}
-
-/* Variante ao vivo: borda vermelha e animação mais rápida */
-.match-card.card-ao-vivo::before {
-    background: conic-gradient(transparent, var(--live-red), transparent 30%);
-    animation-duration: 2s;
-}
-
-@keyframes rotate-border {
-    100% { transform: rotate(360deg); }
-}
-
-/* ============================================================
-   CONTEÚDO DO CARD (TIMES E PLACAR)
-   ============================================================ */
-.team {
-    width: 25%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    z-index: 2;
-}
-
-.team img {
-    width: 68px;
-    height: 68px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 14px rgba(0,210,255,0.7));
-    transition: filter 0.3s;
-}
-
-.team span {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 900;
-    text-transform: uppercase;
-    white-space: normal;
-    line-height: 1.2;
-    margin-top: 2px;
-    text-shadow: 0 0 8px rgba(255,255,255,0.3);
-}
-
-.info-central {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 6px;
-    z-index: 2;
 }
 
-.campeonato-container {
-    background: rgba(255,255,255,0.08);
-    padding: 4px 20px;
-    width: fit-content;
-}
-
-.campeonato-nome {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 900;
-    color: #fff;
-}
-
-.placar-final {
-    font-size: 20px;
-    color: #fff;
-    margin: 2px 0;
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-/* ============================================================
-   BADGES DE STATUS
-   ============================================================ */
-.badge-status {
-    font-size: 10px;
-    padding: 2px 8px;
-    border: 1px solid #444;
-    font-family: 'Orbitron', sans-serif;
-}
-
-.badge-status.ao-vivo {
-    color: var(--live-red);
-    border-color: var(--live-red);
-    animation: blink 1.2s infinite;
-    max-width: 200px;
-    text-align: center;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.3; }
-}
-
-/* ============================================================
-   LOGOS DE FUNDO (MARCA D'ÁGUA)
-   ============================================================ */
-.bg-logo-container {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.bg-logo {
-    position: absolute;
-    width: 230px;
-    height: 230px;
-    filter: grayscale(1) brightness(0.7);
-    object-fit: contain;
-    opacity: 0.28;
-    top: 50%;
-}
-
-.bg-logo.left  { left: -80px; transform: translateY(-40%) rotate(-15deg); }
-.bg-logo.right { right: -80px; transform: translateY(-40%) rotate(15deg); }
-
-/* ============================================================
-   BOTÕES DE AÇÃO
-   ============================================================ */
-.btn-assistir {
-    background: var(--neon-blue);
-    color: #000;
-    width: 150px;
-    height: 32px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 10px;
-    border: none;
-    cursor: pointer;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+.nav-item {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
     text-decoration: none;
-    margin-top: 5px;
-    transition: background 0.3s, box-shadow 0.3s;
-    z-index: 10;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #c8d8f0;
+    border: 1px solid transparent;
+    transition: all .25s;
+    white-space: nowrap;
+}
+.nav-item:hover {
+    color: var(--neon-blue);
+    border-color: rgba(0,210,255,0.3);
+    background: rgba(0,210,255,0.07);
+}
+/* Botão APOIAR — premium com shimmer */
+.donate-btn {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f0b429 0%, #e8890a 50%, #f0b429 100%) !important;
+    background-size: 200% auto !important;
+    color: #1a0a00 !important;
+    border: none !important;
+    font-weight: 900;
+    padding: 0 20px;
+    gap: 6px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 18px rgba(240,180,41,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+    animation: donate-shimmer 2.8s linear infinite;
+}
+.donate-btn::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    animation: donate-shine 2.8s linear infinite;
+    pointer-events: none;
+}
+@keyframes donate-shine {
+    0%   { left: -75%; }
+    60%  { left: 130%; }
+    100% { left: 130%; }
+}
+@keyframes donate-shimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+.donate-btn:hover {
+    transform: scale(1.06) !important;
+    box-shadow: 0 0 28px rgba(240,180,41,0.6), inset 0 1px 0 rgba(255,255,255,0.3) !important;
+    background: linear-gradient(135deg, #f7c94a, #f0a010, #f7c94a) !important;
+    color: #1a0a00 !important;
+    border: none !important;
+}
+.donate-icon { font-size: 15px; line-height: 1; }
+.donate-label { font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; }
+
+/* Botão de tema */
+.theme-toggle {
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+.theme-toggle:hover {
+    background: rgba(0,210,255,0.1) !important;
 }
 
-.btn-assistir:hover:not(:disabled) {
-    background: #fff;
-    box-shadow: 0 0 20px var(--neon-blue);
+/* Footer brand */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
-
-/* Pulso + piscar no botão quando o card está ao vivo */
-.card-ao-vivo .btn-assistir {
-    animation: pulse-blue 2s infinite, blink-btn 1.2s infinite;
-}
-
-@keyframes pulse-blue {
-    0%   { box-shadow: 0 0 0 0   rgba(0,210,255,0.7); }
-    70%  { box-shadow: 0 0 0 10px rgba(0,210,255,0);   }
-    100% { box-shadow: 0 0 0 0   rgba(0,210,255,0);   }
-}
-
-@keyframes blink-btn {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.6; }
+.footer-logo {
+    height: 46px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(0,210,255,0.3));
+    opacity: .85;
 }
 
 /* ============================================================
-   SECTION LABEL
+   CONTAINER
    ============================================================ */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    width: 100%;
+    flex: 1;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero-section {
+    text-align: center;
+    padding: 56px 0 44px;
+}
+
+/* Eyebrow badge */
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,51,51,0.1);
+    border: 1px solid rgba(255,51,51,0.35);
+    color: #ff6677;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+}
+.pulse-dot {
+    width: 8px; height: 8px;
+    background: #ff3333;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-dot 1.4s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,51,51,0.6); }
+    50%       { box-shadow: 0 0 0 6px rgba(255,51,51,0); }
+}
+
+/* Título principal */
+.hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 14px;
+    text-shadow: 0 0 40px rgba(0,210,255,0.15);
+}
+.hero-accent {
+    /* Neon gradient na palavra AO VIVO */
+    background: linear-gradient(135deg, #00d2ff, #9d00ff);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 36px;
+}
+
+/* ---------- STATS ROW ---------- */
+.stats-row {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+}
+.stat-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 24px;
+    min-width: 80px;
+}
+.stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--neon-blue);
+    line-height: 1;
+}
+.stat-lbl {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+.highlight-pill {
+    border-color: rgba(0,210,255,0.4);
+    background: rgba(0,210,255,0.07);
+}
+.highlight-pill .stat-num { color: #00ffcc; }
+
+/* ---------- BRAVE ALERT ---------- */
+.brave-alert {
+    display: block;
+    background: rgba(0,210,255,0.06);
+    border: 1px solid rgba(0,210,255,0.2);
+    border-left: 4px solid var(--neon-blue);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin: 20px auto 0;
+    text-align: left;
+    max-width: 520px;
+}
+.brave-alert strong { color: var(--text); }
+
+/* ---------- BTN PIX ---------- */
+.btn-pix-animated {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #00d2ff 0%, #9d00ff 50%, #00d2ff 100%);
+    background-size: 200% auto;
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 46px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    border-radius: 999px;
+    min-height: 54px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow:
+        0 0 30px rgba(0,210,255,0.4),
+        0 0 60px rgba(157,0,255,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    animation: pix-bg-shift 3s linear infinite;
+    transition: transform .3s, box-shadow .3s;
+    text-shadow: 0 0 12px rgba(255,255,255,0.5);
+}
+.btn-pix-animated::before {
+    content: "❤️";
+    font-size: 16px;
+    animation: heartbeat .9s ease-in-out infinite;
+}
+.btn-pix-animated::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -70%;
+    width: 45%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.28), transparent);
+    animation: pix-shine 3s linear infinite;
+    pointer-events: none;
+}
+@keyframes pix-bg-shift {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+@keyframes pix-shine {
+    0%   { left: -70%; }
+    55%  { left: 120%; }
+    100% { left: 120%; }
+}
+@keyframes heartbeat {
+    0%,100% { transform: scale(1);    }
+    15%     { transform: scale(1.25); }
+    30%     { transform: scale(1);    }
+    45%     { transform: scale(1.15); }
+    60%     { transform: scale(1);    }
+}
+.btn-pix-animated:hover {
+    transform: scale(1.07);
+    box-shadow:
+        0 0 50px rgba(0,210,255,0.6),
+        0 0 90px rgba(157,0,255,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+/* ============================================================
+   FILTROS — TODOS / AO VIVO / HOJE
+   ============================================================ */
+.filtros {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+.filtro-btn {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--card-border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .2s;
+    min-height: 32px;
+    white-space: nowrap;
+}
+.filtro-btn:hover {
+    border-color: rgba(0,210,255,0.4);
+    color: var(--neon-blue);
+    background: rgba(0,210,255,0.06);
+}
+.filtro-btn.active {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    background: rgba(0,210,255,0.12);
+    box-shadow: 0 0 10px rgba(0,210,255,0.2);
+}
+
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+.jogos-section { margin-top: 16px; }
+
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+.section-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,210,255,0.3), transparent);
+}
 .section-label {
     font-family: 'Orbitron', sans-serif;
     font-size: 13px;
-    letter-spacing: 2px;
-    color: var(--neon-blue);
-    margin-bottom: 20px;
-    opacity: 0.8;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+    white-space: nowrap;
+    text-shadow: 0 0 20px rgba(0,210,255,0.7), 0 0 40px rgba(0,210,255,0.3);
+    background: linear-gradient(135deg, #fff 30%, var(--neon-blue));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 4px;
 }
+.section-icon {
+    -webkit-text-fill-color: initial;
+    display: inline-block;
+    margin-right: 2px;
+    animation: ball-bounce 2.5s ease-in-out infinite;
+}
+@keyframes ball-bounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+
+/* ============================================================
+   GRID DE JOGOS
+   ============================================================ */
+.jogos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* ============================================================
+   CARD — layout vertical compacto (estilo portal esportivo)
+   ============================================================ */
+.match-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: border-color .3s, box-shadow .3s, transform .2s;
+    padding: 0;
+    min-height: unset;
+}
+.match-card:hover {
+    border-color: rgba(0,210,255,0.4);
+    box-shadow: 0 6px 32px rgba(0,210,255,0.14);
+    transform: translateY(-3px);
+}
+
+/* Barra colorida lateral — removida no novo layout */
+.match-card::before { display: none; }
+
+/* ---------- CARD HEADER (faixa do topo) ---------- */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.45);
+    border-bottom: 1px solid var(--card-border);
+    gap: 6px;
+    position: relative;
+    z-index: 10;
+    flex-wrap: nowrap;
+}
+
+/* ---------- CARD BODY (escudos + VS) ---------- */
+.card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 8px;
+    padding: 20px 16px 10px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ---------- CARD FOOT (nomes + botão) ---------- */
+.card-foot {
+    padding: 0 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Nomes em colunas, cada um abaixo do seu escudo */
+.card-teams-names {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    opacity: .9;
+}
+.card-teams-names .team-name {
+    flex: 1;
+    text-align: center;
+    line-height: 1.3;
+    word-break: break-word;
+}
+.card-teams-names .sep {
+    color: var(--muted);
+    font-size: 10px;
+    padding-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Ao vivo: borda vermelha pulsando no card */
+.match-card.card-ao-vivo {
+    border-color: rgba(255,51,51,0.5);
+    box-shadow: 0 0 24px rgba(255,51,51,0.14);
+}
+
+/* Gradiente dinâmico — z-index ABAIXO do conteúdo */
+.card-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: var(--radius);
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--cor1) 22%, transparent),
+        transparent 45%,
+        transparent 55%,
+        color-mix(in srgb, var(--cor2) 22%, transparent)
+    );
+    animation: gradient-pulse 4s ease-in-out infinite alternate;
+}
+@keyframes gradient-pulse {
+    0%   { opacity: .5; }
+    100% { opacity: 1;  }
+}
+
+/* Scanlines — z-index ABAIXO do conteúdo */
+.match-card .scanlines {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0, transparent 3px,
+        rgba(0,0,0,.06) 3px, rgba(0,0,0,.06) 4px
+    );
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ---------- LOGOS DE FUNDO — z-index ABAIXO do conteúdo ---------- */
+.bg-logo-container {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+.bg-logo {
+    position: absolute;
+    width: 110px; height: 110px;
+    filter: grayscale(1) brightness(0.4);
+    object-fit: contain;
+    opacity: 0.14;
+    top: 50%;
+    mix-blend-mode: luminosity;
+}
+.bg-logo.left  { left: -18px;  transform: translateY(-50%) rotate(-12deg); }
+.bg-logo.right { right: -18px; transform: translateY(-50%) rotate(12deg);  }
+
+/* ---------- TIMES (dentro card-body) ---------- */
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 10;
+    flex: 1;
+}
+.team img {
+    width: 48px; height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(0,210,255,0.3));
+    transition: filter .3s, transform .25s;
+    mix-blend-mode: screen;
+    background: transparent;
+}
+.match-card:hover .team img { transform: scale(1.1); }
+.team span { display: none; }
+
+/* ---------- CENTRO (VS) ---------- */
+.info-central {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+/* Campeonato fica no header */
+.campeonato-container { display: none; }
+.campeonato-nome { display: none; }
+
+/* VS */
+.placar-final { font-size: 16px; color: #fff; }
+.vs {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    text-shadow: 0 0 12px rgba(0,210,255,0.25);
+}
+
+/* ---------- BADGES ---------- */
+.badge-status {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid #444;
+    letter-spacing: 1px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.badge-status.ao-vivo {
+    color: var(--live-red);
+    border-color: var(--live-red);
+    background: rgba(255,51,51,0.15);
+    animation: blink 1.2s infinite;
+}
+.badge-status.hoje-badge {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(240,180,41,0.12);
+    animation: blink 1.2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+
+/* Campeonato no header — completo, sem cortar */
+.campeonato-header {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 7px;
+    font-weight: 700;
+    color: var(--neon-blue);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    opacity: .85;
+    flex: 1;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+    overflow: visible;
+    max-width: none;
+}
+
+/* Countdown */
+.comeca-em {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 7px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-align: center;
+}
+.countdown {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--neon-blue);
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(0,210,255,0.7);
+    animation: count-pulse 1s ease-in-out infinite alternate;
+    text-align: center;
+}
+@keyframes count-pulse {
+    0%   { text-shadow: 0 0 6px  rgba(0,210,255,0.4); }
+    100% { text-shadow: 0 0 20px rgba(0,210,255,1);   }
+}
+.horario-futuro {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* ---------- BOTÃO ASSISTIR ---------- */
+.btn-assistir {
+    background: linear-gradient(135deg, var(--neon-blue), #007bcc);
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    height: 36px;
+    min-height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: box-shadow .3s, transform .2s;
+    z-index: 10;
+}
+.btn-assistir:hover:not(:disabled) {
+    box-shadow: 0 0 18px rgba(0,210,255,0.5);
+    transform: translateY(-1px);
+}
+.card-ao-vivo .btn-assistir {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    animation: pulse-red 2s infinite;
+}
+@keyframes pulse-red {
+    0%  { box-shadow: 0 0 0 0   rgba(255,51,51,0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(255,51,51,0);   }
+    100%{ box-shadow: 0 0 0 0   rgba(255,51,51,0);   }
+}
+@keyframes pulse-blue {
+    0%  { box-shadow: 0 0 0 0   rgba(0,210,255,0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0,210,255,0);   }
+    100%{ box-shadow: 0 0 0 0   rgba(0,210,255,0);   }
+}
+@keyframes blink-btn {
+    0%,100% { opacity: 1;  }
+    50%     { opacity: .65;}
+}
+
+/* ---------- BOTÃO COMPARTILHAR ---------- */
+.btn-share {
+    background: rgba(0,210,255,0.08);
+    border: 1px solid rgba(0,210,255,0.25);
+    border-radius: 50%;
+    color: var(--neon-blue);
+    font-size: 12px;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: background .2s, box-shadow .2s;
+    flex-shrink: 0;
+}
+.btn-share:hover {
+    background: rgba(0,210,255,0.2);
+    box-shadow: 0 0 10px rgba(0,210,255,0.35);
+}
+
+/* ---------- TOAST COMPARTILHAR ---------- */
+.share-toast {
+    position: fixed;
+    bottom: -60px;
+    left: 50%; transform: translateX(-50%);
+    background: var(--neon-blue); color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px; font-weight: 900;
+    padding: 10px 26px;
+    border-radius: 999px;
+    z-index: 99999;
+    letter-spacing: 1px;
+    transition: bottom .4s ease;
+    white-space: nowrap;
+}
+.share-toast.show { bottom: 28px; }
+
+/* ============================================================
+   NOTIFICAÇÃO DE JOGO
+   ============================================================ */
+.game-notif {
+    position: fixed;
+    bottom: -130px; right: 20px;
+    background: #0a0e1a;
+    border: 1px solid var(--live-red);
+    border-radius: 12px;
+    box-shadow: 0 0 24px rgba(255,51,51,0.35);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    z-index: 99999;
+    transition: bottom .5s cubic-bezier(0.34,1.56,0.64,1);
+    max-width: 320px;
+    width: calc(100% - 40px);
+}
+.game-notif.show { bottom: 20px; }
+.notif-icon { font-size: 22px; animation: blink 1s infinite; }
+.notif-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.notif-text strong {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px; font-weight: 900;
+    color: var(--live-red); letter-spacing: 1px;
+}
+.notif-text span { font-size: 11px; color: var(--muted); }
+.notif-close {
+    background: none; border: none;
+    color: #555; font-size: 16px; cursor: pointer; padding: 0 4px;
+    transition: color .2s; min-height: 44px;
+}
+.notif-close:hover { color: #fff; }
 
 /* ============================================================
    FOOTER
    ============================================================ */
 .footer-final {
-    background: #00000085;
-    padding: 30px 0;
-    border-top: 2px solid var(--neon-blue);
+    background: var(--footer-bg);
+    border-top: 1px solid rgba(0,210,255,0.2);
+    padding: 30px 24px;
     text-align: center;
     margin-top: auto;
 }
-
-/* Logo no footer */
-.footer-logo {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-    filter: drop-shadow(0 0 8px rgba(0,210,255,0.3));
-    opacity: 0.85;
-}
-
 .copyright {
     font-size: 12px;
-    opacity: 0.5;
-    margin-top: 8px;
+    color: var(--muted);
+    margin-top: 6px;
 }
 
 /* ============================================================
@@ -450,253 +887,174 @@ body {
    ============================================================ */
 .modal {
     display: none;
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background: rgba(0,0,0,0.92);
     z-index: 99999;
-    align-items: center;
-    justify-content: center;
+    align-items: center; justify-content: center;
 }
-
 .modal.active { display: flex; }
-
 .modal-content {
-    width: 90%;
-    max-width: 900px;
+    width: 90%; max-width: 900px;
     background: var(--card-bg);
-    border: 2px solid var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    border-radius: 12px;
     padding: 20px;
 }
-
 .close-btn {
-    display: block;
-    text-align: right;
+    display: block; text-align: right;
     color: var(--neon-blue);
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    cursor: pointer;
-    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif; font-size: 11px;
+    cursor: pointer; margin-bottom: 12px;
 }
-
 .iframe-container {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 */
+    position: relative; width: 100%;
+    padding-top: 56.25%;
 }
-
 .iframe-container iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border-radius: 8px;
 }
 
 /* ============================================================
-   CORREÇÕES GLOBAIS iOS / SAFARI MOBILE
+   TEMA CLARO
    ============================================================ */
+body.tema-claro {
+    background-color: #f0f4fc;
+    background-image:
+        linear-gradient(rgba(0,100,200,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,100,200,0.05) 1px, transparent 1px);
+    color: #1a2540;
+}
+body.tema-claro .main-header {
+    background: rgba(255,255,255,0.88);
+    border-bottom-color: rgba(0,150,210,0.3);
+}
+body.tema-claro .nav-item { color: #334; }
+body.tema-claro .nav-item:hover { color: #0099cc; }
+body.tema-claro .match-card { background: #fff; border-color: #ccd5e8; }
+body.tema-claro .card-gradient { opacity: .12; }
+body.tema-claro .team span,
+body.tema-claro .vs,
+body.tema-claro .campeonato-nome,
+body.tema-claro .comeca-em,
+body.tema-claro .horario-futuro,
+body.tema-claro .countdown { color: #1a2540; }
 
-/* Evita zoom automático em inputs no iOS */
+body.tema-claro .countdown {
+    text-shadow: 0 0 10px rgba(0,120,200,0.5);
+}
+
+body.tema-claro .hero-title { color: #0d1a33; }
+body.tema-claro .hero-sub   { color: #445577; }
+body.tema-claro .stat-num   { color: #005fa3; }
+body.tema-claro .stat-lbl   { color: #667799; }
+body.tema-claro .stat-pill  { background: #e4ecf8; border-color: #b8cce0; }
+body.tema-claro .highlight-pill { background: rgba(0,100,180,0.1); border-color: rgba(0,100,180,0.35); }
+body.tema-claro .highlight-pill .stat-num { color: #006644; }
+body.tema-claro .section-label {
+    background: linear-gradient(135deg, #005fa3, #003399);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+body.tema-claro .section-line {
+    background: linear-gradient(to right, transparent, rgba(0,100,180,0.35), transparent);
+}
+body.tema-claro .logo-text {
+    background: linear-gradient(to right, #0055cc, #003399, #0055cc, #003399, #0055cc);
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+body.tema-claro .badge-status { border-color: #bbb; color: #666; }
+body.tema-claro .campeonato-container { background: rgba(0,0,0,.05); border-color: rgba(0,0,0,.1); }
+body.tema-claro .campeonato-header { color: #005fa3; }
+body.tema-claro .card-header { background: rgba(0,0,0,.04); border-bottom-color: #ccd5e8; }
+body.tema-claro .card-teams-names { color: #1a2540; }
+body.tema-claro .brave-alert { background: rgba(0,120,200,.06); color: #445; }
+body.tema-claro .brave-alert strong { color: #1a2540; }
+body.tema-claro .footer-final { background: rgba(224,230,245,.9); border-top-color: #aac; }
+body.tema-claro .copyright { color: #778; }
+body.tema-claro .game-notif { background: #fff; border-color: var(--live-red); }
+
+/* ============================================================
+   IOS / SAFARI
+   ============================================================ */
 input, select, textarea { font-size: 16px; }
 
-/* Corrige tremido do header fixo no Safari mobile */
-.main-header {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-/* Área segura para iPhones com notch / Dynamic Island */
-body {
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-    padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* Smooth scroll nativo */
-html {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Touch targets mínimos 44px (Apple HIG / Material Design) */
-.btn-assistir,
-.nav-item,
-.close-btn,
-.donate-link {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* ============================================================
-   CELULAR PEQUENO — ate 380px (Galaxy A, iPhone SE, etc.)
+   RESPONSIVO — CELULAR PEQUENO até 380px
    ============================================================ */
 @media (max-width: 380px) {
     body { padding-top: 60px; }
     .main-header { height: 60px; }
-    .nav-links { gap: 12px; }
-    .nav-item { font-size: 11px; letter-spacing: 0; }
-    .welcome-section { padding: 20px 0; }
-    .brave-alert { font-size: 12px; padding: 10px; }
-
-    /* Card em linha: time | centro | time */
-    .match-card {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 8px;
-        gap: 4px;
-        min-height: unset;
-    }
-    .team {
-        width: 22%;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-    }
-    .team img { width: 34px; height: 34px; }
-    .team span { font-size: 8px; text-align: center; }
-    .info-central { width: 52%; gap: 4px; }
-    .campeonato-container { padding: 2px 8px; }
-    .campeonato-nome { font-size: 8px; }
-    .placar-final { font-size: 14px; }
-    .badge-status { font-size: 8px; padding: 2px 6px; }
-    .btn-assistir {
-        width: 100%;
-        clip-path: none;
-        height: 30px;
-        font-size: 8px;
-        margin-top: 2px;
-    }
-
-    .jogos-grid { gap: 12px; }
+    .nav-item { font-size: 9px; padding: 0 10px; }
+    .hero-title { font-size: 1.7rem; }
+    .hero-sub { font-size: .95rem; }
+    .stats-row { gap: 6px; }
+    .stat-pill { padding: 10px 14px; min-width: 64px; }
+    .stat-num { font-size: 1.2rem; }
+    .jogos-grid { grid-template-columns: 1fr; gap: 12px; }
+    .team img { width: 52px; height: 52px; }
 }
 
 /* ============================================================
-   CELULAR PADRAO — 381px ate 768px
+   CELULAR PADRÃO — 381px a 768px
    ============================================================ */
 @media (min-width: 381px) and (max-width: 768px) {
-    /* Card em linha: time | centro | time */
-    .match-card {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 12px;
-        gap: 6px;
-        min-height: unset;
-    }
-    .team {
-        width: 22%;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-    }
-    .team img { width: 44px; height: 44px; }
-    .team span { font-size: 9px; text-align: center; }
-    .info-central { width: 52%; gap: 6px; }
-    .campeonato-container { padding: 3px 10px; }
-    .campeonato-nome { font-size: 9px; }
-    .placar-final { font-size: 18px; }
-    .badge-status { font-size: 9px; }
-    .btn-assistir {
-        width: 100%;
-        clip-path: none;
-        height: 36px;
-        font-size: 9px;
-        margin-top: 3px;
-    }
-
-    .jogos-grid { gap: 14px; }
+    .jogos-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .stats-row { gap: 8px; }
+    .stat-pill { padding: 10px 16px; min-width: 70px; }
+    .team img { width: 56px; height: 56px; }
 }
 
 /* ============================================================
-   LANDSCAPE — altura menor que 500px (celular deitado)
+   LANDSCAPE — altura < 500px
    ============================================================ */
 @media (max-height: 500px) and (orientation: landscape) {
-    body { padding-top: 55px; }
-
-    .main-header { height: 55px; }
-
-    .welcome-section { padding: 16px 0; }
-
-    .match-card {
-        flex-direction: row;
-        min-height: 70px;
-        padding: 6px 16px;
-    }
-
-    .team img { width: 36px; height: 36px; }
-
-    .team span { font-size: 9px; }
-
-    .placar-final { font-size: 16px; }
-
-    .btn-assistir { height: 44px; width: 130px; font-size: 9px; }
+    body { padding-top: 56px; }
+    .main-header { height: 56px; }
+    .hero-section { padding: 20px 0; }
+    .jogos-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .team img { width: 38px; height: 38px; }
+    .btn-assistir { height: 32px; font-size: 8px; }
 }
 
 /* ============================================================
-   TABLET — 769px ate 1024px
+   TABLET — 769px a 1024px
    ============================================================ */
 @media (min-width: 769px) and (max-width: 1024px) {
     .container { max-width: 900px; }
-
-    .team img { width: 58px; height: 58px; }
-
-    .team span { font-size: 12px; }
-
-    .match-card { padding: 10px 20px; }
-
-    .jogos-grid { gap: 20px; }
-
-    .bg-logo { width: 200px; height: 200px; }
+    .team img { width: 56px; height: 56px; }
+    .team span { font-size: 11px; }
+    .bg-logo { width: 190px; height: 190px; }
 }
 
 /* ============================================================
-   DESKTOP — 1025px ate 1440px
+   DESKTOP — 1025px a 1440px
    ============================================================ */
 @media (min-width: 1025px) and (max-width: 1440px) {
-    .bg-logo { width: 260px; height: 260px; }
+    .bg-logo { width: 250px; height: 250px; }
 }
 
 /* ============================================================
-   TV SMART / TELAS GRANDES — acima de 1440px
+   TV SMART — acima de 1440px
    ============================================================ */
 @media (min-width: 1441px) {
     body { padding-top: 90px; }
-
     .main-header { height: 90px; }
-
     .container { max-width: 1600px; }
-
     .nav-container { max-width: 1600px; }
-
-    .nav-item { font-size: 20px; letter-spacing: 2px; }
-
-    .donate-link { padding: 8px 24px; }
-
-    .match-card { min-height: 140px; padding: 16px 40px; }
-
-    .team img { width: 100px; height: 100px; }
-
-    .team span { font-size: 18px; }
-
-    .info-central { gap: 14px; }
-
-    .campeonato-nome { font-size: 16px; }
-
-    .placar-final { font-size: 40px; }
-
-    .badge-status { font-size: 14px; padding: 4px 16px; }
-
-    .btn-assistir { width: 260px; height: 58px; font-size: 16px; }
-
-    .jogos-grid { gap: 30px; }
-
-    .section-label { font-size: 20px; letter-spacing: 4px; margin-bottom: 30px; }
-
-    .footer-final { padding: 50px 0; }
-
-    .brave-alert { font-size: 18px; padding: 20px; }
+    .nav-item { font-size: 18px; }
+    .donate-link { padding: 0 28px; }
+    .team img { width: 80px; height: 80px; }
+    .vs { font-size: 28px; }
+    .badge-status { font-size: 11px; }
+    .btn-assistir { height: 48px; font-size: 12px; }
+    .countdown { font-size: 22px; }
+    .jogos-grid { gap: 24px; }
+    .section-label { font-size: 18px; }
+    .brave-alert { font-size: 17px; padding: 18px 24px; }
+    .stat-num { font-size: 2rem; }
 }

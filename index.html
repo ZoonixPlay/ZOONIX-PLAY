@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZONIX PLAY | AO VIVO</title>
     <meta name="referrer" content="no-referrer">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,58 +20,143 @@
         </div>
     </div>
 
+    <!-- NOTIFICACAO DE JOGO -->
+    <div id="notif" class="game-notif">
+        <span class="notif-icon">🔴</span>
+        <div class="notif-text">
+            <strong id="notif-title">JOGO COMECANDO!</strong>
+            <span id="notif-sub">Acesse agora e assista ao vivo</span>
+        </div>
+        <button class="notif-close" onclick="fecharNotif()">X</button>
+    </div>
+
+    <!-- TOAST DE COMPARTILHAR -->
+    <div id="share-toast" class="share-toast">🔗 Link copiado!</div>
+
+    <!-- HEADER -->
     <header class="main-header">
         <nav class="nav-container">
-            <!-- LOGO NO HEADER -->
             <a href="index.html" class="header-brand">
                 <img src="img/logo-zoonix.png" alt="ZONIX PLAY" class="header-logo">
                 <span class="logo-text">ZONIX PLAY</span>
             </a>
-
             <ul class="nav-links">
-                <li><a href="index.html" class="nav-item">INÍCIO</a></li>
-                <li><a href="pix.html" class="nav-item donate-link">DOAR</a></li>
+                <li><a href="index.html" class="nav-item">INICIO</a></li>
+                <li>
+                    <button class="nav-item theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Alternar tema">🌙</button>
+                </li>
+                <li><a href="pix.html" class="nav-item donate-btn"><span class="donate-icon">💙</span><span class="donate-label">APOIAR</span></a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <section class="welcome-section">
-            <!-- AVISO BRAVE -->
-            <div class="brave-alert">
-                🚀 <strong>DICA:</strong> Use o navegador <strong>Brave</strong> para bloquear anúncios e assistir sem interrupções!
+
+        <!-- HERO -->
+        <section class="hero-section">
+            <div class="hero-eyebrow">
+                <span class="pulse-dot"></span>
+                TRANSMISSAO GRATUITA
+            </div>
+            <h1 class="hero-title">SEJA BEM-VINDO AO <span class="hero-accent">ZONIX PLAY</span></h1>
+            <p class="hero-sub">Assista seus jogos, lutas e muito mais &mdash; totalmente gratis!</p>
+
+            <!-- STATS -->
+            <div class="stats-row">
+                <div class="stat-pill">
+                    <span class="stat-num" id="stat-live">0</span>
+                    <span class="stat-lbl">AO VIVO</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-num" id="stat-hoje">0</span>
+                    <span class="stat-lbl">HOJE</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-num" id="stat-total">0</span>
+                    <span class="stat-lbl">PARTIDAS</span>
+                </div>
+                <div class="stat-pill highlight-pill">
+                    <span class="stat-num">100%</span>
+                    <span class="stat-lbl">GRATIS</span>
+                </div>
+                <a href="pix.html" class="btn-pix-animated">APOIE O PROJETO</a>
             </div>
 
-            <h2 class="main-title logo-text">SEJA BEM VINDO AO ZONIX PLAY</h2>
-            <p class="welcome-text">
-                Assista seus jogos, lutas e muito mais — tudo totalmente de graça! <br>
-                Aqui você aproveita o melhor do esporte sem pagar nada.
-            </p>
-
-            <p class="support-text">
-                E se gostar do site e quiser apoiar, você pode fazer uma doação 💙 (não é obrigatório!).
-            </p>
-
-            <!-- APOIE O PROJETO -->
-            <a href="pix.html" class="btn-pix-animated">APOIE O PROJETO</a>
+            <div class="brave-alert">
+                🛡️ <strong>Dica:</strong> Use o <strong>Brave Browser</strong> para bloquear anuncios e assistir sem interrupcoes.
+            </div>
         </section>
 
-        <h3 class="section-label">PARTIDAS DISPONÍVEIS</h3>
-        <div id="lista-jogos" class="jogos-grid">
-            <!-- JAVASCRIPT INJETA OS CARDS AQUI -->
-        </div>
+        <!-- PARTIDAS -->
+        <section class="jogos-section">
+            <div class="section-header">
+                <div class="section-title-row">
+                    <div class="section-line"></div>
+                    <h2 class="section-label"><span class="section-icon">⚽</span> PARTIDAS DISPONÍVEIS</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="filtros">
+                    <button class="filtro-btn active" onclick="filtrar('todos', this)">TODOS</button>
+                    <button class="filtro-btn" onclick="filtrar('live', this)">AO VIVO</button>
+                    <button class="filtro-btn" onclick="filtrar('hoje', this)">HOJE</button>
+                </div>
+            </div>
+            <div id="lista-jogos" class="jogos-grid"></div>
+        </section>
+
     </main>
 
     <footer class="footer-final">
-        <!-- LOGO NO FOOTER -->
         <div class="footer-brand">
             <img src="img/logo-zoonix.png" alt="ZONIX PLAY" class="footer-logo">
             <span class="logo-text">ZONIX PLAY</span>
         </div>
-        <p class="copyright">&copy; 2026 - Todos os direitos reservados.</p>
+        <p class="copyright">&copy; 2026 &mdash; Todos os direitos reservados.</p>
     </footer>
 
-    <script src="particles.js"></script>
-    <script src="script.js"></script>
+    <script src="scripts/particles.js"></script>
+    <script src="scripts/script.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const hoje = new Date().toISOString().split("T")[0];
+                let live = 0, hojeC = 0;
+                if (typeof JOGOS !== "undefined") {
+                    JOGOS.forEach(j => {
+                        const s = checkStatus(j);
+                        if (s.status === "live") live++;
+                        if (j.data === hoje) hojeC++;
+                    });
+                }
+                const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+                set("stat-live",  live);
+                set("stat-hoje",  hojeC);
+                set("stat-total", typeof JOGOS !== "undefined" ? JOGOS.length : 0);
+            }, 150);
+        });
+
+        function filtrar(tipo, btn) {
+            /* Atualiza botão ativo */
+            document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const hoje = new Date().toISOString().split("T")[0];
+            const cards = document.querySelectorAll(".match-card");
+            cards.forEach(card => {
+                const isLive = card.classList.contains("card-ao-vivo");
+                const dataCard = card.dataset.data || "";
+                const isHoje = dataCard === hoje;
+
+                if (tipo === "todos") {
+                    card.style.display = "";
+                } else if (tipo === "live") {
+                    card.style.display = isLive ? "" : "none";
+                } else if (tipo === "hoje") {
+                    card.style.display = isHoje ? "" : "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>

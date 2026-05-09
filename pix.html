@@ -4,41 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apoie o Zonix Play</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/pix.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="pix-container">
-        <header>
-            <h1 class="logo-text">APOIE O PROJETO</h1>
-            <p>Sua doação ajuda a manter o servidor online e sem anúncios travando.</p>
-        </header>
+
+    <div class="particles">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+    </div>
+
+    <div class="page-wrapper">
+
+        <a href="index.html" class="btn-back">
+            <span class="back-arrow">&#8592;</span> VOLTAR
+        </a>
 
         <div class="pix-card">
-            <div class="qr-placeholder">
-                <img src="img/qrcode.png" alt="QR Code PIX">
+
+            <div class="card-header">
+                <div class="header-glow"></div>
+                <span class="heart-icon">&#10084;&#65039;</span>
+                <h1 class="card-title">APOIE O <span class="accent">ZONIX PLAY</span></h1>
+                <p class="card-subtitle">Sua doação mantém o servidor no ar e o site livre de anúncios travando.</p>
             </div>
 
-            <div class="pix-info">
-                <span>Chave PIX (E-mail/CPF/Aleatória):</span>
-                <div class="copy-box">
-                    <input type="text" value="d1a0c1c2-5cae-4b5b-8a27-bcb04a5cd663" id="pixKey" readonly>
-                    <button onclick="copiarPix()">COPIAR</button>
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">PIX</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-frame">
+                    <div class="qr-corner tl"></div>
+                    <div class="qr-corner tr"></div>
+                    <div class="qr-corner bl"></div>
+                    <div class="qr-corner br"></div>
+                    <img src="img/qrcode.png" alt="QR Code PIX" class="qr-img">
+                </div>
+                <p class="qr-hint">Escaneie com qualquer banco</p>
+            </div>
+
+            <div class="pix-key-section">
+                <label class="key-label">CHAVE PIX ALEATÓRIA</label>
+                <div class="copy-row">
+                    <input type="text" id="pixKey" value="d1a0c1c2-5cae-4b5b-8a27-bcb04a5cd663" readonly class="key-input">
+                    <button class="btn-copy" onclick="copiarPix()" id="copyBtn">
+                        <span class="copy-icon">&#128203;</span>
+                        <span class="copy-text">COPIAR</span>
+                    </button>
                 </div>
             </div>
 
-            <a href="index.html" class="btn-voltar">VOLTAR PARA O INÍCIO</a>
+            <div class="thank-you">
+                <span class="ty-icon">&#128591;</span>
+                <span class="ty-text">Qualquer valor ajuda muito. Obrigado!</span>
+            </div>
+
         </div>
+
     </div>
 
     <script>
         function copiarPix() {
-            var copyText = document.getElementById("pixKey");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value);
-            alert("Chave PIX copiada!");
+            const input = document.getElementById("pixKey");
+            const btn   = document.getElementById("copyBtn");
+            navigator.clipboard.writeText(input.value).then(() => {
+                btn.classList.add("copied");
+                btn.querySelector(".copy-icon").textContent = "✅";
+                btn.querySelector(".copy-text").textContent = "COPIADO!";
+                setTimeout(() => {
+                    btn.classList.remove("copied");
+                    btn.querySelector(".copy-icon").textContent = "📋";
+                    btn.querySelector(".copy-text").textContent = "COPIAR";
+                }, 2500);
+            }).catch(() => {
+                input.select();
+                document.execCommand("copy");
+                alert("Chave PIX copiada!");
+            });
         }
     </script>
+
 </body>
 </html>
