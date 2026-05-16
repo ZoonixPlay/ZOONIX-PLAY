@@ -1,16 +1,16 @@
 const JOGOS = [
     {
-        time1: "Vasco Da Gama",
-        escudo1: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
-        time2: "Sportivo Luqueño-PAR",
-        escudo2: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Club_Sportivo_Luqueno.png",
+        time1: "Internacional",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sport_Club_Internacional_logo.svg/3840px-Sport_Club_Internacional_logo.svg.png",
+        time2: "Vasco Da Gama",
+        escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
         encerrado: false,
-        campeonato: "CONMEBOL Libertadores",
-        data: "2026-05-09",
-        horario: "14:00",
+        campeonato: "Brasileirão Serie A",
+        data: "2026-05-016",
+        horario: "18:30",
         duracao: 150, /* minutos — futebol: 90min + intervalo + acréscimos */
-        link1: "https://w2.embedtv.live/sportv2",
-        link2: "#"
+        link1: "https://meuplayeronlinehd.com/myplay/watch.html?id=primevideo1",
+        link2: " https://meuplayeronlinehd.com/myplay/watch.html?id=brasileiraoprime-2 "
     }
 
 
