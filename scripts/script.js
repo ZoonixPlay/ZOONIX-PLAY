@@ -6,7 +6,7 @@ const JOGOS = [
         escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
         encerrado: false,
         campeonato: "Brasileirão Serie A",
-        data: "2026-05-016",
+        data: "2026-05-16",
         horario: "18:30",
         duracao: 150, /* minutos — futebol: 90min + intervalo + acréscimos */
         link1: "https://meuplayeronlinehd.com/myplay/watch.html?id=primevideo1",
