@@ -1,7 +1,7 @@
 const JOGOS = [
     {
-        time1: "Internacional",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sport_Club_Internacional_logo.svg/3840px-Sport_Club_Internacional_logo.svg.png",
+        time1: "Olimpia",
+        escudo1: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_de_Olimpia_2022_PNG_HD.png",
         time2: "Vasco Da Gama",
         escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
         encerrado: false,
@@ -9,8 +9,9 @@ const JOGOS = [
         data: "2026-05-16",
         horario: "18:30",
         duracao: 150, /* minutos — futebol: 90min + intervalo + acréscimos */
-        link1: "https://meuplayeronlinehd.com/myplay/watch.html?id=primevideo1",
-        link2: " https://meuplayeronlinehd.com/myplay/watch.html?id=brasileiraoprime-2 "
+        link1: "https://nossoplayeronlinehd.ink/tv/paramountplus",
+        link2: "https://nossoplayeronlinehd.ink/extra/eventos3",
+        link3: "https://static-redirect.vercel.app/?canal=paramountplus",
     }
 
 
