@@ -6,8 +6,8 @@ const JOGOS = [
         escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
         encerrado: false,
         campeonato: "Brasileirão Serie A",
-        data: "2026-05-16",
-        horario: "18:30",
+        data: "2026-05-20",
+        horario: "19:00",
         duracao: 150, /* minutos — futebol: 90min + intervalo + acréscimos */
         link1: "https://nossoplayeronlinehd.ink/tv/paramountplus",
         link2: "https://nossoplayeronlinehd.ink/extra/eventos3",
