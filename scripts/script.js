@@ -5,7 +5,7 @@ const JOGOS = [
         time2: "Vasco Da Gama",
         escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
         encerrado: false,
-        campeonato: "Brasileirão Serie A",
+        campeonato: "CONMEBOL Sudamericana",
         data: "2026-05-20",
         horario: "19:00",
         duracao: 150, /* minutos — futebol: 90min + intervalo + acréscimos */
@@ -96,8 +96,11 @@ function checkStatus(jogo) {
     };
 }
 
-function irParaPlayer(l1, l2) {
-    window.location.href = `player.html?ch1=${btoa(l1)}&ch2=${btoa(l2)}`;
+function irParaPlayer(l1, l2, l3 = "", l4 = "") {
+    let url = `player.html?ch1=${btoa(l1)}&ch2=${btoa(l2)}`;
+    if (l3) url += `&ch3=${btoa(l3)}`;
+    if (l4) url += `&ch4=${btoa(l4)}`;
+    window.location.href = url;
 }
 
 function getDominantColor(src) {
@@ -166,7 +169,7 @@ function centroDaPartida(j, s) {
     if (s.status === "live") {
         return {
             badge: `<div class="badge-status ao-vivo">● AO VIVO</div>`,
-            action: `<button class="btn-assistir" onclick="irParaPlayer('${j.link1}', '${j.link2}')">▶ ASSISTIR AGORA</button>`
+            action: `<button class="btn-assistir" onclick="irParaPlayer('${j.link1}', '${j.link2}', '${j.link3 || ""}', '${j.link4 || ""}')">▶ ASSISTIR AGORA</button>`
         };
     }
 
