@@ -12,6 +12,7 @@ const JOGOS = [
         link1: "https://nossoplayeronlinehd.ink/tv/paramountplus",
         link2: "https://nossoplayeronlinehd.ink/extra/eventos3",
         link3: "https://static-redirect.vercel.app/?canal=paramountplus",
+        link4: "https://static-redirect.vercel.app/?canal=paramountplus",
     }
 
 
