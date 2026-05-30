@@ -1,18 +1,18 @@
 const JOGOS = [
     {
-        time1: "Olimpia",
-        escudo1: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_de_Olimpia_2022_PNG_HD.png",
-        time2: "Vasco Da Gama",
-        escudo2: "https://logodownload.org/wp-content/uploads/2016/09/vasco-logo.png",
+        time1: "Psg",
+        escudo1: "https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_PSG.png",
+        time2: "Arsenal",
+        escudo2: "https://upload.wikimedia.org/wikipedia/pt/thumb/5/53/Arsenal_FC.svg/1920px-Arsenal_FC.svg.png",
         encerrado: false,
-        campeonato: "CONMEBOL Sudamericana",
-        data: "2026-05-20",
-        horario: "19:00",
+        campeonato: "Liga Dos Campeões - Final",
+        data: "2026-05-30",
+        horario: "13:00",
         duracao: 150, /* minutos — futebol: 90min + intervalo + acréscimos */
-        link1: "https://nossoplayeronlinehd.ink/tv/paramountplus",
-        link2: "https://nossoplayeronlinehd.ink/extra/eventos3",
-        link3: "https://static-redirect.vercel.app/?canal=paramountplus",
-        link4: "https://static-redirect.vercel.app/?canal=paramountplus",
+        link1: "https://2embeddecanais.xyz/sbtsp/",
+        link2: "https://esportesembed.com/psg-x-arsenal-1",
+        link3: "https://nossoplayeronlinehd.ink/tv/sbt",
+        link4: "#",
     }
 
 
